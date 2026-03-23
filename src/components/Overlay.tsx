@@ -5,7 +5,7 @@ export default function Overlay() {
       <section className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
         <h1 className="text-6xl md:text-9xl font-bold text-white tracking-tighter mix-blend-difference">VORTEX</h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4 mix-blend-difference">Interactive CFD Visualization</p>
-        <div className="absolute bottom-10 left-10 md:left-20 animate-bounce text-white/50">
+        <div className="absolute bottom-10 left-10 md:left-20 animate-bounce text-white/50" aria-hidden="true">
             Scroll to explore ↓
         </div>
       </section>
@@ -35,8 +35,9 @@ export default function Overlay() {
       {/* Page 4 */}
       <section className="h-screen flex flex-col justify-center items-center p-10 md:p-20">
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 mix-blend-difference">Explore the Data</h2>
-        <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors pointer-events-auto">
+        <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 transition-colors pointer-events-auto">
             Powered by PyVista & R3F
+            <span className="sr-only"> (opens in a new tab)</span>
         </a>
       </section>
     </div>

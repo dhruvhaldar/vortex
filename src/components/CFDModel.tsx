@@ -52,12 +52,12 @@ void main() {
 `;
 
 export default function CFDModel() {
-  const { nodes: streamNodes } = useGLTF('/assets/streamlines.gltf') as any;
-  const { nodes: cylNodes } = useGLTF('/assets/cylinder.gltf') as any;
+  const { nodes: streamNodes } = useGLTF('/assets/streamlines.gltf') as unknown as { nodes: Record<string, THREE.Object3D> };
+  const { nodes: cylNodes } = useGLTF('/assets/cylinder.gltf') as unknown as { nodes: Record<string, THREE.Object3D> };
 
   // Extract meshes
-  const streamMesh = Object.values(streamNodes).find((n: any) => n.isMesh) as THREE.Mesh;
-  const cylMesh = Object.values(cylNodes).find((n: any) => n.isMesh) as THREE.Mesh;
+  const streamMesh = Object.values(streamNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh;
+  const cylMesh = Object.values(cylNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh;
 
   // Prepare Shader Material
   const material = useMemo(() => {
@@ -78,9 +78,16 @@ export default function CFDModel() {
     });
   }, [streamMesh]);
 
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null);
+
+  // Synchronize memoized material to ref
+  if (materialRef.current !== material) {
+      materialRef.current = material;
+  }
+
   useFrame((state) => {
-    if (material) {
-      material.uniforms.uTime.value = state.clock.getElapsedTime();
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
     }
   });
 
