@@ -17,14 +17,17 @@ const t3 = new THREE.Vector3(0, 0, 2);
 const p4 = new THREE.Vector3(-8, 8, 0); // Top/Rear overview
 const t4 = new THREE.Vector3(0, 0, 0);
 
+// Pre-allocate objects to avoid garbage collection pauses in useFrame
+const currentPos = new THREE.Vector3();
+const currentTarget = new THREE.Vector3();
+const targetQuaternion = new THREE.Quaternion();
+const currentQuaternion = new THREE.Quaternion();
+
 export default function CameraHandler() {
   const scroll = useScroll();
 
   useFrame((state, delta) => {
     const offset = scroll.offset; // 0..1
-
-    const currentPos = new THREE.Vector3();
-    const currentTarget = new THREE.Vector3();
 
     // Piecewise linear interpolation between waypoints
     if (offset < 0.33) {
@@ -50,8 +53,7 @@ export default function CameraHandler() {
     // We can't lerp rotation directly easily, but we can update the quaternion using lookAt
     // and slerp towards it.
 
-    const targetQuaternion = new THREE.Quaternion();
-    const currentQuaternion = state.camera.quaternion.clone();
+    currentQuaternion.copy(state.camera.quaternion);
 
     state.camera.lookAt(currentTarget);
     targetQuaternion.copy(state.camera.quaternion);
