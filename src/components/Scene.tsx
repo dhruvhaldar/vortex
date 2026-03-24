@@ -2,7 +2,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import { ScrollControls, Scroll, Environment } from '@react-three/drei';
+import { ScrollControls, Scroll, Environment, Loader } from '@react-three/drei';
 import { EffectComposer, Bloom, SSAO, SMAA } from '@react-three/postprocessing';
 import CFDModel from './CFDModel';
 import CameraHandler from './CameraHandler';
@@ -45,6 +45,7 @@ export default function Scene() {
             </EffectComposer>
         </Suspense>
       </Canvas>
+      <Loader />
     </div>
   );
 }
