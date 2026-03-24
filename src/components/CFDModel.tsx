@@ -55,9 +55,16 @@ export default function CFDModel() {
   const { nodes: streamNodes } = useGLTF('/assets/streamlines.gltf') as unknown as { nodes: Record<string, THREE.Object3D> };
   const { nodes: cylNodes } = useGLTF('/assets/cylinder.gltf') as unknown as { nodes: Record<string, THREE.Object3D> };
 
-  // Extract meshes
-  const streamMesh = Object.values(streamNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh;
-  const cylMesh = Object.values(cylNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh;
+  // ⚡ Bolt: Memoize mesh extraction to prevent O(n) array allocations and searches on every render.
+  const streamMesh = useMemo(
+    () => Object.values(streamNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh,
+    [streamNodes]
+  );
+
+  const cylMesh = useMemo(
+    () => Object.values(cylNodes).find((n) => (n as THREE.Mesh).isMesh) as THREE.Mesh,
+    [cylNodes]
+  );
 
   // Prepare Shader Material
   const material = useMemo(() => {
