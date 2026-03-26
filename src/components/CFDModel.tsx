@@ -80,8 +80,7 @@ export default function CFDModel() {
       uniforms: {
         uTime: { value: 0 },
         uTexture: { value: map }
-      },
-      side: THREE.DoubleSide
+      }
     });
   }, [streamMesh]);
 
@@ -94,7 +93,7 @@ export default function CFDModel() {
 
   useFrame((state) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
     }
   });
 
