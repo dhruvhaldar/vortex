@@ -21,7 +21,7 @@ const t4 = new THREE.Vector3(0, 0, 0);
 const currentPos = new THREE.Vector3();
 const currentTarget = new THREE.Vector3();
 const targetQuaternion = new THREE.Quaternion();
-const currentQuaternion = new THREE.Quaternion();
+const lookAtMatrix = new THREE.Matrix4();
 
 export default function CameraHandler() {
   const scroll = useScroll();
@@ -50,16 +50,12 @@ export default function CameraHandler() {
     state.camera.position.lerp(currentPos, 3.0 * delta);
 
     // Smooth lookAt
-    // We can't lerp rotation directly easily, but we can update the quaternion using lookAt
-    // and slerp towards it.
+    // ⚡ Bolt: Use Matrix4.lookAt to compute target rotation instead of camera.lookAt()
+    // This avoids triggering expensive updateWorldMatrix() calls on the camera every frame
+    // and removes the need for multiple quaternion copy operations.
+    lookAtMatrix.lookAt(state.camera.position, currentTarget, state.camera.up);
+    targetQuaternion.setFromRotationMatrix(lookAtMatrix);
 
-    currentQuaternion.copy(state.camera.quaternion);
-
-    state.camera.lookAt(currentTarget);
-    targetQuaternion.copy(state.camera.quaternion);
-
-    // Restore current rotation and slerp
-    state.camera.quaternion.copy(currentQuaternion);
     state.camera.quaternion.slerp(targetQuaternion, 3.0 * delta);
   });
 
