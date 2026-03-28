@@ -33,6 +33,15 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=31536000; includeSubDomains; preload",
   },
+  // Sentinel: Add Cross-Origin headers for defense-in-depth against side-channel attacks (e.g. Spectre)
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
+  {
+    key: "Cross-Origin-Resource-Policy",
+    value: "same-origin",
+  },
 ];
 
 const nextConfig: NextConfig = {
