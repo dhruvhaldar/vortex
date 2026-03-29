@@ -12,6 +12,8 @@ export default function Scene() {
   return (
     <div className="w-full h-screen fixed top-0 left-0 bg-black">
       <Canvas
+        aria-label="Interactive 3D fluid dynamics visualization"
+        role="img"
         camera={{ position: [5, 5, 5], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: false, stencil: false, alpha: false }}
