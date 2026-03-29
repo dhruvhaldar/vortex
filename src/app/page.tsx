@@ -1,4 +1,13 @@
-import Scene from "@/components/Scene";
+'use client';
+
+import dynamic from "next/dynamic";
+
+// ⚡ Bolt: Dynamically import the heavy Scene component to split out Three.js/R3F/Drei from the initial bundle.
+// Disable SSR since Canvas cannot be rendered on the server anyway.
+const Scene = dynamic(() => import("@/components/Scene"), {
+  ssr: false,
+  loading: () => <div className="w-full h-screen bg-black" />
+});
 
 export default function Home() {
   return (
