@@ -11,7 +11,7 @@ const securityHeaders = [
   },
   {
     key: "X-Frame-Options",
-    value: "SAMEORIGIN",
+    value: "DENY",
   },
   {
     key: "Permissions-Policy",
@@ -23,7 +23,12 @@ const securityHeaders = [
   },
   {
     key: "Referrer-Policy",
-    value: "origin-when-cross-origin",
+    value: "strict-origin-when-cross-origin",
+  },
+  // Sentinel: Add X-Permitted-Cross-Domain-Policies for defense-in-depth against Flash/Acrobat data extraction
+  {
+    key: "X-Permitted-Cross-Domain-Policies",
+    value: "none",
   },
   {
     key: "Content-Security-Policy",
