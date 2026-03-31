@@ -66,30 +66,18 @@ export default function CFDModel() {
     [cylNodes]
   );
 
-  // Prepare Shader Material
-  const material = useMemo(() => {
-    if (!streamMesh) return null;
-
-    // Get the existing texture map
-    const originalMaterial = streamMesh.material as THREE.MeshStandardMaterial;
-    const map = originalMaterial.map || null;
-
-    return new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uTexture: { value: map }
-      }
-    });
+  // ⚡ Bolt: Memoize uniforms and use <shaderMaterial> JSX instead of new THREE.ShaderMaterial()
+  // This allows R3F to automatically dispose of the material on unmount, preventing GPU memory leaks,
+  // and removes the need for manual ref synchronization during the render phase.
+  const uniforms = useMemo(() => {
+    const originalMaterial = streamMesh?.material as THREE.MeshStandardMaterial | undefined;
+    return {
+      uTime: { value: 0 },
+      uTexture: { value: originalMaterial?.map || null }
+    };
   }, [streamMesh]);
 
   const materialRef = useRef<THREE.ShaderMaterial | null>(null);
-
-  // Synchronize memoized material to ref
-  if (materialRef.current !== material) {
-      materialRef.current = material;
-  }
 
   useFrame((state) => {
     if (materialRef.current) {
@@ -99,14 +87,20 @@ export default function CFDModel() {
 
   return (
     <group>
-      {streamMesh && material && (
+      {streamMesh && (
         <mesh
           geometry={streamMesh.geometry}
-          material={material}
           rotation={streamMesh.rotation}
           position={streamMesh.position}
           scale={streamMesh.scale}
-        />
+        >
+          <shaderMaterial
+            ref={materialRef}
+            vertexShader={vertexShader}
+            fragmentShader={fragmentShader}
+            uniforms={uniforms}
+          />
+        </mesh>
       )}
       {cylMesh && (
         <mesh
