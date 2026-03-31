@@ -7,7 +7,8 @@ const securityHeaders = [
   },
   {
     key: "X-XSS-Protection",
-    value: "1; mode=block",
+    // Sentinel: Set to 0 to disable the legacy XSS auditor, which can introduce vulnerabilities (CSP is the modern defense)
+    value: "0",
   },
   {
     key: "X-Frame-Options",
