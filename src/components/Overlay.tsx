@@ -36,7 +36,7 @@ export default function Overlay() {
       {/* Page 4 */}
       <section aria-labelledby="explore-data-title" className="h-screen flex flex-col justify-center items-center p-10 md:p-20">
         <h2 id="explore-data-title" className="text-4xl md:text-6xl font-bold text-white mb-8 mix-blend-difference">Explore the Data</h2>
-        <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 transition-colors pointer-events-auto inline-flex items-center gap-2 justify-center">
+        <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors pointer-events-auto inline-flex items-center gap-2 justify-center">
             Powered by PyVista & R3F
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
             <span className="sr-only"> (opens in a new tab)</span>
