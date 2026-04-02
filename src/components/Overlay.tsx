@@ -1,4 +1,5 @@
 export default function Overlay() {
+  console.log("Overlay rendered");
   return (
     <div className="w-screen">
       {/* Page 1 */}
