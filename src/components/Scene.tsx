@@ -15,7 +15,9 @@ export default function Scene() {
         aria-label="Interactive 3D fluid dynamics visualization"
         role="img"
         camera={{ position: [5, 5, 5], fov: 45 }}
-        dpr={[1, 2]}
+        // ⚡ Bolt: Capping DPR at 1.5 prevents severe framerate drops on high-density (Retina/4K) displays
+        // because heavy post-processing effects (SSAO, Bloom) scale quadratically with resolution.
+        dpr={[1, 1.5]}
         // ⚡ Bolt: Explicitly request the high-performance discrete GPU.
         // On dual-GPU systems (like many laptops), browsers may default to the integrated low-power GPU.
         // This scene is heavy with post-processing (SSAO, Bloom), so forcing the discrete GPU drastically improves framerates.
