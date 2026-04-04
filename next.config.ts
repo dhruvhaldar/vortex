@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const securityHeaders = [
   {
     key: "X-DNS-Prefetch-Control",
-    value: "on",
+    // Sentinel: Set to off to prevent potential information leakage via background DNS prefetching
+    value: "off",
   },
   {
     key: "X-XSS-Protection",
