@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const securityHeaders = [
   {
     key: "X-DNS-Prefetch-Control",
-    value: "on",
+    // Sentinel: Set to 'off' to prevent potential information leakage via background DNS prefetching
+    value: "off",
   },
   {
     key: "X-XSS-Protection",
@@ -33,7 +34,8 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
+    // Sentinel: Added 'wasm-unsafe-eval' to script-src and connect-src for external CDNs used by @react-three/drei
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src 'self' data: blob: https://raw.githack.com https://raw.githubusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
   },
   {
     key: "Strict-Transport-Security",
