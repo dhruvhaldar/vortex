@@ -15,7 +15,10 @@ export default function Scene() {
         aria-label="Interactive 3D fluid dynamics visualization"
         role="img"
         camera={{ position: [5, 5, 5], fov: 45 }}
-        dpr={[1, 2]}
+        // ⚡ Bolt: Cap Device Pixel Ratio (DPR) to 1.5 instead of 2.
+        // Heavy full-screen post-processing effects (SSAO, Bloom) scale quadratically with resolution.
+        // Capping DPR prevents severe framerate degradation on high-density displays.
+        dpr={[1, 1.5]}
         // ⚡ Bolt: Explicitly request the high-performance discrete GPU.
         // On dual-GPU systems (like many laptops), browsers may default to the integrated low-power GPU.
         // This scene is heavy with post-processing (SSAO, Bloom), so forcing the discrete GPU drastically improves framerates.

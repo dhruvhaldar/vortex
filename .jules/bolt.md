@@ -17,3 +17,7 @@
 ## 2026-04-01 - Use powerPreference: high-performance for heavy WebGL scenes
 **Learning:** Heavy WebGL scenes utilizing post-processing (SSAO, Bloom, etc.) can suffer severe framerate degradation on dual-GPU devices if the browser incorrectly defaults to the integrated, low-power GPU to save battery.
 **Action:** Always explicitly set `powerPreference: 'high-performance'` in the WebGL context (e.g., `<Canvas gl={{ powerPreference: 'high-performance' }}>`) to instruct the browser to use the dedicated discrete GPU, drastically improving performance.
+
+## 2025-05-15 - Cap Device Pixel Ratio for post-processing performance
+**Learning:** Heavy full-screen post-processing effects (like SSAO or Bloom) scale quadratically with resolution. On high-density displays (like Retina screens), setting a max `dpr` of 2 or higher causes severe framerate degradation.
+**Action:** Cap the Device Pixel Ratio to a maximum of 1.5 (e.g., `dpr={[1, 1.5]}`) on the `<Canvas>` when using `@react-three/postprocessing` to balance visual quality and performance.

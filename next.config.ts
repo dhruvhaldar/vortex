@@ -33,7 +33,9 @@ const securityHeaders = [
   },
   {
     key: "Content-Security-Policy",
-    value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
+    // Sentinel/Bolt: Added connect-src with data: blob: to allow GLTFLoader to parse internal buffers,
+    // and wasm-unsafe-eval to allow Three.js WASM modules if needed.
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' data: blob: raw.githack.com raw.githubusercontent.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
   },
   {
     key: "Strict-Transport-Security",
