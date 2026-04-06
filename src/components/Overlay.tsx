@@ -1,15 +1,29 @@
+import { useScroll } from '@react-three/drei';
+
 export default function Overlay() {
+  const scroll = useScroll();
   console.log("Overlay rendered");
+
+  const handleScrollDown = () => {
+    if (scroll && scroll.el) {
+      scroll.el.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-screen">
       {/* Page 1 */}
       <section aria-labelledby="hero-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
         <h1 id="hero-title" className="text-6xl md:text-9xl font-bold text-white tracking-tighter mix-blend-difference">VORTEX</h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4 mix-blend-difference">Interactive CFD Visualization</p>
-        <div className="absolute bottom-10 left-10 md:left-20 motion-safe:animate-bounce text-white/70 flex items-center gap-2">
+        <button
+          onClick={handleScrollDown}
+          aria-label="Scroll down to explore"
+          className="absolute bottom-10 left-10 md:left-20 motion-safe:animate-bounce text-white/70 flex items-center gap-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-colors pointer-events-auto"
+        >
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
-            <span>Scroll or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs">↑</kbd> to explore</span>
-        </div>
+            <span>Scroll or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white/70">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white/70">↑</kbd> to explore</span>
+        </button>
       </section>
 
       {/* Page 2 */}

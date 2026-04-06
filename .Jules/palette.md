@@ -9,3 +9,7 @@
 ## 2024-05-18 - Semantic Landmarks for 3D Canvas HTML Overlays
 **Learning:** Screen readers struggle to navigate HTML elements layered over a WebGL context, such as those rendered inside `@react-three/drei`'s `<ScrollControls>` or `<Scroll html>`, because the structure can appear flat or disconnected from the document flow.
 **Action:** Always explicitly define semantic landmarks, such as using `aria-labelledby` on `<section>` elements, to connect them to their corresponding heading elements and create clear navigational blocks for screen readers.
+
+## 2025-01-28 - Interactive Scroll Indicators
+**Learning:** Static visual cues like bouncing "Scroll Down" arrows or mouse icons are common, but leaving them as non-interactive elements can cause user frustration, especially if they click them expecting an action.
+**Action:** Convert prominent visual scroll indicators into fully interactive `<button>` elements with `onClick` handlers to programmatically scroll the container, including proper hover states, ARIA labels, and `focus-visible` styling for accessibility.
