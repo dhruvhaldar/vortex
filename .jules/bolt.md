@@ -21,3 +21,7 @@
 ## 2026-04-06 - Cap Device Pixel Ratio for post-processing performance
 **Learning:** Full-screen post-processing effects (like SSAO and Bloom) scale quadratically with resolution. Leaving the Device Pixel Ratio (DPR) uncapped on high-density displays (e.g. Retina displays at 2x or 3x) can lead to severe framerate degradation.
 **Action:** Always cap the maximum Device Pixel Ratio in the `<Canvas>` component (e.g. `dpr={[1, 1.5]}`) when utilizing heavy post-processing effects to maintain a balance of visual fidelity and stable performance.
+
+## 2026-04-07 - Replace SSAO with N8AO for superior performance
+**Learning:** Using the legacy `<SSAO>` component from `@react-three/postprocessing` is inherently slow, and if a `<NormalPass>` is omitted from the `EffectComposer`, it incurs immense hidden overhead by forcing expensive on-the-fly depth-to-normal reconstruction for every fragment.
+**Action:** Always replace `<SSAO>` with `<N8AO>` (N8 Ambient Occlusion) when using `@react-three/postprocessing`. N8AO is a highly optimized, modern implementation that provides much faster performance and better visual quality without requiring a separate normal pass. Set `quality="performance"` and `halfRes` for maximum framerates.

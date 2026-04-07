@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { ScrollControls, Scroll, Environment, Loader } from '@react-three/drei';
-import { EffectComposer, Bloom, SSAO, SMAA } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, N8AO, SMAA } from '@react-three/postprocessing';
 import CFDModel from './CFDModel';
 import CameraHandler from './CameraHandler';
 import Overlay from './Overlay';
@@ -39,10 +39,14 @@ export default function Scene() {
 
             <EffectComposer multisampling={0}>
                 <SMAA />
-                <SSAO
-                    radius={0.4}
+                {/* ⚡ Bolt: Replaced legacy SSAO with N8AO (N8 Ambient Occlusion).
+                    N8AO is highly optimized, significantly faster, and doesn't require a separate NormalPass
+                    which was missing and causing expensive on-the-fly depth-to-normal reconstruction. */}
+                <N8AO
+                    aoRadius={0.4}
                     intensity={5}
-                    luminanceInfluence={0.4}
+                    quality="performance"
+                    halfRes
                 />
                 <Bloom
                     luminanceThreshold={0.2}
