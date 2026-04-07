@@ -2,7 +2,6 @@ import { useScroll } from '@react-three/drei';
 
 export default function Overlay() {
   const scroll = useScroll();
-  console.log("Overlay rendered");
 
   const handleScrollDown = () => {
     if (scroll && scroll.el) {
