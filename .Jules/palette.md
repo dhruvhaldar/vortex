@@ -13,3 +13,7 @@
 ## 2025-01-28 - Interactive Scroll Indicators
 **Learning:** Static visual cues like bouncing "Scroll Down" arrows or mouse icons are common, but leaving them as non-interactive elements can cause user frustration, especially if they click them expecting an action.
 **Action:** Convert prominent visual scroll indicators into fully interactive `<button>` elements with `onClick` handlers to programmatically scroll the container, including proper hover states, ARIA labels, and `focus-visible` styling for accessibility.
+
+## 2025-04-07 - Button ARIA Labeling and Contrast
+**Learning:** Using `aria-label` on a button completely overrides its internal text content. This meant our visual keyboard shortcut hints (`<kbd>↓</kbd>`) were completely hidden from screen readers. Additionally, low opacity (`text-white/70`) on text inside slightly translucent containers (`bg-white/20`) often fails WCAG contrast requirements.
+**Action:** When a button contains complex content (like visual keys or icons + text), avoid `aria-label` on the parent. Instead, use a visually hidden `sr-only` span for the full description and apply `aria-hidden="true"` to the visual elements that shouldn't be double-read. Ensure text inside translucent containers maintains high opacity for contrast.
