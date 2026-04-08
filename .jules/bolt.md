@@ -25,3 +25,7 @@
 ## 2026-04-07 - Replace SSAO with N8AO for superior performance
 **Learning:** Using the legacy `<SSAO>` component from `@react-three/postprocessing` is inherently slow, and if a `<NormalPass>` is omitted from the `EffectComposer`, it incurs immense hidden overhead by forcing expensive on-the-fly depth-to-normal reconstruction for every fragment.
 **Action:** Always replace `<SSAO>` with `<N8AO>` (N8 Ambient Occlusion) when using `@react-three/postprocessing`. N8AO is a highly optimized, modern implementation that provides much faster performance and better visual quality without requiring a separate normal pass. Set `quality="performance"` and `halfRes` for maximum framerates.
+
+## 2026-04-08 - Avoid expensive CSS compositing over WebGL
+**Learning:** Using CSS properties like `backdrop-filter: blur()` or `mix-blend-mode` on elements overlaying an active WebGL `<Canvas>` destroys performance. These properties force the browser to perform expensive per-frame read-backs of the canvas buffer for software compositing, bypassing hardware-accelerated direct scanout and often cutting framerates in half.
+**Action:** Avoid complex CSS compositing effects over active WebGL scenes. Instead, use opaque or simple semi-transparent backgrounds (e.g., `bg-black/80`) and standard text contrast (e.g., `drop-shadow-lg`) to maintain 60fps.
