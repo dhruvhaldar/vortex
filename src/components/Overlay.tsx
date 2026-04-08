@@ -14,10 +14,10 @@ export default function Overlay() {
       {/* Page 1 */}
       <section aria-labelledby="hero-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
         <h1 id="hero-title" className="text-6xl md:text-9xl font-bold text-white tracking-tighter mix-blend-difference">VORTEX</h1>
-        <p className="text-xl md:text-2xl text-gray-300 mt-4 mix-blend-difference">Interactive CFD Visualization</p>
+        <p className="text-xl md:text-2xl text-gray-100 mt-4 mix-blend-difference">Interactive CFD Visualization</p>
         <button
           onClick={handleScrollDown}
-          className="absolute bottom-10 left-10 md:left-20 motion-safe:animate-bounce text-white/70 flex items-center gap-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-colors pointer-events-auto"
+          className="absolute bottom-10 left-10 md:left-20 motion-safe:animate-bounce text-white flex items-center gap-2 hover:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-colors pointer-events-auto"
         >
             <span className="sr-only">Scroll down, or use the down and up arrow keys to explore</span>
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
@@ -29,7 +29,7 @@ export default function Overlay() {
       <section aria-labelledby="flow-dynamics-title" className="h-screen flex flex-col justify-center items-end p-10 md:p-20 pointer-events-none">
         <div className="bg-black/30 p-8 rounded-lg backdrop-blur-md max-w-md border border-white/10 pointer-events-auto hover:bg-black/50 transition-colors">
             <h2 id="flow-dynamics-title" className="text-3xl md:text-4xl font-bold text-white mb-4">Flow Dynamics</h2>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-white leading-relaxed">
                 Visualizing velocity magnitude around a cylindrical obstacle.
                 Observe the laminar flow transition and the stagnation point where velocity drops to zero.
             </p>
@@ -40,7 +40,7 @@ export default function Overlay() {
       <section aria-labelledby="wake-analysis-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20 pointer-events-none">
          <div className="bg-black/30 p-8 rounded-lg backdrop-blur-md max-w-md border border-white/10 pointer-events-auto hover:bg-black/50 transition-colors">
             <h2 id="wake-analysis-title" className="text-3xl md:text-4xl font-bold text-white mb-4">Wake Analysis</h2>
-            <p className="text-gray-200 leading-relaxed">
+            <p className="text-white leading-relaxed">
                 Detailed view of the wake region.
                 Streamlines illustrate the complex flow patterns and potential vortex shedding downstream of the obstacle.
             </p>
