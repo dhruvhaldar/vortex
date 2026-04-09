@@ -6,3 +6,7 @@
 ## 2026-04-02 - Exposing Critical Interaction Instructions
 **Learning:** Applying `aria-hidden="true"` to a container block hides vital interaction cues from screen readers (e.g. "Scroll to explore"), leaving visually impaired users without knowledge of how to operate full-page scroll-driven applications.
 **Action:** Always ensure textual instructions remain exposed to screen readers. Apply `aria-hidden="true"` strictly to the decorative elements (like SVG icons) within the instruction block, rather than the parent container.
+
+## 2024-05-18 - Respecting Reduced Motion Preferences in Programmatic JS Scrolling
+**Learning:** Programmatic JavaScript scrolling (e.g., using `Element.scrollBy({ behavior: 'smooth' })` or similar methods) completely ignores CSS `@media (prefers-reduced-motion: reduce)` rules. This can cause significant accessibility issues and vestibular discomfort for users who have requested reduced motion but still trigger JavaScript-driven navigation or scroll events.
+**Action:** When implementing any programmatic scrolling or animation in JavaScript, always manually check `window.matchMedia('(prefers-reduced-motion: reduce)').matches` and fallback to an instant update (e.g., `behavior: 'auto'`) if true.
