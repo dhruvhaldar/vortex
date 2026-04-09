@@ -5,7 +5,12 @@ export default function Overlay() {
 
   const handleScrollDown = () => {
     if (scroll && scroll.el) {
-      scroll.el.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+      // Respect user's reduced motion preference for JS-driven animations
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      scroll.el.scrollBy({
+        top: window.innerHeight,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
     }
   };
 
