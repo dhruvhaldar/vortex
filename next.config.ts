@@ -16,7 +16,8 @@ const securityHeaders = [
   },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    // Sentinel: Replace deprecated interest-cohort (FLoC) with browsing-topics to protect user privacy against the modern Google Topics API
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
   },
   {
     key: "X-Content-Type-Options",
