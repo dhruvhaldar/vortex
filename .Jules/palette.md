@@ -17,3 +17,6 @@
 ## 2025-04-07 - Button ARIA Labeling and Contrast
 **Learning:** Using `aria-label` on a button completely overrides its internal text content. This meant our visual keyboard shortcut hints (`<kbd>↓</kbd>`) were completely hidden from screen readers. Additionally, low opacity (`text-white/70`) on text inside slightly translucent containers (`bg-white/20`) often fails WCAG contrast requirements.
 **Action:** When a button contains complex content (like visual keys or icons + text), avoid `aria-label` on the parent. Instead, use a visually hidden `sr-only` span for the full description and apply `aria-hidden="true"` to the visual elements that shouldn't be double-read. Ensure text inside translucent containers maintains high opacity for contrast.
+## 2025-04-10 - Multi-page Scroll Loops
+**Learning:** Linear, multi-page scroll experiences often leave users stranded at the bottom of the page, forcing them to manually scroll all the way back up to restart or re-experience the content. This creates friction and a tedious end to the experience.
+**Action:** Always provide a quick, programmatic "Back to Start" mechanism (e.g., a button calling `scrollTo({ top: 0, behavior: 'smooth' })`) at the conclusion of multi-page scroll sequences to create a satisfying loop and improve overall usability.
