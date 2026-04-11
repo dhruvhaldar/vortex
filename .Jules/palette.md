@@ -20,3 +20,7 @@
 ## 2025-04-10 - Multi-page Scroll Loops
 **Learning:** Linear, multi-page scroll experiences often leave users stranded at the bottom of the page, forcing them to manually scroll all the way back up to restart or re-experience the content. This creates friction and a tedious end to the experience.
 **Action:** Always provide a quick, programmatic "Back to Start" mechanism (e.g., a button calling `scrollTo({ top: 0, behavior: 'smooth' })`) at the conclusion of multi-page scroll sequences to create a satisfying loop and improve overall usability.
+
+## 2025-05-10 - Hover Animation Stability
+**Learning:** Animating an entire clickable button (e.g., using `animate-bounce` directly on the button element) creates a moving target, which can be frustrating to click and makes the interface feel unstable.
+**Action:** When implementing animated indicators inside buttons (like a scrolling mouse or pointing arrow), apply the animation strictly to the internal icon element using group hover states (e.g., parent `group`, child `group-hover:animate-bounce`) rather than animating the entire parent container. This keeps the interactive hit area stable.
