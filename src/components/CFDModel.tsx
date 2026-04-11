@@ -93,6 +93,8 @@ export default function CFDModel() {
           rotation={streamMesh.rotation}
           position={streamMesh.position}
           scale={streamMesh.scale}
+          matrixAutoUpdate={false}
+          onUpdate={(self) => self.updateMatrix()}
         >
           <shaderMaterial
             ref={materialRef}
@@ -108,6 +110,8 @@ export default function CFDModel() {
           rotation={cylMesh.rotation}
           position={cylMesh.position}
           scale={cylMesh.scale}
+          matrixAutoUpdate={false}
+          onUpdate={(self) => self.updateMatrix()}
         >
            <meshStandardMaterial color="#888888" roughness={0.4} metalness={0.8} />
         </mesh>
