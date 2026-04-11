@@ -29,3 +29,7 @@
 ## 2026-04-08 - Avoid expensive CSS compositing over WebGL
 **Learning:** Using CSS properties like `backdrop-filter: blur()` or `mix-blend-mode` on elements overlaying an active WebGL `<Canvas>` destroys performance. These properties force the browser to perform expensive per-frame read-backs of the canvas buffer for software compositing, bypassing hardware-accelerated direct scanout and often cutting framerates in half.
 **Action:** Avoid complex CSS compositing effects over active WebGL scenes. Instead, use opaque or simple semi-transparent backgrounds (e.g., `bg-black/80`) and standard text contrast (e.g., `drop-shadow-lg`) to maintain 60fps.
+
+## 2026-04-09 - Disable matrixAutoUpdate for static meshes
+**Learning:** Three.js defaults to calculating the world matrix for every object on every frame if `matrixAutoUpdate` is true, which introduces unnecessary CPU overhead for objects that never move.
+**Action:** Always add `matrixAutoUpdate={false}` and `onUpdate={(self) => self.updateMatrix()}` to static `<mesh>` components in React Three Fiber to skip useless matrix recalculations.
