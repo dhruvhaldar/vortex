@@ -17,3 +17,8 @@
 **Vulnerability:** Next.js Denial of Service with Server Components (GHSA-q4gf-8mx6-v5v3)
 **Learning:** Outdated dependencies can harbor high-severity vulnerabilities that allow for Denial of Service attacks when malicious HTTP requests trigger excessive CPU usage during deserialization.
 **Prevention:** Regularly run `pnpm audit` to detect known vulnerabilities in the dependency tree and update affected packages to their patched versions proactively.
+
+## 2024-06-25 - Restrict Powerful Browser APIs
+**Vulnerability:** Permissive access to powerful browser APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict modern, powerful browser APIs (such as Payment Request, WebUSB, Web Bluetooth, and Screen Capture) through the `Permissions-Policy` header. Leaving these enabled when not required expands the attack surface, potentially allowing compromised third-party scripts to access sensitive device hardware or payment interfaces.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific powerful web capabilities (like `payment=()`, `usb=()`, `bluetooth=()`, or `display-capture=()`), explicitly disable them to prevent unauthorized use.
