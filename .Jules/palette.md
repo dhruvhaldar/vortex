@@ -24,3 +24,7 @@
 ## 2025-05-10 - Hover Animation Stability
 **Learning:** Animating an entire clickable button (e.g., using `animate-bounce` directly on the button element) creates a moving target, which can be frustrating to click and makes the interface feel unstable.
 **Action:** When implementing animated indicators inside buttons (like a scrolling mouse or pointing arrow), apply the animation strictly to the internal icon element using group hover states (e.g., parent `group`, child `group-hover:animate-bounce`) rather than animating the entire parent container. This keeps the interactive hit area stable.
+
+## 2025-05-15 - Managing Focus during Programmatic Scroll
+**Learning:** When programmatically scrolling back to the top of a multi-page scroll experience, keyboard focus remains stuck at the bottom. This leaves keyboard and screen reader users stranded, forcing them to manually tab backwards through the entire document to continue interacting.
+**Action:** When implementing a "Back to Start" programmatic scroll, always move keyboard focus to an appropriate top-level element (like the main `<h1>` with `tabIndex={-1}`). Crucially, use `.focus({ preventScroll: true })` so the browser doesn't instantly snap the scroll position back, which would ruin the smooth visual scroll animation.
