@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -25,24 +26,38 @@ const lookAtMatrix = new THREE.Matrix4();
 
 export default function CameraHandler() {
   const scroll = useScroll();
+  const lastOffset = useRef(-1);
 
   useFrame((state, delta) => {
     const offset = scroll.offset; // 0..1
 
-    // Piecewise linear interpolation between waypoints
-    if (offset < 0.33) {
-        const t = offset / 0.33;
-        currentPos.lerpVectors(p1, p2, t);
-        currentTarget.lerpVectors(t1, t2, t);
-    } else if (offset < 0.66) {
-        const t = (offset - 0.33) / 0.33;
-        currentPos.lerpVectors(p2, p3, t);
-        currentTarget.lerpVectors(t2, t3, t);
-    } else {
-        // Ensure t goes from 0 to 1 in the last segment
-        const t = (offset - 0.66) / 0.34;
-        currentPos.lerpVectors(p3, p4, Math.min(t, 1));
-        currentTarget.lerpVectors(t3, t4, Math.min(t, 1));
+    let changed = false;
+    // ⚡ Bolt: Only recalculate waypoints if offset has changed
+    if (offset !== lastOffset.current) {
+        lastOffset.current = offset;
+        changed = true;
+        // Piecewise linear interpolation between waypoints
+        if (offset < 0.33) {
+            const t = offset / 0.33;
+            currentPos.lerpVectors(p1, p2, t);
+            currentTarget.lerpVectors(t1, t2, t);
+        } else if (offset < 0.66) {
+            const t = (offset - 0.33) / 0.33;
+            currentPos.lerpVectors(p2, p3, t);
+            currentTarget.lerpVectors(t2, t3, t);
+        } else {
+            // Ensure t goes from 0 to 1 in the last segment
+            const t = (offset - 0.66) / 0.34;
+            currentPos.lerpVectors(p3, p4, Math.min(t, 1));
+            currentTarget.lerpVectors(t3, t4, Math.min(t, 1));
+        }
+    }
+
+    // ⚡ Bolt: Add early return to skip unnecessary processing when idle.
+    // If the scroll hasn't changed and the camera has roughly reached its target position,
+    // skip the expensive matrix math and interpolation.
+    if (!changed && state.camera.position.distanceToSquared(currentPos) < 0.001) {
+        return;
     }
 
     // Smooth camera movement
