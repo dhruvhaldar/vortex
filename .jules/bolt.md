@@ -33,3 +33,7 @@
 ## 2026-04-09 - Disable matrixAutoUpdate for static meshes
 **Learning:** Three.js defaults to calculating the world matrix for every object on every frame if `matrixAutoUpdate` is true, which introduces unnecessary CPU overhead for objects that never move.
 **Action:** Always add `matrixAutoUpdate={false}` and `onUpdate={(self) => self.updateMatrix()}` to static `<mesh>` components in React Three Fiber to skip useless matrix recalculations.
+
+## 2026-04-14 - Skip redundant math in useFrame loops when idle
+**Learning:** Continuous calculations like piecewise linear interpolations, matrix math, and quaternions inside `useFrame` will run 60 times a second even when the target state hasn't changed and the transition has completed, needlessly draining battery.
+**Action:** Use refs to track the input state (like scroll offset) and check if the current value matches the target value (e.g., using `.distanceToSquared() < 0.001`). If both conditions are met, early return from the `useFrame` loop to skip unnecessary processing.
