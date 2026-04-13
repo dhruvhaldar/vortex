@@ -21,6 +21,13 @@ export default function Overlay() {
         top: 0,
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
+      // Programmatically move focus back to the top element for keyboard/screen reader users
+      // preventScroll: true is crucial here, otherwise the browser instantly snaps back to the top,
+      // ruining the smooth scroll animation.
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) {
+        heroTitle.focus({ preventScroll: true });
+      }
     }
   };
 
@@ -28,7 +35,7 @@ export default function Overlay() {
     <div className="w-screen">
       {/* Page 1 */}
       <section aria-labelledby="hero-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
-        <h1 id="hero-title" className="text-6xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-lg">VORTEX</h1>
+        <h1 id="hero-title" tabIndex={-1} className="text-6xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-lg focus:outline-none">VORTEX</h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4 drop-shadow-lg">Interactive CFD Visualization</p>
         <button
           onClick={handleScrollDown}
