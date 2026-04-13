@@ -22,3 +22,8 @@
 **Vulnerability:** Permissive access to powerful browser APIs (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict modern, powerful browser APIs (such as Payment Request, WebUSB, Web Bluetooth, and Screen Capture) through the `Permissions-Policy` header. Leaving these enabled when not required expands the attack surface, potentially allowing compromised third-party scripts to access sensitive device hardware or payment interfaces.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific powerful web capabilities (like `payment=()`, `usb=()`, `bluetooth=()`, or `display-capture=()`), explicitly disable them to prevent unauthorized use.
+
+## 2024-07-20 - Restrict Hardware Sensors in Permissions-Policy
+**Vulnerability:** Unrestricted access to hardware sensors (accelerometer, gyroscope, etc.)
+**Learning:** WebGL applications are particularly susceptible to device fingerprinting. Leaving hardware sensors accessible when not needed increases the attack surface for side-channel attacks and fingerprinting.
+**Prevention:** Always disable unused hardware sensors in the Permissions-Policy header, such as accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), and sync-xhr=().
