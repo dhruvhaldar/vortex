@@ -11,6 +11,12 @@ export default function Overlay() {
         top: window.innerHeight,
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
+      // Programmatically move focus to the next section's heading for keyboard/screen reader users
+      // preventScroll: true is crucial here to not interrupt the smooth scroll animation
+      const nextTitle = document.getElementById('flow-dynamics-title');
+      if (nextTitle) {
+        nextTitle.focus({ preventScroll: true });
+      }
     }
   };
 
@@ -50,7 +56,7 @@ export default function Overlay() {
       {/* Page 2 */}
       <section aria-labelledby="flow-dynamics-title" className="h-screen flex flex-col justify-center items-end p-10 md:p-20 pointer-events-none">
         <div className="bg-black/80 p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto hover:bg-black/90 transition-colors">
-            <h2 id="flow-dynamics-title" className="text-3xl md:text-4xl font-bold text-white mb-4">Flow Dynamics</h2>
+            <h2 id="flow-dynamics-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Flow Dynamics</h2>
             <p className="text-gray-200 leading-relaxed">
                 Visualizing velocity magnitude around a cylindrical obstacle.
                 Observe the laminar flow transition and the stagnation point where velocity drops to zero.
