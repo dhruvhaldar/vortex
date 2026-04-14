@@ -28,3 +28,7 @@
 ## 2025-05-15 - Managing Focus during Programmatic Scroll
 **Learning:** When programmatically scrolling back to the top of a multi-page scroll experience, keyboard focus remains stuck at the bottom. This leaves keyboard and screen reader users stranded, forcing them to manually tab backwards through the entire document to continue interacting.
 **Action:** When implementing a "Back to Start" programmatic scroll, always move keyboard focus to an appropriate top-level element (like the main `<h1>` with `tabIndex={-1}`). Crucially, use `.focus({ preventScroll: true })` so the browser doesn't instantly snap the scroll position back, which would ruin the smooth visual scroll animation.
+
+## 2025-10-26 - Forward Programmatic Scroll and Focus Traps
+**Learning:** When programmatically scrolling forward (e.g., clicking a "Scroll Down" button to advance to the next page in a custom scroll container like Drei's `ScrollControls`), keyboard focus often remains on the clicked button which becomes off-screen. Subsequent `Tab` presses by a keyboard user will cause the browser to abruptly snap the scroll position, ruining the smooth animation and skipping content.
+**Action:** Always complement programmatic scroll actions with focus management. When scrolling forward, move focus to a relevant heading in the newly visible section using `.focus({ preventScroll: true })`. Ensure the target has `tabIndex={-1}` and `focus:outline-none` so it can receive programmatic focus without an ugly visible ring.
