@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { preload } from "react-dom";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,6 +23,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // ⚡ Bolt: Preload heavy 3D assets early in the server HTML response.
+  // Since the 3D Scene is dynamically imported (CSR only), the browser wouldn't
+  // know about these assets until the React bundle loads and executes.
+  // Preloading them here significantly improves the time-to-interactive for the 3D scene.
+  preload('/assets/streamlines.gltf', { as: 'fetch', crossOrigin: 'anonymous' });
+  preload('/assets/cylinder.gltf', { as: 'fetch', crossOrigin: 'anonymous' });
+
   return (
     <html lang="en">
       <body
