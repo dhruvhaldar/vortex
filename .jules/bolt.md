@@ -37,3 +37,7 @@
 ## 2026-04-14 - Skip redundant math in useFrame loops when idle
 **Learning:** Continuous calculations like piecewise linear interpolations, matrix math, and quaternions inside `useFrame` will run 60 times a second even when the target state hasn't changed and the transition has completed, needlessly draining battery.
 **Action:** Use refs to track the input state (like scroll offset) and check if the current value matches the target value (e.g., using `.distanceToSquared() < 0.001`). If both conditions are met, early return from the `useFrame` loop to skip unnecessary processing.
+
+## 2024-05-18 - Preload critical 3D assets in Server Components
+**Learning:** In Next.js applications using `next/dynamic` with `ssr: false` to load heavy React Three Fiber scenes, `useGLTF.preload` only executes after the client-side JavaScript bundle loads, creating a network waterfall and delaying the 3D scene's time-to-interactive.
+**Action:** Always use `react-dom`'s `preload` function inside a Server Component (like `app/layout.tsx` or `app/page.tsx`) to eagerly fetch critical 3D assets (like .gltf, .hdr, or textures) concurrently with the initial HTML request.
