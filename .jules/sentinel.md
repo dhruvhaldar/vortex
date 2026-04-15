@@ -27,3 +27,7 @@
 **Vulnerability:** Unrestricted access to hardware sensors (accelerometer, gyroscope, etc.)
 **Learning:** WebGL applications are particularly susceptible to device fingerprinting. Leaving hardware sensors accessible when not needed increases the attack surface for side-channel attacks and fingerprinting.
 **Prevention:** Always disable unused hardware sensors in the Permissions-Policy header, such as accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), and sync-xhr=().
+## 2024-10-27 - Harden Permissions-Policy further
+**Vulnerability:** Unnecessary media and device capabilities left enabled (Defense in Depth)
+**Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable unused APIs like `battery`, `autoplay`, `fullscreen`, `picture-in-picture`, `screen-wake-lock`, `web-share`, and `xr-spatial-tracking` reduces the application's attack surface and mitigates potential privacy leakage risks.
+**Prevention:** To further harden the HTTP `Permissions-Policy` header for defense-in-depth, explicitly disable unused media and device capabilities.
