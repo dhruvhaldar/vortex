@@ -1,7 +1,16 @@
 import { useScroll } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
 export default function Overlay() {
   const scroll = useScroll();
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useFrame(() => {
+    if (progressRef.current && scroll) {
+      progressRef.current.style.transform = `scaleX(${scroll.offset})`;
+    }
+  });
 
   const handleScrollDown = () => {
     if (scroll && scroll.el) {
@@ -39,6 +48,14 @@ export default function Overlay() {
 
   return (
     <div className="w-screen">
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none">
+        <div
+          ref={progressRef}
+          className="h-full bg-white origin-left"
+          style={{ transform: 'scaleX(0)', willChange: 'transform' }} />
+      </div>
+
       {/* Page 1 */}
       <section aria-labelledby="hero-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
         <h1 id="hero-title" tabIndex={-1} className="text-6xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-lg focus:outline-none">VORTEX</h1>

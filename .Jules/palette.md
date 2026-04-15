@@ -32,3 +32,7 @@
 ## 2025-10-26 - Forward Programmatic Scroll and Focus Traps
 **Learning:** When programmatically scrolling forward (e.g., clicking a "Scroll Down" button to advance to the next page in a custom scroll container like Drei's `ScrollControls`), keyboard focus often remains on the clicked button which becomes off-screen. Subsequent `Tab` presses by a keyboard user will cause the browser to abruptly snap the scroll position, ruining the smooth animation and skipping content.
 **Action:** Always complement programmatic scroll actions with focus management. When scrolling forward, move focus to a relevant heading in the newly visible section using `.focus({ preventScroll: true })`. Ensure the target has `tabIndex={-1}` and `focus:outline-none` so it can receive programmatic focus without an ugly visible ring.
+
+## 2024-05-18 - Visual Progress in Scroll Controls
+**Learning:** In multi-page scroll experiences built with tools like `@react-three/drei`'s `ScrollControls`, native browser scrollbars are often hidden or deemphasized. Without them, users lack context regarding their current position or the overall length of the experience.
+**Action:** Always provide a clear visual scroll progress indicator, such as a top-fixed progress bar, to ground the user. Implement this performantly using a `ref` inside a `useFrame` loop to directly mutate the DOM node's `style.transform` (e.g., `scaleX(offset)`), rather than relying on React state updates.
