@@ -18,7 +18,8 @@ const securityHeaders = [
     key: "Permissions-Policy",
     // Sentinel: Replace deprecated interest-cohort (FLoC) with browsing-topics to protect user privacy against the modern Google Topics API
     // Also explicitly disable powerful APIs like payment, usb, bluetooth, and display-capture to reduce the application's attack surface.
-    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=()",
+    // Sentinel: Added further restrictions for battery, screen-wake-lock, web-share, autoplay, fullscreen, picture-in-picture, and xr-spatial-tracking for enhanced defense-in-depth.
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=(), battery=(), screen-wake-lock=(), web-share=(), autoplay=(), fullscreen=(), picture-in-picture=(), xr-spatial-tracking=()",
   },
   {
     key: "X-Content-Type-Options",
