@@ -41,3 +41,7 @@
 ## 2024-05-18 - Preload critical 3D assets in Server Components
 **Learning:** In Next.js applications using `next/dynamic` with `ssr: false` to load heavy React Three Fiber scenes, `useGLTF.preload` only executes after the client-side JavaScript bundle loads, creating a network waterfall and delaying the 3D scene's time-to-interactive.
 **Action:** Always use `react-dom`'s `preload` function inside a Server Component (like `app/layout.tsx` or `app/page.tsx`) to eagerly fetch critical 3D assets (like .gltf, .hdr, or textures) concurrently with the initial HTML request.
+
+## 2026-04-16 - Avoid redundant DOM manipulations in useFrame
+**Learning:** Performing DOM property assignments (e.g., `element.style.transform = ...`) and allocating template strings continuously inside a `useFrame` hook generates unnecessary overhead when the corresponding values haven't changed (e.g., when the user is not actively scrolling). This wastes CPU cycles 60-120 times per second when idle.
+**Action:** Use a `useRef` to track the last applied value and wrap DOM updates in a conditional check so they are only executed when the actual value changes.

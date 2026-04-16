@@ -5,10 +5,16 @@ import { useRef } from 'react';
 export default function Overlay() {
   const scroll = useScroll();
   const progressRef = useRef<HTMLDivElement>(null);
+  const lastOffset = useRef(-1);
 
   useFrame(() => {
     if (progressRef.current && scroll) {
-      progressRef.current.style.transform = `scaleX(${scroll.offset})`;
+      // ⚡ Bolt: Only update DOM style if the scroll offset has actually changed.
+      // This prevents useless string allocations and DOM property assignments 60-120 times per second when idle.
+      if (scroll.offset !== lastOffset.current) {
+        progressRef.current.style.transform = `scaleX(${scroll.offset})`;
+        lastOffset.current = scroll.offset;
+      }
     }
   });
 
