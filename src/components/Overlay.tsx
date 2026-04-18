@@ -6,6 +6,7 @@ export default function Overlay() {
   const scroll = useScroll();
   const progressRef = useRef<HTMLDivElement>(null);
   const lastOffset = useRef(-1);
+  const lastPercent = useRef(-1);
 
   useFrame(() => {
     if (progressRef.current && scroll) {
@@ -14,6 +15,13 @@ export default function Overlay() {
       if (scroll.offset !== lastOffset.current) {
         progressRef.current.style.transform = `scaleX(${scroll.offset})`;
         lastOffset.current = scroll.offset;
+
+        // ⚡ Bolt: Throttle aria-valuenow updates to integer percentages to avoid overwhelming the accessibility tree
+        const percent = Math.round(scroll.offset * 100);
+        if (percent !== lastPercent.current) {
+          progressRef.current.setAttribute('aria-valuenow', percent.toString());
+          lastPercent.current = percent;
+        }
       }
     }
   });
@@ -58,6 +66,10 @@ export default function Overlay() {
       <div className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none">
         <div
           ref={progressRef}
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={0}
           className="h-full bg-white origin-left"
           style={{ transform: 'scaleX(0)', willChange: 'transform' }} />
       </div>

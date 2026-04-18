@@ -45,3 +45,7 @@
 ## 2026-04-16 - Avoid redundant DOM manipulations in useFrame
 **Learning:** Performing DOM property assignments (e.g., `element.style.transform = ...`) and allocating template strings continuously inside a `useFrame` hook generates unnecessary overhead when the corresponding values haven't changed (e.g., when the user is not actively scrolling). This wastes CPU cycles 60-120 times per second when idle.
 **Action:** Use a `useRef` to track the last applied value and wrap DOM updates in a conditional check so they are only executed when the actual value changes.
+
+## 2024-05-18 - Throttle high-frequency ARIA updates in render loop
+**Learning:** Updating DOM attributes (like `aria-valuenow`) with floating-point values inside a `useFrame` loop (running at 60-120fps) causes significant performance overhead. It forces the browser to constantly recalculate the accessibility tree and spam screen readers, leading to severe stuttering.
+**Action:** Always throttle dynamic ARIA updates in render loops. Calculate an integer value (e.g., `Math.round(percent)`) and use a `useRef` to track the last applied value. Only call `setAttribute` when the integer value changes to drastically reduce accessibility tree mutations.
