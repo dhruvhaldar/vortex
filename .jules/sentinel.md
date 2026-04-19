@@ -31,3 +31,8 @@
 **Vulnerability:** Unnecessary media and device capabilities left enabled (Defense in Depth)
 **Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable unused APIs like `battery`, `autoplay`, `fullscreen`, `picture-in-picture`, `screen-wake-lock`, `web-share`, and `xr-spatial-tracking` reduces the application's attack surface and mitigates potential privacy leakage risks.
 **Prevention:** To further harden the HTTP `Permissions-Policy` header for defense-in-depth, explicitly disable unused media and device capabilities.
+
+## 2024-11-15 - Restrict Clipboard and Serial APIs
+**Vulnerability:** Permissive access to clipboard and serial port APIs (Defense in Depth)
+**Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable clipboard access (`clipboard-read`, `clipboard-write`) and hardware/window access (`gamepad`, `serial`, `window-management`) reduces the risk of malicious scripts reading sensitive data from the user's clipboard or interacting with physical serial devices, minimizing the potential attack surface.
+**Prevention:** To further harden the HTTP `Permissions-Policy` header, proactively disable capabilities that are not strictly necessary for the application to function.
