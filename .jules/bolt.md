@@ -45,3 +45,7 @@
 ## 2026-04-16 - Avoid redundant DOM manipulations in useFrame
 **Learning:** Performing DOM property assignments (e.g., `element.style.transform = ...`) and allocating template strings continuously inside a `useFrame` hook generates unnecessary overhead when the corresponding values haven't changed (e.g., when the user is not actively scrolling). This wastes CPU cycles 60-120 times per second when idle.
 **Action:** Use a `useRef` to track the last applied value and wrap DOM updates in a conditional check so they are only executed when the actual value changes.
+
+## 2024-05-30 - Pre-calculate constant vectors instead of normalize() in shaders
+**Learning:** In WebGL/Three.js fragment shaders, calling functions like `normalize()` on constant vectors forces the GPU to perform redundant calculations (e.g., inverse square roots) for every single pixel. This can cause significant overhead on high-resolution displays.
+**Action:** Always pre-calculate constant vectors and use them directly (e.g., replace `normalize(vec3(1.0, 1.0, 1.0))` with `vec3(0.577350269)`) to optimize shader performance.
