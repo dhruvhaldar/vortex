@@ -19,7 +19,8 @@ const securityHeaders = [
     // Sentinel: Replace deprecated interest-cohort (FLoC) with browsing-topics to protect user privacy against the modern Google Topics API
     // Also explicitly disable powerful APIs like payment, usb, bluetooth, and display-capture to reduce the application's attack surface.
     // Sentinel: Added further restrictions for battery, screen-wake-lock, web-share, autoplay, fullscreen, picture-in-picture, and xr-spatial-tracking for enhanced defense-in-depth.
-    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=(), battery=(), screen-wake-lock=(), web-share=(), autoplay=(), fullscreen=(), picture-in-picture=(), xr-spatial-tracking=()",
+    // Sentinel: Further hardened by disabling clipboard access, serial, gamepad, and window management to reduce attack surface.
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=(), battery=(), screen-wake-lock=(), web-share=(), autoplay=(), fullscreen=(), picture-in-picture=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), serial=(), gamepad=(), window-management=()",
   },
   {
     key: "X-Content-Type-Options",
@@ -28,6 +29,11 @@ const securityHeaders = [
   {
     key: "Referrer-Policy",
     value: "strict-origin-when-cross-origin",
+  },
+  // Sentinel: Add X-Download-Options to prevent legacy browsers from executing downloaded files in the app's context
+  {
+    key: "X-Download-Options",
+    value: "noopen",
   },
   // Sentinel: Add X-Permitted-Cross-Domain-Policies for defense-in-depth against Flash/Acrobat data extraction
   {
