@@ -36,3 +36,7 @@
 ## 2024-05-18 - Visual Progress in Scroll Controls
 **Learning:** In multi-page scroll experiences built with tools like `@react-three/drei`'s `ScrollControls`, native browser scrollbars are often hidden or deemphasized. Without them, users lack context regarding their current position or the overall length of the experience.
 **Action:** Always provide a clear visual scroll progress indicator, such as a top-fixed progress bar, to ground the user. Implement this performantly using a `ref` inside a `useFrame` loop to directly mutate the DOM node's `style.transform` (e.g., `scaleX(offset)`), rather than relying on React state updates.
+
+## 2025-10-27 - Throttling ARIA Updates in Continuous Render Loops
+**Learning:** When implementing custom visual scroll progress bars in a continuous render loop (like React Three Fiber's `useFrame`), screen readers can be overwhelmed by high-frequency updates to attributes like `aria-valuenow`.
+**Action:** Add `role="progressbar"` and related `aria-*` attributes to the visual progress element. To prevent overwhelming screen readers, update `aria-valuenow` via a ref and throttle the updates (e.g., only updating when the integer percentage changes), instead of updating it every single frame.
