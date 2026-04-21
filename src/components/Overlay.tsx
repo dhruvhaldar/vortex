@@ -5,7 +5,9 @@ import { useRef } from 'react';
 export default function Overlay() {
   const scroll = useScroll();
   const progressRef = useRef<HTMLDivElement>(null);
+  const progressAriaRef = useRef<HTMLDivElement>(null);
   const lastOffset = useRef(-1);
+  const lastPercentage = useRef(-1);
 
   useFrame(() => {
     if (progressRef.current && scroll) {
@@ -14,6 +16,14 @@ export default function Overlay() {
       if (scroll.offset !== lastOffset.current) {
         progressRef.current.style.transform = `scaleX(${scroll.offset})`;
         lastOffset.current = scroll.offset;
+
+        if (progressAriaRef.current) {
+          const percentage = Math.round(scroll.offset * 100);
+          if (percentage !== lastPercentage.current) {
+            progressAriaRef.current.setAttribute('aria-valuenow', percentage.toString());
+            lastPercentage.current = percentage;
+          }
+        }
       }
     }
   });
@@ -55,7 +65,15 @@ export default function Overlay() {
   return (
     <div className="w-screen">
       {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none">
+      <div
+        ref={progressAriaRef}
+        role="progressbar"
+        aria-label="Scroll progress"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={0}
+        className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none"
+      >
         <div
           ref={progressRef}
           className="h-full bg-white origin-left"
