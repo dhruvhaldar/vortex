@@ -31,3 +31,7 @@
 **Vulnerability:** Unnecessary media and device capabilities left enabled (Defense in Depth)
 **Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable unused APIs like `battery`, `autoplay`, `fullscreen`, `picture-in-picture`, `screen-wake-lock`, `web-share`, and `xr-spatial-tracking` reduces the application's attack surface and mitigates potential privacy leakage risks.
 **Prevention:** To further harden the HTTP `Permissions-Policy` header for defense-in-depth, explicitly disable unused media and device capabilities.
+## 2024-11-20 - Further Harden Permissions-Policy and add X-Download-Options
+**Vulnerability:** Permissive access to clipboard, serial, gamepad, and window management APIs, and legacy browsers potentially directly executing downloaded files (Defense in Depth)
+**Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable unused APIs like `clipboard-read`, `clipboard-write`, `serial`, `gamepad`, and `window-management` further reduces the application's attack surface and mitigates potential data extraction/exfiltration risks. Adding the `X-Download-Options: noopen` header prevents legacy browsers from executing downloaded files in the application's context.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` and `X-Download-Options` in HTTP headers to prevent unauthorized use of modern browser APIs and legacy browser exploits.
