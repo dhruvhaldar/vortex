@@ -32,7 +32,10 @@ void main() {
   color += vec3(1.0) * pulse * 0.5;
 
   // Simple lighting
-  vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
+  // ⚡ Bolt: Avoid calling normalize() on constant vectors inside the fragment shader.
+  // Pre-calculating the normalized vector (1.0 / sqrt(3) ≈ 0.577350269) saves expensive
+  // inverse square root calculations for every single pixel.
+  const vec3 lightDir = vec3(0.577350269);
   float diff = max(dot(vNormal, lightDir), 0.0);
   color *= (0.5 + 0.5 * diff);
 
