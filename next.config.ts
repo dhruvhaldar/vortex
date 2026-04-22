@@ -62,6 +62,11 @@ const securityHeaders = [
     key: "X-Download-Options",
     value: "noopen",
   },
+  // Sentinel: Add Origin-Agent-Cluster to enforce strict origin-keyed isolation and prevent document.domain relaxation
+  {
+    key: "Origin-Agent-Cluster",
+    value: "?1",
+  },
 ];
 
 const nextConfig: NextConfig = {
