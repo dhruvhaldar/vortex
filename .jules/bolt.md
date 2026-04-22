@@ -49,3 +49,7 @@
 ## 2024-05-30 - Pre-calculate constant vectors instead of normalize() in shaders
 **Learning:** In WebGL/Three.js fragment shaders, calling functions like `normalize()` on constant vectors forces the GPU to perform redundant calculations (e.g., inverse square roots) for every single pixel. This can cause significant overhead on high-resolution displays.
 **Action:** Always pre-calculate constant vectors and use them directly (e.g., replace `normalize(vec3(1.0, 1.0, 1.0))` with `vec3(0.577350269)`) to optimize shader performance.
+
+## 2026-04-18 - Offload perfectly linear shader math to vertexShader
+**Learning:** Performing arithmetic combining constants, uniforms, and perfectly linear UVs (e.g. `uv.y * 20.0 - uTime * 5.0`) inside a WebGL `fragmentShader` forces the GPU to redundantly execute the same linear calculation for millions of pixels.
+**Action:** Always offload perfectly linear mathematical combinations of uniforms and vertex attributes (like UVs or positions) to the `vertexShader`, store the result in a `varying` variable, and let the GPU's fixed-function rasterizer smoothly interpolate the result for the `fragmentShader`. This replaces millions of per-pixel arithmetic operations with thousands of per-vertex operations.

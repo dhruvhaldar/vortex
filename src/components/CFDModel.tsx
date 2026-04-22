@@ -6,25 +6,24 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const fragmentShader = `
-uniform float uTime;
 uniform sampler2D uTexture;
 varying vec2 vUv;
 varying vec3 vNormal;
+varying float vFlowPhase;
+varying float vPulsePhase;
 
 void main() {
   // Sample the base color (velocity magnitude)
   vec4 baseColor = texture2D(uTexture, vUv);
 
   // Create a flow effect
-  // Assuming vUv.x is along the tube length or vUv.y
-  // We'll try both or a combination.
-  // Usually for tubes: x is around, y is along.
-
-  float flow = sin(vUv.y * 20.0 - uTime * 5.0);
+  // ⚡ Bolt: Flow and pulse phases are now computed in the vertex shader and interpolated,
+  // drastically reducing per-fragment arithmetic operations.
+  float flow = sin(vFlowPhase);
   float flowPattern = smoothstep(0.4, 0.6, flow);
 
   // Add a glowing pulse
-  float pulse = exp(-mod(vUv.y * 10.0 - uTime * 2.0, 5.0));
+  float pulse = exp(-mod(vPulsePhase, 5.0));
 
   // Mix
   vec3 color = baseColor.rgb;
@@ -44,12 +43,22 @@ void main() {
 `;
 
 const vertexShader = `
+uniform float uTime;
 varying vec2 vUv;
 varying vec3 vNormal;
+varying float vFlowPhase;
+varying float vPulsePhase;
 
 void main() {
   vUv = uv;
   vNormal = normalize(normalMatrix * normal);
+
+  // ⚡ Bolt: Offload linear phase math to the vertex shader.
+  // These perfectly linear combinations of uv and uTime are interpolated smoothly
+  // across the primitive, replacing millions of fragment calculations with thousands of vertex calculations.
+  vFlowPhase = uv.y * 20.0 - uTime * 5.0;
+  vPulsePhase = uv.y * 10.0 - uTime * 2.0;
+
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
