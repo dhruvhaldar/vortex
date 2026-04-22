@@ -35,3 +35,7 @@
 **Vulnerability:** Permissive access to clipboard, serial, gamepad, and window management APIs, and legacy browsers potentially directly executing downloaded files (Defense in Depth)
 **Learning:** Expanding the `Permissions-Policy` HTTP header to explicitly disable unused APIs like `clipboard-read`, `clipboard-write`, `serial`, `gamepad`, and `window-management` further reduces the application's attack surface and mitigates potential data extraction/exfiltration risks. Adding the `X-Download-Options: noopen` header prevents legacy browsers from executing downloaded files in the application's context.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` and `X-Download-Options` in HTTP headers to prevent unauthorized use of modern browser APIs and legacy browser exploits.
+## 2024-12-05 - Add Origin-Agent-Cluster HTTP Header
+**Vulnerability:** Missing strict origin-keyed isolation
+**Learning:** This Next.js web application was missing the `Origin-Agent-Cluster` header, which explicitly enforces strict origin-keyed isolation and prevents `document.domain` relaxation, strengthening the application's defense against cross-origin side-channel attacks.
+**Prevention:** Always include the `Origin-Agent-Cluster: ?1` header to enforce strict origin isolation and improve defense-in-depth against cross-origin vulnerabilities.
