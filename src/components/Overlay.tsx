@@ -90,7 +90,7 @@ export default function Overlay() {
         >
             <span className="sr-only">Scroll down, or use the down and up arrow keys to explore</span>
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse motion-safe:animate-bounce transition-transform"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
-            <span aria-hidden="true">Scroll or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↑</kbd> to explore</span>
+            <span aria-hidden="true">Scroll <span className="hidden md:inline">or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↑</kbd> </span>to explore</span>
         </button>
       </section>
 
@@ -128,9 +128,9 @@ export default function Overlay() {
 
           <button
             onClick={handleScrollToTop}
-            className="group text-white/70 hover:text-white flex items-center gap-2 px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto"
+            className="group text-white/70 hover:text-white hover:bg-white/10 flex items-center gap-2 px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto"
           >
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" className="group-hover:-translate-y-1 transition-transform"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-y-1 transition-transform"><path d="m18 15-6-6-6 6" /></svg>
             <span className="font-medium">Back to Start</span>
           </button>
         </div>
