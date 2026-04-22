@@ -36,3 +36,7 @@
 ## 2024-05-18 - Visual Progress in Scroll Controls
 **Learning:** In multi-page scroll experiences built with tools like `@react-three/drei`'s `ScrollControls`, native browser scrollbars are often hidden or deemphasized. Without them, users lack context regarding their current position or the overall length of the experience.
 **Action:** Always provide a clear visual scroll progress indicator, such as a top-fixed progress bar, to ground the user. Implement this performantly using a `ref` inside a `useFrame` loop to directly mutate the DOM node's `style.transform` (e.g., `scaleX(offset)`), rather than relying on React state updates.
+
+## 2025-11-20 - Contextual Keyboard Hints
+**Learning:** Physical keyboard hints (like arrow keys) shown unconditionally can confuse mobile/touch users who do not have physical keyboards. This creates visual noise and reduces the relevance of the UI.
+**Action:** Always wrap keyboard-specific hints in responsive classes (e.g., `hidden md:inline`) so they are only visible on devices likely to have physical keyboards, tailoring the instruction to the user's available hardware.
