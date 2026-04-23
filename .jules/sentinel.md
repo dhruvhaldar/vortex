@@ -39,3 +39,7 @@
 **Vulnerability:** Missing strict origin-keyed isolation
 **Learning:** This Next.js web application was missing the `Origin-Agent-Cluster` header, which explicitly enforces strict origin-keyed isolation and prevents `document.domain` relaxation, strengthening the application's defense against cross-origin side-channel attacks.
 **Prevention:** Always include the `Origin-Agent-Cluster: ?1` header to enforce strict origin isolation and improve defense-in-depth against cross-origin vulnerabilities.
+## 2025-02-27 - Tighten CSP base-uri and form-action
+**Vulnerability:** Permissive Content-Security-Policy allowed `base-uri` and `form-action` to default to `'self'`.
+**Learning:** In applications that do not use HTML `<base>` tags or native HTML `<form>` submissions (common in SPAs and 3D web applications like this one), leaving `base-uri` and `form-action` as `'self'` or omitted provides an unnecessary attack surface. An attacker could potentially inject a malicious `<base>` tag (altering relative URLs) or perform rogue form submissions if an XSS or HTML injection vulnerability exists elsewhere. Setting these to `'none'` eliminates this class of attacks entirely.
+**Prevention:** Always restrict `base-uri` and `form-action` to `'none'` in the Content-Security-Policy unless the application specifically relies on base tags or native form actions.
