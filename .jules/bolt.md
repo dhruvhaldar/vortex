@@ -53,3 +53,7 @@
 ## 2026-04-18 - Offload perfectly linear shader math to vertexShader
 **Learning:** Performing arithmetic combining constants, uniforms, and perfectly linear UVs (e.g. `uv.y * 20.0 - uTime * 5.0`) inside a WebGL `fragmentShader` forces the GPU to redundantly execute the same linear calculation for millions of pixels.
 **Action:** Always offload perfectly linear mathematical combinations of uniforms and vertex attributes (like UVs or positions) to the `vertexShader`, store the result in a `varying` variable, and let the GPU's fixed-function rasterizer smoothly interpolate the result for the `fragmentShader`. This replaces millions of per-pixel arithmetic operations with thousands of per-vertex operations.
+
+## 2024-06-25 - Preload @react-three/drei Environment HDRIs in Next.js Server Components
+**Learning:** In Next.js applications using `next/dynamic` (`ssr: false`) to load React Three Fiber scenes, dynamic external assets like `@react-three/drei` Environment HDRIs cause network waterfalls because they only execute after the client bundle loads.
+**Action:** Always use `react-dom`'s `preconnect()` and `preload()` functions inside a Server Component (like `layout.tsx`) to eagerly establish connections and fetch heavy external 3D assets (e.g. from raw.githubusercontent.com for PMNDRS assets) concurrently with the initial HTML request and JavaScript parsing.

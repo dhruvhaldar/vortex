@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { preload } from "react-dom";
+import { preload, preconnect } from "react-dom";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,6 +29,10 @@ export default function RootLayout({
   // Preloading them here significantly improves the time-to-interactive for the 3D scene.
   preload('/assets/streamlines.gltf', { as: 'fetch', crossOrigin: 'anonymous' });
   preload('/assets/cylinder.gltf', { as: 'fetch', crossOrigin: 'anonymous' });
+
+  // Preload Environment HDR map
+  preconnect('https://raw.githubusercontent.com', { crossOrigin: 'anonymous' });
+  preload('https://raw.githubusercontent.com/pmndrs/drei-assets/master/hdri/potsdamer_platz_1k.hdr', { as: 'fetch', crossOrigin: 'anonymous' });
 
   return (
     <html lang="en">
