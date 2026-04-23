@@ -89,7 +89,7 @@ export default function Overlay() {
           className="group absolute bottom-10 left-10 md:left-20 text-white/70 flex items-center gap-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-all active:scale-95 pointer-events-auto"
         >
             <span className="sr-only">Scroll down, or use the down and up arrow keys to explore</span>
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse motion-safe:animate-bounce transition-transform"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse motion-safe:group-hover:animate-bounce transition-transform"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
             <span aria-hidden="true">Scroll <span className="hidden md:inline">or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↑</kbd> </span>to explore</span>
         </button>
       </section>
