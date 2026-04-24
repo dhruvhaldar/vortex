@@ -89,7 +89,7 @@ export default function Overlay() {
           className="group absolute bottom-10 left-10 md:left-20 text-white/70 flex items-center gap-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-all active:scale-95 pointer-events-auto"
         >
             <span className="sr-only">Scroll down, or use the down and up arrow keys to explore</span>
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse motion-safe:group-hover:animate-bounce transition-transform"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mouse motion-safe:group-hover:animate-bounce motion-safe:group-focus-visible:animate-bounce transition-transform"><rect x="5" y="2" width="14" height="20" rx="7"/><path d="M12 6v4"/></svg>
             <span aria-hidden="true">Scroll <span className="hidden md:inline">or use <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↓</kbd> <kbd className="font-sans px-1 py-0.5 rounded-md bg-white/20 text-xs text-white">↑</kbd> </span>to explore</span>
         </button>
       </section>
@@ -122,7 +122,7 @@ export default function Overlay() {
         <div className="flex flex-col items-center gap-6">
           <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="group px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto inline-flex items-center gap-2 justify-center">
               Powered by PyVista & R3F
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link group-hover:-translate-y-1 group-focus-visible:-translate-y-1 group-hover:translate-x-1 group-focus-visible:translate-x-1 transition-transform" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
               <span className="sr-only"> (opens in a new tab)</span>
           </a>
 
@@ -130,7 +130,7 @@ export default function Overlay() {
             onClick={handleScrollToTop}
             className="group text-white/70 hover:text-white hover:bg-white/10 flex items-center gap-2 px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto"
           >
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-y-1 transition-transform"><path d="m18 15-6-6-6 6" /></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-y-1 group-focus-visible:-translate-y-1 transition-transform"><path d="m18 15-6-6-6 6" /></svg>
             <span className="font-medium">Back to Start</span>
           </button>
         </div>

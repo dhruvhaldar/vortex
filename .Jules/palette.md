@@ -40,3 +40,7 @@
 ## 2025-11-20 - Contextual Keyboard Hints
 **Learning:** Physical keyboard hints (like arrow keys) shown unconditionally can confuse mobile/touch users who do not have physical keyboards. This creates visual noise and reduces the relevance of the UI.
 **Action:** Always wrap keyboard-specific hints in responsive classes (e.g., `hidden md:inline`) so they are only visible on devices likely to have physical keyboards, tailoring the instruction to the user's available hardware.
+
+## 2025-05-18 - Mirroring Hover and Focus Animations
+**Learning:** Decorative micro-animations triggered on hover (like `group-hover:-translate-y-1` on an icon within a button) are often missed by keyboard users if not explicitly mirrored for focus states. This creates an inconsistent experience where mouse users get playful feedback, but keyboard users do not.
+**Action:** Whenever applying a hover animation to an element (or a child element via group-hover), always mirror it with the corresponding `focus-visible` or `group-focus-visible` utility class to ensure equivalent visual feedback for keyboard navigation.
