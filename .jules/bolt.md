@@ -57,3 +57,7 @@
 ## 2024-06-25 - Preload @react-three/drei Environment HDRIs in Next.js Server Components
 **Learning:** In Next.js applications using `next/dynamic` (`ssr: false`) to load React Three Fiber scenes, dynamic external assets like `@react-three/drei` Environment HDRIs cause network waterfalls because they only execute after the client bundle loads.
 **Action:** Always use `react-dom`'s `preconnect()` and `preload()` functions inside a Server Component (like `layout.tsx`) to eagerly establish connections and fetch heavy external 3D assets (e.g. from raw.githubusercontent.com for PMNDRS assets) concurrently with the initial HTML request and JavaScript parsing.
+
+## 2024-05-28 - Prefer hardware MSAA over SMAA post-processing
+**Learning:** Using the `<SMAA />` post-processing pass introduces significant GPU overhead because it executes as an expensive full-screen fragment shader pass. In modern WebGL2 environments, hardware MSAA is generally much faster and integrated directly into the rasterization pipeline.
+**Action:** Instead of adding `<SMAA />` to the `<EffectComposer>`, enable hardware multi-sampling by setting `multisampling={4}` (or 8) directly on the `<EffectComposer>` to leverage the native GPU anti-aliasing capabilities with significantly lower overhead.

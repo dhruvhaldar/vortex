@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { ScrollControls, Scroll, Environment, Loader } from '@react-three/drei';
-import { EffectComposer, Bloom, N8AO, SMAA } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, N8AO } from '@react-three/postprocessing';
 import CFDModel from './CFDModel';
 import CameraHandler from './CameraHandler';
 import Overlay from './Overlay';
@@ -37,8 +37,10 @@ export default function Scene() {
                 </Scroll>
             </ScrollControls>
 
-            <EffectComposer multisampling={0}>
-                <SMAA />
+            {/* ⚡ Bolt: Replaced SMAA with hardware MSAA. SMAA runs as an expensive full-screen fragment shader pass.
+                In WebGL2, hardware MSAA (multisampling={4}) is generally much faster and integrated into the rasterization pipeline,
+                significantly reducing GPU overhead. */}
+            <EffectComposer multisampling={4}>
                 {/* ⚡ Bolt: Replaced legacy SSAO with N8AO (N8 Ambient Occlusion).
                     N8AO is highly optimized, significantly faster, and doesn't require a separate NormalPass
                     which was missing and causing expensive on-the-fly depth-to-normal reconstruction. */}
