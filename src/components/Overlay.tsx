@@ -81,7 +81,7 @@ export default function Overlay() {
       </div>
 
       {/* Page 1 */}
-      <section aria-labelledby="hero-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20">
+      <section aria-labelledby="hero-title" className="relative h-screen flex flex-col justify-center items-start p-10 md:p-20">
         <h1 id="hero-title" tabIndex={-1} className="text-6xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-lg focus:outline-none">VORTEX</h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4 drop-shadow-lg">Interactive CFD Visualization</p>
         <button

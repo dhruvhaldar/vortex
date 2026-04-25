@@ -44,3 +44,7 @@
 ## 2025-05-18 - Mirroring Hover and Focus Animations
 **Learning:** Decorative micro-animations triggered on hover (like `group-hover:-translate-y-1` on an icon within a button) are often missed by keyboard users if not explicitly mirrored for focus states. This creates an inconsistent experience where mouse users get playful feedback, but keyboard users do not.
 **Action:** Whenever applying a hover animation to an element (or a child element via group-hover), always mirror it with the corresponding `focus-visible` or `group-focus-visible` utility class to ensure equivalent visual feedback for keyboard navigation.
+
+## 2025-11-20 - Contextual Elements in Scroll Containers
+**Learning:** Placing an `absolute`ly positioned instructional element (like a "Scroll down" hint) within a non-relative section inside a continuous scroll container causes the element to be anchored to the bottom of the entire scrollable content, rather than the initial viewport. This hides crucial instructions from the user when they first load the page and confusingly presents them only when they reach the end.
+**Action:** Always ensure that parent sections containing contextual, position-absolute UI elements have `relative` positioning applied to properly constrain their child elements to the relevant viewport or screen.
