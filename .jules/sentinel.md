@@ -43,3 +43,7 @@
 **Vulnerability:** Permissive Content-Security-Policy allowed `base-uri` and `form-action` to default to `'self'`.
 **Learning:** In applications that do not use HTML `<base>` tags or native HTML `<form>` submissions (common in SPAs and 3D web applications like this one), leaving `base-uri` and `form-action` as `'self'` or omitted provides an unnecessary attack surface. An attacker could potentially inject a malicious `<base>` tag (altering relative URLs) or perform rogue form submissions if an XSS or HTML injection vulnerability exists elsewhere. Setting these to `'none'` eliminates this class of attacks entirely.
 **Prevention:** Always restrict `base-uri` and `form-action` to `'none'` in the Content-Security-Policy unless the application specifically relies on base tags or native form actions.
+## 2025-04-25 - Remove Unnecessary CDN from CSP
+**Vulnerability:** Permissive Content-Security-Policy allowed connections to an unused external domain (`raw.githack.com`).
+**Learning:** Expanding `connect-src` to include domains that are no longer actively used by the application unnecessarily increases the attack surface. An attacker could potentially abuse this if another vulnerability allowed them to execute scripts or fetch data from that origin.
+**Prevention:** Regularly audit the `Content-Security-Policy` and remove any external domains that are not strictly required for the application's functionality.
