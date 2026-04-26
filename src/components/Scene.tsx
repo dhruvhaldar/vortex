@@ -40,7 +40,11 @@ export default function Scene() {
             {/* ⚡ Bolt: Replaced SMAA with hardware MSAA. SMAA runs as an expensive full-screen fragment shader pass.
                 In WebGL2, hardware MSAA (multisampling={4}) is generally much faster and integrated into the rasterization pipeline,
                 significantly reducing GPU overhead. */}
-            <EffectComposer multisampling={4}>
+            {/* ⚡ Bolt: Explicitly disable the stencil buffer in the EffectComposer.
+                Since we are not using any stencil-based effects (like masks or outlines),
+                disabling it prevents the GPU from allocating and managing an unused stencil buffer,
+                saving VRAM and memory bandwidth. */}
+            <EffectComposer multisampling={4} stencilBuffer={false}>
                 {/* ⚡ Bolt: Replaced legacy SSAO with N8AO (N8 Ambient Occlusion).
                     N8AO is highly optimized, significantly faster, and doesn't require a separate NormalPass
                     which was missing and causing expensive on-the-fly depth-to-normal reconstruction. */}
