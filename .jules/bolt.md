@@ -61,3 +61,7 @@
 ## 2024-05-28 - Prefer hardware MSAA over SMAA post-processing
 **Learning:** Using the `<SMAA />` post-processing pass introduces significant GPU overhead because it executes as an expensive full-screen fragment shader pass. In modern WebGL2 environments, hardware MSAA is generally much faster and integrated directly into the rasterization pipeline.
 **Action:** Instead of adding `<SMAA />` to the `<EffectComposer>`, enable hardware multi-sampling by setting `multisampling={4}` (or 8) directly on the `<EffectComposer>` to leverage the native GPU anti-aliasing capabilities with significantly lower overhead.
+
+## 2026-04-26 - Disable unused stencilBuffer in EffectComposer
+**Learning:** By default, `@react-three/postprocessing`'s `EffectComposer` enables the stencil buffer. If a scene does not use stencil-based effects (like masks or certain outlines), this forces the GPU to needlessly allocate and manage an unused buffer, wasting VRAM and memory bandwidth.
+**Action:** Always explicitly set `stencilBuffer={false}` on the `<EffectComposer>` when stencil effects are not in use to optimize GPU memory and bandwidth.
