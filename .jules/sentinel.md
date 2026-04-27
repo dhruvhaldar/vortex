@@ -47,3 +47,7 @@
 **Vulnerability:** Permissive Content-Security-Policy allowed connections to an unused external domain (`raw.githack.com`).
 **Learning:** Expanding `connect-src` to include domains that are no longer actively used by the application unnecessarily increases the attack surface. An attacker could potentially abuse this if another vulnerability allowed them to execute scripts or fetch data from that origin.
 **Prevention:** Regularly audit the `Content-Security-Policy` and remove any external domains that are not strictly required for the application's functionality.
+## 2024-05-20 - Further Harden Permissions-Policy
+**Vulnerability:** Permissive access to ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection APIs (Defense in Depth)
+**Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
+**Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
