@@ -51,3 +51,8 @@
 **Vulnerability:** Permissive access to ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection APIs (Defense in Depth)
 **Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
 **Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
+
+## 2024-05-25 - Add Sandbox Directive to CSP
+**Vulnerability:** Permissive Content-Security-Policy without a sandbox directive (Defense in Depth)
+**Learning:** Adding a `sandbox` directive to the Content-Security-Policy limits the actions that the page is allowed to take. Even if an attacker finds an XSS vulnerability, the `sandbox` directive can restrict their ability to perform certain malicious actions like submitting forms or opening popups (unless explicitly allowed).
+**Prevention:** Always consider adding a `sandbox` directive to the Content-Security-Policy to enforce strict limitations on page capabilities, enhancing defense-in-depth against XSS and other injection attacks.

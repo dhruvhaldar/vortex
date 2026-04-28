@@ -39,7 +39,8 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     // Sentinel: Strengthen CSP by setting base-uri and form-action to 'none' as this app doesn't use base tags or HTML forms.
-    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; connect-src 'self' raw.githubusercontent.com data: blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
+    // Sentinel: Added sandbox directive for defense-in-depth against XSS and other injection attacks.
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; connect-src 'self' raw.githubusercontent.com data: blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests; sandbox allow-scripts allow-same-origin allow-popups;`.replace(/\s+/g, ' ').trim(),
   },
   {
     key: "Strict-Transport-Security",
