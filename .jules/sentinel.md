@@ -51,3 +51,7 @@
 **Vulnerability:** Permissive access to ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection APIs (Defense in Depth)
 **Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
 **Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
+## 2024-06-25 - Restrict Experimental Browser APIs
+**Vulnerability:** Permissive access to experimental browser APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict modern experimental APIs like `compute-pressure`, `direct-sockets`, and `attribution-reporting` through the `Permissions-Policy` header.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Further restrict experimental APIs like `compute-pressure=()`, `direct-sockets=()`, and `attribution-reporting=()` to limit potential side-channels and unwanted behavior.

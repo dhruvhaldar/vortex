@@ -21,7 +21,8 @@ const securityHeaders = [
     // Sentinel: Added further restrictions for battery, screen-wake-lock, web-share, autoplay, fullscreen, picture-in-picture, and xr-spatial-tracking for enhanced defense-in-depth.
     // Sentinel: Restrict access to clipboard and window management APIs (clipboard-read, clipboard-write, serial, gamepad, window-management).
     // Sentinel: Further restrict ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection for defense-in-depth.
-    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=(), battery=(), screen-wake-lock=(), web-share=(), autoplay=(), fullscreen=(), picture-in-picture=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), serial=(), gamepad=(), window-management=(), ambient-light-sensor=(), encrypted-media=(), idle-detection=(), local-fonts=(), speaker-selection=()",
+    // Sentinel: Explicitly restrict experimental APIs including compute-pressure, direct-sockets, and attribution-reporting.
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), payment=(), usb=(), bluetooth=(), display-capture=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), publickey-credentials-get=(), sync-xhr=(), battery=(), screen-wake-lock=(), web-share=(), autoplay=(), fullscreen=(), picture-in-picture=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), serial=(), gamepad=(), window-management=(), ambient-light-sensor=(), encrypted-media=(), idle-detection=(), local-fonts=(), speaker-selection=(), compute-pressure=(), direct-sockets=(), attribution-reporting=()",
   },
   {
     key: "X-Content-Type-Options",
