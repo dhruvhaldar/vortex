@@ -8,7 +8,7 @@ import * as THREE from 'three';
 const fragmentShader = `
 uniform sampler2D uTexture;
 varying vec2 vUv;
-varying vec3 vNormal;
+varying float vDiff;
 varying float vFlowPhase;
 varying float vPulsePhase;
 
@@ -23,7 +23,8 @@ void main() {
   float flowPattern = smoothstep(0.4, 0.6, flow);
 
   // Add a glowing pulse
-  float pulse = exp(-mod(vPulsePhase, 5.0));
+  // ⚡ Bolt: Use fract() instead of mod() for better performance on many GPUs.
+  float pulse = exp(-(fract(vPulsePhase * 0.2) * 5.0));
 
   // Mix
   vec3 color = baseColor.rgb;
@@ -31,12 +32,8 @@ void main() {
   color += vec3(1.0) * pulse * 0.5;
 
   // Simple lighting
-  // ⚡ Bolt: Avoid calling normalize() on constant vectors inside the fragment shader.
-  // Pre-calculating the normalized vector (1.0 / sqrt(3) ≈ 0.577350269) saves expensive
-  // inverse square root calculations for every single pixel.
-  const vec3 lightDir = vec3(0.577350269);
-  float diff = max(dot(vNormal, lightDir), 0.0);
-  color *= (0.5 + 0.5 * diff);
+  // ⚡ Bolt: vDiff is computed in the vertex shader and interpolated smoothly.
+  color *= (0.5 + 0.5 * vDiff);
 
   gl_FragColor = vec4(color, 1.0);
 }
@@ -45,13 +42,18 @@ void main() {
 const vertexShader = `
 uniform float uTime;
 varying vec2 vUv;
-varying vec3 vNormal;
+varying float vDiff;
 varying float vFlowPhase;
 varying float vPulsePhase;
 
 void main() {
   vUv = uv;
-  vNormal = normalize(normalMatrix * normal);
+  vec3 normalWorld = normalize(normalMatrix * normal);
+
+  // ⚡ Bolt: Offload the vector dot product to the vertex shader.
+  // We compute the diffuse lighting term here instead of per-pixel.
+  const vec3 lightDir = vec3(0.577350269);
+  vDiff = max(dot(normalWorld, lightDir), 0.0);
 
   // ⚡ Bolt: Offload linear phase math to the vertex shader.
   // These perfectly linear combinations of uv and uTime are interpolated smoothly
