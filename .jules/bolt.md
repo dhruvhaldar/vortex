@@ -65,3 +65,7 @@
 ## 2026-04-26 - Disable unused stencilBuffer in EffectComposer
 **Learning:** By default, `@react-three/postprocessing`'s `EffectComposer` enables the stencil buffer. If a scene does not use stencil-based effects (like masks or certain outlines), this forces the GPU to needlessly allocate and manage an unused buffer, wasting VRAM and memory bandwidth.
 **Action:** Always explicitly set `stencilBuffer={false}` on the `<EffectComposer>` when stencil effects are not in use to optimize GPU memory and bandwidth.
+
+## 2024-05-31 - Offload dot products to vertex shader and use fract over mod
+**Learning:** In WebGL fragment shaders, performing vector dot products (like `dot(normal, lightDir)`) per-pixel is expensive. Many older or mobile GPUs also emulate `mod(x, y)` which can be slower than the natively supported `fract(x)`.
+**Action:** Always offload linear vector math and dot products to the `vertexShader` when computing simple directional lighting, passing the scalar result via a `varying`. Replace `mod(x, y)` with `fract(x / y) * y` where possible for better performance across different GPU architectures.
