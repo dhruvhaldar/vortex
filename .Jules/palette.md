@@ -48,3 +48,7 @@
 ## 2025-11-20 - Contextual Elements in Scroll Containers
 **Learning:** Placing an `absolute`ly positioned instructional element (like a "Scroll down" hint) within a non-relative section inside a continuous scroll container causes the element to be anchored to the bottom of the entire scrollable content, rather than the initial viewport. This hides crucial instructions from the user when they first load the page and confusingly presents them only when they reach the end.
 **Action:** Always ensure that parent sections containing contextual, position-absolute UI elements have `relative` positioning applied to properly constrain their child elements to the relevant viewport or screen.
+
+## 2025-06-15 - Unnecessary Focus Attributes on Static Headings
+**Learning:** Adding `tabIndex={-1}` and `focus:outline-none` to static headings is a standard practice only if there is active JavaScript managing programmatic focus (e.g., skip links or routing). Adding these attributes on their own provides no tangible UX or accessibility benefit and clutters the DOM.
+**Action:** Only apply programmatic focus attributes to elements that are actually targeted by focus management logic.
