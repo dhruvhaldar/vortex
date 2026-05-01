@@ -11,7 +11,7 @@ const Scene = dynamic(() => import("@/components/Scene"), {
       <div role="status" className="flex flex-col items-center gap-4">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 text-gray-700 animate-spin fill-white"
+          className="w-8 h-8 text-gray-700 motion-safe:animate-spin fill-white"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const Scene = dynamic(() => import("@/components/Scene"), {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading 3D experience...</span>
+        <span className="sr-only motion-reduce:not-sr-only motion-reduce:text-white/80 motion-reduce:font-medium motion-reduce:tracking-wide">Loading 3D experience...</span>
       </div>
     </div>
   )
