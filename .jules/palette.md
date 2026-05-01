@@ -13,3 +13,7 @@
 ## 2024-05-18 - Throttling ARIA Updates in Continuous Render Loops
 **Learning:** When implementing custom visual scroll progress bars in a continuous render loop (like React Three Fiber's `useFrame`), naive updates to `aria-valuenow` can occur 60+ times per second. This high frequency overwhelms screen readers, causing degraded accessibility performance and unintelligible announcements.
 **Action:** Always add `role="progressbar"` and related `aria-*` attributes (`aria-valuemin`, `aria-valuemax`, `aria-label`). To prevent screen reader spam, update the `aria-valuenow` attribute programmatically via a `ref` and throttle the updates—for example, by only applying the update when the integer percentage actually changes.
+
+## 2024-05-18 - Handling Loading States with Reduced Motion
+**Learning:** When disabling animations (like loading spinners) for users who request reduced motion, relying purely on `sr-only` text leaves sighted users with a frozen, uninformative UI.
+**Action:** Ensure that when animations are disabled, a clear textual equivalent (like "Loading...") is exposed visually using utility classes like `motion-reduce:not-sr-only`.
