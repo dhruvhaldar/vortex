@@ -8,7 +8,7 @@ import * as THREE from 'three';
 const fragmentShader = `
 uniform sampler2D uTexture;
 varying vec2 vUv;
-varying float vDiff;
+varying float vLight;
 varying float vFlowPhase;
 varying float vPulsePhase;
 
@@ -24,16 +24,20 @@ void main() {
 
   // Add a glowing pulse
   // ⚡ Bolt: Use fract() instead of mod() for better performance on many GPUs.
-  float pulse = exp(-(fract(vPulsePhase * 0.2) * 5.0));
+  // ⚡ Bolt: vPulsePhase is pre-scaled in the vertex shader to avoid the * 0.2 multiplication here.
+  float pulse = exp(-(fract(vPulsePhase) * 5.0));
 
   // Mix
   vec3 color = baseColor.rgb;
-  color += vec3(0.2, 0.4, 1.0) * flowPattern * 0.3;
-  color += vec3(1.0) * pulse * 0.5;
+  // ⚡ Bolt: Pre-calculate constant vector math: vec3(0.2, 0.4, 1.0) * 0.3 = vec3(0.06, 0.12, 0.3)
+  color += vec3(0.06, 0.12, 0.3) * flowPattern;
+  // ⚡ Bolt: Simplify vec3(1.0) * pulse * 0.5 to vec3(pulse * 0.5)
+  color += vec3(pulse * 0.5);
 
   // Simple lighting
-  // ⚡ Bolt: vDiff is computed in the vertex shader and interpolated smoothly.
-  color *= (0.5 + 0.5 * vDiff);
+  // ⚡ Bolt: The final lighting multiplier (0.5 + 0.5 * vDiff) is now pre-computed
+  // in the vertex shader and passed as vLight, saving per-pixel additions and multiplications.
+  color *= vLight;
 
   gl_FragColor = vec4(color, 1.0);
 }
@@ -42,7 +46,7 @@ void main() {
 const vertexShader = `
 uniform float uTime;
 varying vec2 vUv;
-varying float vDiff;
+varying float vLight;
 varying float vFlowPhase;
 varying float vPulsePhase;
 
@@ -53,13 +57,16 @@ void main() {
   // ⚡ Bolt: Offload the vector dot product to the vertex shader.
   // We compute the diffuse lighting term here instead of per-pixel.
   const vec3 lightDir = vec3(0.577350269);
-  vDiff = max(dot(normalWorld, lightDir), 0.0);
+  float vDiff = max(dot(normalWorld, lightDir), 0.0);
+  // ⚡ Bolt: Compute final lighting multiplier in vertex shader as it is perfectly linear
+  vLight = 0.5 + 0.5 * vDiff;
 
   // ⚡ Bolt: Offload linear phase math to the vertex shader.
   // These perfectly linear combinations of uv and uTime are interpolated smoothly
   // across the primitive, replacing millions of fragment calculations with thousands of vertex calculations.
   vFlowPhase = uv.y * 20.0 - uTime * 5.0;
-  vPulsePhase = uv.y * 10.0 - uTime * 2.0;
+  // ⚡ Bolt: Pre-scale pulse phase by 0.2 here so we don't have to multiply per-fragment later
+  vPulsePhase = uv.y * 2.0 - uTime * 0.4;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }

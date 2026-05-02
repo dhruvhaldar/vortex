@@ -69,3 +69,7 @@
 ## 2024-05-31 - Offload dot products to vertex shader and use fract over mod
 **Learning:** In WebGL fragment shaders, performing vector dot products (like `dot(normal, lightDir)`) per-pixel is expensive. Many older or mobile GPUs also emulate `mod(x, y)` which can be slower than the natively supported `fract(x)`.
 **Action:** Always offload linear vector math and dot products to the `vertexShader` when computing simple directional lighting, passing the scalar result via a `varying`. Replace `mod(x, y)` with `fract(x / y) * y` where possible for better performance across different GPU architectures.
+
+## 2024-06-28 - Pre-compute final linear varying expressions in vertex shaders
+**Learning:** If a varying output from a vertex shader (like diffuse lighting or scaled phases) is used only in linear fragment shader equations (like simple multipliers or combined fract functions), it is more efficient to perform those combinations (e.g. `0.5 + 0.5 * vDiff`, or `uv.y * 2.0 - uTime * 0.4`) directly in the vertex shader. The hardware interpolation perfectly handles the linear math, effectively replacing millions of per-pixel arithmetic operations with thousands of per-vertex operations.
+**Action:** Always pre-compute and simplify perfectly linear final mathematical expressions (including constants) inside the `vertexShader` rather than just passing the base varying and calculating the final multiplier in the `fragmentShader`.
