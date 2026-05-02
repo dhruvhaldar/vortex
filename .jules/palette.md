@@ -17,3 +17,7 @@
 ## 2024-05-18 - Handling Loading States with Reduced Motion
 **Learning:** When disabling animations (like loading spinners) for users who request reduced motion, relying purely on `sr-only` text leaves sighted users with a frozen, uninformative UI.
 **Action:** Ensure that when animations are disabled, a clear textual equivalent (like "Loading...") is exposed visually using utility classes like `motion-reduce:not-sr-only`.
+
+## 2024-05-18 - Preventing False Affordance on Static Information Cards
+**Learning:** Adding hover states (like background color changes) to non-interactive informational cards creates a "false affordance", making users think the element is clickable or interactive when it is not. This leads to user frustration and confusion. Additionally, using solid high-opacity backgrounds for overlays in 3D scenes blocks the visualization.
+**Action:** Remove hover states from purely informational elements. Use a glassmorphism effect (e.g., `bg-black/60 backdrop-blur-md`) for text panels overlaying dynamic 3D scenes to ensure readability while preserving context.
