@@ -21,3 +21,7 @@
 ## 2024-05-18 - Preventing False Affordance on Static Information Cards
 **Learning:** Adding hover states (like background color changes) to non-interactive informational cards creates a "false affordance", making users think the element is clickable or interactive when it is not. This leads to user frustration and confusion. Additionally, using solid high-opacity backgrounds for overlays in 3D scenes blocks the visualization.
 **Action:** Remove hover states from purely informational elements. Use a glassmorphism effect (e.g., `bg-black/60 backdrop-blur-md`) for text panels overlaying dynamic 3D scenes to ensure readability while preserving context.
+
+## 2024-05-18 - Mirroring Structural Hover States for Keyboard Users
+**Learning:** While decorative micro-animations (like `group-hover:-translate-y-1`) are often properly mirrored with `group-focus-visible`, the base structural hover states on the parent container (like `hover:bg-gray-200` or `hover:text-white`) are frequently forgotten for keyboard focus states. This creates a disparity in visual feedback between mouse and keyboard users.
+**Action:** Always mirror parent container structural hover states (background color, text color) with the corresponding `focus-visible:` utility classes, in addition to mirroring the internal micro-animations.
