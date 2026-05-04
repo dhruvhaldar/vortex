@@ -73,3 +73,7 @@
 ## 2024-06-28 - Pre-compute final linear varying expressions in vertex shaders
 **Learning:** If a varying output from a vertex shader (like diffuse lighting or scaled phases) is used only in linear fragment shader equations (like simple multipliers or combined fract functions), it is more efficient to perform those combinations (e.g. `0.5 + 0.5 * vDiff`, or `uv.y * 2.0 - uTime * 0.4`) directly in the vertex shader. The hardware interpolation perfectly handles the linear math, effectively replacing millions of per-pixel arithmetic operations with thousands of per-vertex operations.
 **Action:** Always pre-compute and simplify perfectly linear final mathematical expressions (including constants) inside the `vertexShader` rather than just passing the base varying and calculating the final multiplier in the `fragmentShader`.
+
+## 2024-05-04 - Remove CSS Compositing over WebGL
+**Learning:** In WebGL/React Three Fiber applications, avoid using CSS properties like `backdrop-filter: blur()` (e.g., Tailwind's `backdrop-blur-md`) over the `<Canvas>`. It forces the browser into expensive software compositing and per-frame canvas read-backs, which severely degrades performance.
+**Action:** Use opaque backgrounds or drop shadows instead when optimizing for speed.
