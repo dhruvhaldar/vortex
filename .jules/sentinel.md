@@ -52,3 +52,8 @@
 **Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like ambient-light-sensor, encrypted-media, idle-detection, local-fonts, and speaker-selection further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
 **Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
 ## 2025-04-30 - Harden Permissions-Policy further\n**Vulnerability:** Permissive access to compute-pressure, direct-sockets, and attribution-reporting APIs (Defense in Depth)\n**Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable experimental APIs like compute-pressure, direct-sockets, and attribution-reporting further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.\n**Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
+
+## 2024-05-04 - Strict CSP for Localized Assets
+**Vulnerability:** Loading heavy 3D assets from external sources requires broad `connect-src` CSP directives, increasing the risk of data exfiltration or supply chain attacks.
+**Learning:** React Three Fiber's `<Environment>` component can load local HDR files instead of using `preset` names that fetch from external CDNs, allowing us to remove external domains from the CSP.
+**Prevention:** Always host external assets (like HDRs, fonts, and scripts) locally and configure `next.config.ts` to restrict the CSP `connect-src` solely to `'self'` and required data URIs.

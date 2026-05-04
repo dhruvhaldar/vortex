@@ -31,7 +31,7 @@ export default function Scene() {
             <ScrollControls pages={4} damping={0.2}>
                 <CameraHandler />
                 <CFDModel />
-                <Environment preset="city" />
+                <Environment files="/assets/potsdamer_platz_1k.hdr" />
                 <Scroll html>
                     <Overlay />
                 </Scroll>
