@@ -43,7 +43,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     // Sentinel: Strengthen CSP by setting base-uri and form-action to 'none' as this app doesn't use base tags or HTML forms.
     // Sentinel: Explicitly restrict worker-src, media-src, child-src, and frame-src to 'none' for enhanced defense-in-depth.
-    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; connect-src 'self' raw.githubusercontent.com data: blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; worker-src 'none'; media-src 'none'; child-src 'none'; frame-src 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; connect-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; worker-src 'none'; media-src 'none'; child-src 'none'; frame-src 'none'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
   },
   {
     key: "Strict-Transport-Security",
