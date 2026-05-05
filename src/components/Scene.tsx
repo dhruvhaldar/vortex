@@ -23,6 +23,8 @@ export default function Scene() {
         // On dual-GPU systems (like many laptops), browsers may default to the integrated low-power GPU.
         // This scene is heavy with post-processing (SSAO, Bloom), so forcing the discrete GPU drastically improves framerates.
         gl={{ antialias: false, stencil: false, alpha: false, powerPreference: "high-performance" }}
+        // ⚡ Bolt: Disable pointer events on the Canvas. Since this scene has no interactive 3D objects, this prevents R3F from running expensive raycasting computations on every mouse move, saving CPU.
+        style={{ pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.0} />
