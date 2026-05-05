@@ -77,3 +77,7 @@
 ## 2024-05-04 - Remove CSS Compositing over WebGL
 **Learning:** In WebGL/React Three Fiber applications, avoid using CSS properties like `backdrop-filter: blur()` (e.g., Tailwind's `backdrop-blur-md`) over the `<Canvas>`. It forces the browser into expensive software compositing and per-frame canvas read-backs, which severely degrades performance.
 **Action:** Use opaque backgrounds or drop shadows instead when optimizing for speed.
+
+## 2024-07-28 - Disable Raycasting for non-interactive Scenes
+**Learning:** If there are NO interactive objects in the scene (`onClick`, `onPointerOver`), R3F's raycaster still fires on pointer movement if events are enabled, computing intersections for everything, which wastes CPU.
+**Action:** Use `style={{ pointerEvents: 'none' }}` on the `<Canvas>` component to completely disable raycasting and pointer event listeners overhead when there are no interactive 3D objects.
