@@ -96,10 +96,10 @@ export default function Overlay() {
 
       {/* Page 2 */}
       <section aria-labelledby="flow-dynamics-title" className="h-screen flex flex-col justify-center items-end p-10 md:p-20 pointer-events-none">
-        {/* 🎨 Palette: Restored backdrop-blur-md for a glassmorphism effect.
-            Using bg-black/60 and backdrop-blur-md ensures readability while preserving the background 3D context,
-            avoiding a false affordance of a solid block. */}
-        <div className="bg-black/60 backdrop-blur-md drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
+        {/* ⚡ Bolt: Removed backdrop-blur-md and changed bg to black/80.
+            Using CSS properties like backdrop-filter over an active WebGL Canvas
+            forces the browser into expensive software compositing, severely degrading performance. */}
+        <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
             <h2 id="flow-dynamics-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Flow Dynamics</h2>
             <p className="text-gray-200 leading-relaxed">
                 Visualizing velocity magnitude around a cylindrical obstacle.
@@ -110,10 +110,10 @@ export default function Overlay() {
 
       {/* Page 3 */}
       <section aria-labelledby="wake-analysis-title" className="h-screen flex flex-col justify-center items-start p-10 md:p-20 pointer-events-none">
-         {/* 🎨 Palette: Restored backdrop-blur-md for a glassmorphism effect.
-             Using bg-black/60 and backdrop-blur-md ensures readability while preserving the background 3D context,
-             avoiding a false affordance of a solid block. */}
-         <div className="bg-black/60 backdrop-blur-md drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
+         {/* ⚡ Bolt: Removed backdrop-blur-md and changed bg to black/80.
+             Using CSS properties like backdrop-filter over an active WebGL Canvas
+             forces the browser into expensive software compositing, severely degrading performance. */}
+         <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
             <h2 id="wake-analysis-title" className="text-3xl md:text-4xl font-bold text-white mb-4">Wake Analysis</h2>
             <p className="text-gray-200 leading-relaxed">
                 Detailed view of the wake region.
