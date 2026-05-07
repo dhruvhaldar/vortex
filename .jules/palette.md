@@ -25,3 +25,7 @@
 ## 2024-05-18 - Mirroring Structural Hover States for Keyboard Users
 **Learning:** While decorative micro-animations (like `group-hover:-translate-y-1`) are often properly mirrored with `group-focus-visible`, the base structural hover states on the parent container (like `hover:bg-gray-200` or `hover:text-white`) are frequently forgotten for keyboard focus states. This creates a disparity in visual feedback between mouse and keyboard users.
 **Action:** Always mirror parent container structural hover states (background color, text color) with the corresponding `focus-visible:` utility classes, in addition to mirroring the internal micro-animations.
+
+## 2024-05-18 - Ensuring Custom Font Variables Apply in Global CSS
+**Learning:** When using Next.js custom fonts with Tailwind v4 `@theme inline` blocks, if `globals.css` has a hardcoded `body { font-family: Arial... }`, it will silently override the custom font (like Geist) causing the entire app to render in standard system fonts, defeating the UX design.
+**Action:** Always ensure the global CSS body font-family utilizes the corresponding CSS variable mapped to the custom font (e.g., `font-family: var(--font-sans), sans-serif;`) to preserve visual polish.
