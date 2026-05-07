@@ -2,7 +2,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import { ScrollControls, Scroll, Environment, Loader } from '@react-three/drei';
+import { ScrollControls, Scroll, Environment, Loader, useEnvironment } from '@react-three/drei';
 import { EffectComposer, Bloom, N8AO } from '@react-three/postprocessing';
 import CFDModel from './CFDModel';
 import CameraHandler from './CameraHandler';
@@ -69,3 +69,7 @@ export default function Scene() {
     </div>
   );
 }
+// ⚡ Bolt: Preload the Environment HDRI concurrently with the JS module evaluation.
+// If left un-preloaded, React Suspense would halt rendering at `<CFDModel />`, preventing `<Environment />`
+// from mounting and parsing its heavy HDR asset until AFTER the GLTFs finish, causing a CPU parsing waterfall.
+useEnvironment.preload({ files: '/assets/potsdamer_platz_1k.hdr' });

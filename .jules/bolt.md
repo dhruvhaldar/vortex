@@ -81,3 +81,7 @@
 ## 2024-07-28 - Disable Raycasting for non-interactive Scenes
 **Learning:** If there are NO interactive objects in the scene (`onClick`, `onPointerOver`), R3F's raycaster still fires on pointer movement if events are enabled, computing intersections for everything, which wastes CPU.
 **Action:** Use `style={{ pointerEvents: 'none' }}` on the `<Canvas>` component to completely disable raycasting and pointer event listeners overhead when there are no interactive 3D objects.
+
+## 2026-04-30 - Prevent React Suspense parsing waterfalls with useEnvironment.preload
+**Learning:** In React Three Fiber, when multiple components that suspend (like `useGLTF` and `<Environment>`) are placed inside the same `<Suspense>` boundary, React stops rendering at the first suspended component. This creates a parsing waterfall where subsequent heavy assets (like HDRIs) do not start parsing until the earlier assets finish, even if they were preloaded at the network layer.
+**Action:** Always use `.preload()` on the module level for ALL suspending assets (e.g., `useEnvironment.preload({ files: '/path.hdr' })`) to ensure they are fetched and parsed concurrently by Three.js immediately when the JS module executes, avoiding CPU parsing waterfalls.
