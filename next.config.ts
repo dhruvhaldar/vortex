@@ -60,10 +60,10 @@ const securityHeaders = [
     value: "same-origin",
   },
   // Sentinel: Enable Cross-Origin Isolation to protect against side-channel attacks (like Spectre)
-  // Using credentialless instead of require-corp to avoid breaking external HDRI assets from unauthenticated CDNs.
+  // Using require-corp since all assets are now loaded locally.
   {
     key: "Cross-Origin-Embedder-Policy",
-    value: "credentialless",
+    value: "require-corp",
   },
   {
     key: "X-Download-Options",

@@ -57,3 +57,8 @@
 **Vulnerability:** Loading heavy 3D assets from external sources requires broad `connect-src` CSP directives, increasing the risk of data exfiltration or supply chain attacks.
 **Learning:** React Three Fiber's `<Environment>` component can load local HDR files instead of using `preset` names that fetch from external CDNs, allowing us to remove external domains from the CSP.
 **Prevention:** Always host external assets (like HDRs, fonts, and scripts) locally and configure `next.config.ts` to restrict the CSP `connect-src` solely to `'self'` and required data URIs.
+
+## 2025-05-07 - Upgrade COEP to require-corp
+**Vulnerability:** Weaker Cross-Origin-Embedder-Policy (`credentialless`)
+**Learning:** Previously, `credentialless` was used to accommodate external HDRI assets from unauthenticated CDNs. Now that assets are loaded locally, we can upgrade to `require-corp` to enforce stricter cross-origin isolation and enhance defense-in-depth against side-channel attacks (like Spectre).
+**Prevention:** Always enforce the strictest possible COEP (`require-corp`) when all required assets are either same-origin or explicitly provide appropriate CORS/CORP headers.
