@@ -29,3 +29,7 @@
 ## 2024-05-18 - Ensuring Custom Font Variables Apply in Global CSS
 **Learning:** When using Next.js custom fonts with Tailwind v4 `@theme inline` blocks, if `globals.css` has a hardcoded `body { font-family: Arial... }`, it will silently override the custom font (like Geist) causing the entire app to render in standard system fonts, defeating the UX design.
 **Action:** Always ensure the global CSS body font-family utilizes the corresponding CSS variable mapped to the custom font (e.g., `font-family: var(--font-sans), sans-serif;`) to preserve visual polish.
+
+## 2024-05-18 - Clarifying Domain Acronyms for Inclusivity
+**Learning:** Using domain-specific acronyms like "CFD" or "R3F" without expansion can exclude users unfamiliar with the terminology and cause confusion for screen readers.
+**Action:** Wrap domain acronyms in an `<abbr>` tag with a clear `title` attribute (e.g., `<abbr title="Computational Fluid Dynamics" className="cursor-help underline decoration-dotted underline-offset-2">CFD</abbr>`) to provide an accessible hover tooltip and semantic meaning for assistive technologies.
