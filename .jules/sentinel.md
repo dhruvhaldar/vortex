@@ -62,3 +62,7 @@
 **Vulnerability:** Weaker Cross-Origin-Embedder-Policy (`credentialless`)
 **Learning:** Previously, `credentialless` was used to accommodate external HDRI assets from unauthenticated CDNs. Now that assets are loaded locally, we can upgrade to `require-corp` to enforce stricter cross-origin isolation and enhance defense-in-depth against side-channel attacks (like Spectre).
 **Prevention:** Always enforce the strictest possible COEP (`require-corp`) when all required assets are either same-origin or explicitly provide appropriate CORS/CORP headers.
+## 2025-05-08 - Harden Permissions-Policy
+**Vulnerability:** Permissive access to window-placement and ch-ua-form-factors APIs (Defense in Depth)
+**Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable the deprecated window-placement API and ch-ua-form-factors API (now window-management) further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
+**Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
