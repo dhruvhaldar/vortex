@@ -66,3 +66,13 @@
 **Vulnerability:** Permissive access to window-placement and ch-ua-form-factors APIs (Defense in Depth)
 **Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable the deprecated window-placement API and ch-ua-form-factors API (now window-management) further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
 **Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
+
+## 2024-05-16 - Enforce Safe Versions for Transitive Dependencies
+**Vulnerability:** Several high-severity vulnerabilities in transitive dependencies (`flatted`, `minimatch`, `picomatch`) allow for DoS and ReDoS attacks.
+**Learning:** `pnpm audit` sometimes fails to flag nested dependency issues that `npm audit` catches. Additionally, automated lockfile updates alone may not resolve vulnerabilities deeply nested in the dependency tree.
+**Prevention:** Use the `pnpm.overrides` field in `package.json` to explicitly enforce minimum safe versions for transitive dependencies, resolving deep tree vulnerabilities without waiting for direct dependency updates.
+
+## 2024-05-16 - Enforce Package Manager and Remove Stale Lockfiles
+**Vulnerability:** The repository contained an outdated `package-lock.json` with known high-severity vulnerabilities alongside `pnpm-lock.yaml`. If a developer or CI pipeline accidentally used `npm install` instead of `pnpm`, vulnerable dependency versions would be installed, exposing the application to DoS/ReDoS attacks.
+**Learning:** Stale or duplicate lockfiles from different package managers create a supply chain risk through "dependency confusion" within the development lifecycle.
+**Prevention:** Always delete unused lockfiles (e.g., `package-lock.json` in a pnpm project) and define the `packageManager` field in `package.json` to enforce the use of the correct package manager (e.g., Corepack), ensuring deterministic and secure dependency resolution.
