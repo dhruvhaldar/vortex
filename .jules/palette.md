@@ -33,3 +33,7 @@
 ## 2024-05-18 - Clarifying Domain Acronyms for Inclusivity
 **Learning:** Using domain-specific acronyms like "CFD" or "R3F" without expansion can exclude users unfamiliar with the terminology and cause confusion for screen readers.
 **Action:** Wrap domain acronyms in an `<abbr>` tag with a clear `title` attribute (e.g., `<abbr title="Computational Fluid Dynamics" className="cursor-help underline decoration-dotted underline-offset-2">CFD</abbr>`) to provide an accessible hover tooltip and semantic meaning for assistive technologies.
+
+## 2024-05-09 - Avoid Screen Reader Spam on Scroll Progress Bars
+**Learning:** Updating `aria-valuenow` on a scroll progress bar inside a `useFrame` or `requestAnimationFrame` loop rapidly fires screen reader updates on every frame. This creates overwhelming noise for assistive technologies, completely drowning out the actual content of the page.
+**Action:** For continuous scroll indicators, treat them as purely visual/decorative and hide them with `aria-hidden="true"`. Assistive technologies already have their own native ways of understanding document scroll position.
