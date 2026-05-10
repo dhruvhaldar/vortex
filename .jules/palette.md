@@ -37,3 +37,6 @@
 ## 2024-05-09 - Avoid Screen Reader Spam on Scroll Progress Bars
 **Learning:** Updating `aria-valuenow` on a scroll progress bar inside a `useFrame` or `requestAnimationFrame` loop rapidly fires screen reader updates on every frame. This creates overwhelming noise for assistive technologies, completely drowning out the actual content of the page.
 **Action:** For continuous scroll indicators, treat them as purely visual/decorative and hide them with `aria-hidden="true"`. Assistive technologies already have their own native ways of understanding document scroll position.
+## 2024-05-10 - Immersive Selection and Tactile Keyboard Hints
+**Learning:** In immersive WebGL applications with dark themes, default browser text selection (often bright blue) breaks the aesthetic. Additionally, keyboard shortcut hints <kbd> are more quickly recognized by users when styled with physical affordances (borders, bottom shadows) rather than flat backgrounds.
+**Action:** Always apply custom selection: utility classes to root layouts in immersive apps, and apply tactile shadow/border styles to <kbd> elements to improve scanability.
