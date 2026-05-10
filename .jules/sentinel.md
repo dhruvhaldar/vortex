@@ -76,3 +76,8 @@
 **Vulnerability:** The repository contained an outdated `package-lock.json` with known high-severity vulnerabilities alongside `pnpm-lock.yaml`. If a developer or CI pipeline accidentally used `npm install` instead of `pnpm`, vulnerable dependency versions would be installed, exposing the application to DoS/ReDoS attacks.
 **Learning:** Stale or duplicate lockfiles from different package managers create a supply chain risk through "dependency confusion" within the development lifecycle.
 **Prevention:** Always delete unused lockfiles (e.g., `package-lock.json` in a pnpm project) and define the `packageManager` field in `package.json` to enforce the use of the correct package manager (e.g., Corepack), ensuring deterministic and secure dependency resolution.
+
+## 2026-05-10 - Harden Permissions-Policy further
+**Vulnerability:** Permissive access to FedCM, OTP credentials, storage access, and keyboard map APIs (Defense in Depth)
+**Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like `identity-credentials-get`, `otp-credentials`, `storage-access`, and `keyboard-map` further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
+**Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
