@@ -99,7 +99,7 @@ export default function Overlay() {
              Using CSS properties like backdrop-filter over an active WebGL Canvas
              forces the browser into expensive software compositing, severely degrading performance. */}
          <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
-            <h2 id="wake-analysis-title" className="text-3xl md:text-4xl font-bold text-white mb-4">Wake Analysis</h2>
+            <h2 id="wake-analysis-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Wake Analysis</h2>
             <p className="text-gray-200 leading-relaxed">
                 Detailed view of the wake region.
                 Streamlines illustrate the complex flow patterns and potential vortex shedding downstream of the obstacle.
@@ -109,7 +109,7 @@ export default function Overlay() {
 
       {/* Page 4 */}
       <section aria-labelledby="explore-data-title" className="h-screen flex flex-col justify-center items-center p-10 md:p-20">
-        <h2 id="explore-data-title" className="text-4xl md:text-6xl font-bold text-white mb-8 drop-shadow-lg">Explore the Data</h2>
+        <h2 id="explore-data-title" tabIndex={-1} className="text-4xl md:text-6xl font-bold text-white mb-8 drop-shadow-lg focus:outline-none">Explore the Data</h2>
         <div className="flex flex-col items-center gap-6">
           <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="group px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-visible:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto inline-flex items-center gap-2 justify-center">
               Powered by PyVista & <abbr title="React Three Fiber" className="cursor-help underline decoration-black/50 decoration-dotted underline-offset-4">R3F</abbr>
