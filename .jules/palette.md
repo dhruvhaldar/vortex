@@ -40,3 +40,7 @@
 ## 2024-05-10 - Immersive Selection and Tactile Keyboard Hints
 **Learning:** In immersive WebGL applications with dark themes, default browser text selection (often bright blue) breaks the aesthetic. Additionally, keyboard shortcut hints <kbd> are more quickly recognized by users when styled with physical affordances (borders, bottom shadows) rather than flat backgrounds.
 **Action:** Always apply custom selection: utility classes to root layouts in immersive apps, and apply tactile shadow/border styles to <kbd> elements to improve scanability.
+
+## 2024-05-18 - Consistent Programmatic Focus for Scroll Sections
+**Learning:** When using scroll-driven interactive experiences (like R3F with useScroll), missing `tabIndex={-1}` and `focus:outline-none` on some major section headings leads to inconsistent structural accessibility. Without these, it is impossible to programmatically shift screen reader focus to those sections consistently (e.g. from a scroll button), breaking the accessibility tree predictability.
+**Action:** Ensure all major section headings in scrollable experiences have `tabIndex={-1}` and `focus:outline-none` so they can safely receive programmatic focus without displaying ugly browser focus rings.
