@@ -81,3 +81,8 @@
 **Vulnerability:** Permissive access to FedCM, OTP credentials, storage access, and keyboard map APIs (Defense in Depth)
 **Learning:** Expanding the Permissions-Policy HTTP header to explicitly disable unused APIs like `identity-credentials-get`, `otp-credentials`, `storage-access`, and `keyboard-map` further reduces the application's attack surface and mitigates potential side-channel or fingerprinting risks.
 **Prevention:** Always maintain a strict and comprehensive Permissions-Policy in HTTP headers to prevent unauthorized use of modern browser APIs.
+
+## 2026-05-11 - Harden Permissions-Policy against Fingerprinting
+**Vulnerability:** Permissive access to High-Entropy User-Agent Client Hints and new browser APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict High-Entropy User-Agent Client Hints (`ch-ua-arch`, `ch-ua-bitness`, `ch-ua-full-version`, `ch-ua-full-version-list`, `ch-ua-model`, `ch-ua-wow64`) and new APIs like `smart-card` and `captured-surface-control` through the `Permissions-Policy` header. Leaving these enabled when not required expands the attack surface, potentially allowing compromised third-party scripts to perform high-fidelity device fingerprinting.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific high-entropy client hints or new device capabilities, explicitly disable them to prevent unauthorized use and mitigate fingerprinting risks.
