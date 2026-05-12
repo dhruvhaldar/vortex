@@ -86,3 +86,8 @@
 **Vulnerability:** Permissive access to High-Entropy User-Agent Client Hints and new browser APIs (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict High-Entropy User-Agent Client Hints (`ch-ua-arch`, `ch-ua-bitness`, `ch-ua-full-version`, `ch-ua-full-version-list`, `ch-ua-model`, `ch-ua-wow64`) and new APIs like `smart-card` and `captured-surface-control` through the `Permissions-Policy` header. Leaving these enabled when not required expands the attack surface, potentially allowing compromised third-party scripts to perform high-fidelity device fingerprinting.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific high-entropy client hints or new device capabilities, explicitly disable them to prevent unauthorized use and mitigate fingerprinting risks.
+
+## 2025-05-12 - Upgrade Next.js to fix DoS and Proxy bypass vulnerabilities
+**Vulnerability:** Outdated next dependency (<16.2.5)
+**Learning:** Next.js versions < 16.2.5 contained multiple high and moderate severity vulnerabilities including a Denial of Service with Server Components, cross-site scripting in App Router applications using CSP nonces, and multiple Middleware/Proxy bypasses. Upgrading to a patched version resolves these vulnerabilities.
+**Prevention:** Regularly run `pnpm audit` and upgrade core dependencies like `next` to ensure the application is protected against known CVEs. Use `pnpm update` or manually bump versions in `package.json` to apply critical security patches.
