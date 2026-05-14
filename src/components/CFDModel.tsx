@@ -115,6 +115,9 @@ export default function CFDModel() {
           position={streamMesh.position}
           scale={streamMesh.scale}
           matrixAutoUpdate={false}
+          // ⚡ Bolt: Disable frustum culling for these static, always-visible meshes.
+          // This skips expensive bounding box intersection checks against the camera frustum every frame.
+          frustumCulled={false}
           onUpdate={(self) => self.updateMatrix()}
         >
           <shaderMaterial
@@ -132,6 +135,9 @@ export default function CFDModel() {
           position={cylMesh.position}
           scale={cylMesh.scale}
           matrixAutoUpdate={false}
+          // ⚡ Bolt: Disable frustum culling for these static, always-visible meshes.
+          // This skips expensive bounding box intersection checks against the camera frustum every frame.
+          frustumCulled={false}
           onUpdate={(self) => self.updateMatrix()}
         >
            <meshStandardMaterial color="#888888" roughness={0.4} metalness={0.8} />
