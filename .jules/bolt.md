@@ -85,3 +85,7 @@
 ## 2026-04-30 - Prevent React Suspense parsing waterfalls with useEnvironment.preload
 **Learning:** In React Three Fiber, when multiple components that suspend (like `useGLTF` and `<Environment>`) are placed inside the same `<Suspense>` boundary, React stops rendering at the first suspended component. This creates a parsing waterfall where subsequent heavy assets (like HDRIs) do not start parsing until the earlier assets finish, even if they were preloaded at the network layer.
 **Action:** Always use `.preload()` on the module level for ALL suspending assets (e.g., `useEnvironment.preload({ files: '/path.hdr' })`) to ensure they are fetched and parsed concurrently by Three.js immediately when the JS module executes, avoiding CPU parsing waterfalls.
+
+## 2024-05-14 - Disable frustum culling for always-visible objects
+**Learning:** Three.js performs frustum culling on all objects by default, computing bounding box or bounding sphere intersections against the camera's view frustum on every single frame. For main scene elements that never leave the view, this computation is pure overhead.
+**Action:** Always set `frustumCulled={false}` on React Three Fiber `<mesh>` or `<group>` components that represent central, always-visible objects (like the main environment or focus subject) to save CPU cycles during the render loop.
