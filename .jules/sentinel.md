@@ -91,3 +91,8 @@
 **Vulnerability:** Outdated next dependency (<16.2.5)
 **Learning:** Next.js versions < 16.2.5 contained multiple high and moderate severity vulnerabilities including a Denial of Service with Server Components, cross-site scripting in App Router applications using CSP nonces, and multiple Middleware/Proxy bypasses. Upgrading to a patched version resolves these vulnerabilities.
 **Prevention:** Regularly run `pnpm audit` and upgrade core dependencies like `next` to ensure the application is protected against known CVEs. Use `pnpm update` or manually bump versions in `package.json` to apply critical security patches.
+
+## 2026-05-14 - Implement RFC 9116 security.txt
+**Vulnerability:** Missing standardized vulnerability disclosure mechanism (RFC 9116)
+**Learning:** This Next.js web application lacked a `security.txt` file. Without a standardized way for security researchers to report vulnerabilities, ethical hackers might struggle to contact the right team, potentially leading to public disclosure or unpatched exploits.
+**Prevention:** Always implement a `security.txt` file under `.well-known/` (as per RFC 9116) to provide a clear, established communication channel for reporting security issues.
