@@ -80,6 +80,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    sri: {
+      algorithm: "sha384",
+    },
+  },
   async headers() {
     return [
       {
