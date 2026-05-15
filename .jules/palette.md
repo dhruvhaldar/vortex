@@ -44,3 +44,6 @@
 ## 2024-05-18 - Consistent Programmatic Focus for Scroll Sections
 **Learning:** When using scroll-driven interactive experiences (like R3F with useScroll), missing `tabIndex={-1}` and `focus:outline-none` on some major section headings leads to inconsistent structural accessibility. Without these, it is impossible to programmatically shift screen reader focus to those sections consistently (e.g. from a scroll button), breaking the accessibility tree predictability.
 **Action:** Ensure all major section headings in scrollable experiences have `tabIndex={-1}` and `focus:outline-none` so they can safely receive programmatic focus without displaying ugly browser focus rings.
+## 2024-05-15 - Enhancing keyboard hints and abbreviation accessibility
+**Learning:** Sighted keyboard users and screen reader users often miss out on `<abbr>` title expansions because they cannot hover. Furthermore, inline keyboard hints (`<kbd>`) blend into the text if they lack physical affordance.
+**Action:** Always add `tabIndex={0}` and clear `focus-visible` styles to `<abbr>` elements to ensure keyboard accessibility. Enhance `<kbd>` elements with thicker bottom borders (e.g., `border-b-[3px]`) to simulate physical keys, improving scannability.
