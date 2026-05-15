@@ -96,3 +96,8 @@
 **Vulnerability:** Missing standardized vulnerability disclosure mechanism (RFC 9116)
 **Learning:** This Next.js web application lacked a `security.txt` file. Without a standardized way for security researchers to report vulnerabilities, ethical hackers might struggle to contact the right team, potentially leading to public disclosure or unpatched exploits.
 **Prevention:** Always implement a `security.txt` file under `.well-known/` (as per RFC 9116) to provide a clear, established communication channel for reporting security issues.
+
+## 2026-05-15 - Implement Subresource Integrity (SRI)
+**Vulnerability:** Missing Subresource Integrity (SRI) for scripts and styles (Defense in Depth)
+**Learning:** This Next.js application was loading resources without Subresource Integrity checks. While loading assets locally mitigates some risks, enabling SRI provides an additional layer of defense. If a CDN is compromised or an attacker manages to alter static assets on the host, the browser will refuse to execute the tampered files.
+**Prevention:** Always enable Subresource Integrity (SRI) in `next.config.ts` via the `experimental.sri` flag to ensure that the browser verifies the cryptographic hashes of fetched resources, protecting against asset tampering.
