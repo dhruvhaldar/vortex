@@ -47,3 +47,7 @@
 ## 2024-05-15 - Enhancing keyboard hints and abbreviation accessibility
 **Learning:** Sighted keyboard users and screen reader users often miss out on `<abbr>` title expansions because they cannot hover. Furthermore, inline keyboard hints (`<kbd>`) blend into the text if they lack physical affordance.
 **Action:** Always add `tabIndex={0}` and clear `focus-visible` styles to `<abbr>` elements to ensure keyboard accessibility. Enhance `<kbd>` elements with thicker bottom borders (e.g., `border-b-[3px]`) to simulate physical keys, improving scannability.
+
+## 2024-05-18 - Avoiding Nested Interactive Elements
+**Learning:** Placing a focusable element (like an `<abbr tabIndex={0}>`) inside another interactive element (like an `<a>` or `<button>`) creates invalid HTML. This confuses screen readers and creates a false affordance, as the inner element appears clickable for navigation but may not behave correctly.
+**Action:** Always ensure that interactive elements are not nested. Restructure the HTML to keep interactive components as siblings or separate them logically, maintaining visual styling with structural containers (like `<div>` pills).
