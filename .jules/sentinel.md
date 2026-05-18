@@ -101,3 +101,7 @@
 **Vulnerability:** Missing Subresource Integrity (SRI) for scripts and styles (Defense in Depth)
 **Learning:** This Next.js application was loading resources without Subresource Integrity checks. While loading assets locally mitigates some risks, enabling SRI provides an additional layer of defense. If a CDN is compromised or an attacker manages to alter static assets on the host, the browser will refuse to execute the tampered files.
 **Prevention:** Always enable Subresource Integrity (SRI) in `next.config.ts` via the `experimental.sri` flag to ensure that the browser verifies the cryptographic hashes of fetched resources, protecting against asset tampering.
+## 2026-06-20 - Remove Unused Dependencies
+**Vulnerability:** Larger attack surface from unused dependencies
+**Learning:** This Next.js web application had the `leva` package installed as a dependency in `package.json`, but it was never imported or used in the application. Leaving unused third-party dependencies in the project increases the application's attack surface, as any vulnerabilities discovered in those dependencies (or their transitive dependencies) could potentially affect the application or its build process.
+**Prevention:** Regularly audit the project's dependencies and remove any packages that are no longer actively used to minimize the attack surface and potential for supply chain attacks.
