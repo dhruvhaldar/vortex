@@ -105,3 +105,8 @@
 **Vulnerability:** Larger attack surface from unused dependencies
 **Learning:** This Next.js web application had the `leva` package installed as a dependency in `package.json`, but it was never imported or used in the application. Leaving unused third-party dependencies in the project increases the application's attack surface, as any vulnerabilities discovered in those dependencies (or their transitive dependencies) could potentially affect the application or its build process.
 **Prevention:** Regularly audit the project's dependencies and remove any packages that are no longer actively used to minimize the attack surface and potential for supply chain attacks.
+
+## 2026-06-21 - Remove Unused Dependencies
+**Vulnerability:** Larger attack surface from unused dependencies
+**Learning:** This Next.js web application had the `framer-motion` package installed as a dependency in `package.json`, but it was never imported or used in the application. Leaving unused third-party dependencies in the project increases the application's attack surface, as any vulnerabilities discovered in those dependencies (or their transitive dependencies) could potentially affect the application or its build process.
+**Prevention:** Regularly audit the project's dependencies and remove any packages that are no longer actively used to minimize the attack surface and potential for supply chain attacks.
