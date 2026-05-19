@@ -18,17 +18,18 @@ export default function Overlay() {
     }
   });
 
-  const handleScrollDown = () => {
+  const scrollToPage = (pageIndex: number, targetId: string) => {
     if (scroll && scroll.el) {
       // Respect user's reduced motion preference for JS-driven animations
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      scroll.el.scrollBy({
-        top: window.innerHeight,
+      scroll.el.scrollTo({
+        top: window.innerHeight * pageIndex,
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
+
       // Programmatically move focus to the next section's heading for keyboard/screen reader users
       // preventScroll: true is crucial here to not interrupt the smooth scroll animation
-      const nextTitle = document.getElementById('flow-dynamics-title');
+      const nextTitle = document.getElementById(targetId);
       if (nextTitle) {
         nextTitle.focus({ preventScroll: true });
       }
@@ -70,7 +71,7 @@ export default function Overlay() {
         <h1 id="hero-title" tabIndex={-1} className="text-6xl md:text-9xl font-bold text-white tracking-tighter drop-shadow-lg focus:outline-none">VORTEX</h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4 drop-shadow-lg">Interactive <abbr tabIndex={0} title="Computational Fluid Dynamics" className="cursor-help underline decoration-white/50 decoration-dotted underline-offset-4 focus-visible:outline-none focus-visible:bg-white/10 focus-visible:ring-2 focus-visible:ring-white rounded-sm px-1 transition-colors">CFD</abbr> Visualization</p>
         <button
-          onClick={handleScrollDown}
+          onClick={() => scrollToPage(1, 'flow-dynamics-title')}
           className="group absolute bottom-10 left-10 md:left-20 text-white/70 flex items-center gap-2 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 transition-all active:scale-95 pointer-events-auto"
         >
             <span className="sr-only">Scroll down, or use the down and up arrow keys to explore</span>
@@ -84,12 +85,21 @@ export default function Overlay() {
         {/* ⚡ Bolt: Removed backdrop-blur-md and changed bg to black/80.
             Using CSS properties like backdrop-filter over an active WebGL Canvas
             forces the browser into expensive software compositing, severely degrading performance. */}
-        <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
-            <h2 id="flow-dynamics-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Flow Dynamics</h2>
-            <p className="text-gray-200 leading-relaxed">
-                Visualizing velocity magnitude around a cylindrical obstacle.
-                Observe the laminar flow transition and the stagnation point where velocity drops to zero.
-            </p>
+        <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto flex flex-col gap-6">
+            <div>
+              <h2 id="flow-dynamics-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Flow Dynamics</h2>
+              <p className="text-gray-200 leading-relaxed">
+                  Visualizing velocity magnitude around a cylindrical obstacle.
+                  Observe the laminar flow transition and the stagnation point where velocity drops to zero.
+              </p>
+            </div>
+            <button
+              onClick={() => scrollToPage(2, 'wake-analysis-title')}
+              className="group self-start text-white/70 flex items-center gap-2 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
+            >
+              <span className="font-medium text-sm">Continue to Wake Analysis</span>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
         </div>
       </section>
 
@@ -98,12 +108,21 @@ export default function Overlay() {
          {/* ⚡ Bolt: Removed backdrop-blur-md and changed bg to black/80.
              Using CSS properties like backdrop-filter over an active WebGL Canvas
              forces the browser into expensive software compositing, severely degrading performance. */}
-         <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto">
-            <h2 id="wake-analysis-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Wake Analysis</h2>
-            <p className="text-gray-200 leading-relaxed">
-                Detailed view of the wake region.
-                Streamlines illustrate the complex flow patterns and potential vortex shedding downstream of the obstacle.
-            </p>
+         <div className="bg-black/80 drop-shadow-lg p-8 rounded-lg max-w-md border border-white/10 pointer-events-auto flex flex-col gap-6">
+            <div>
+              <h2 id="wake-analysis-title" tabIndex={-1} className="text-3xl md:text-4xl font-bold text-white mb-4 focus:outline-none">Wake Analysis</h2>
+              <p className="text-gray-200 leading-relaxed">
+                  Detailed view of the wake region.
+                  Streamlines illustrate the complex flow patterns and potential vortex shedding downstream of the obstacle.
+              </p>
+            </div>
+            <button
+              onClick={() => scrollToPage(3, 'explore-data-title')}
+              className="group self-start text-white/70 flex items-center gap-2 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
+            >
+              <span className="font-medium text-sm">Continue to Explore Data</span>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
         </div>
       </section>
 
