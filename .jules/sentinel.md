@@ -110,3 +110,8 @@
 **Vulnerability:** Larger attack surface from unused dependencies
 **Learning:** This Next.js web application had the `framer-motion` package installed as a dependency in `package.json`, but it was never imported or used in the application. Leaving unused third-party dependencies in the project increases the application's attack surface, as any vulnerabilities discovered in those dependencies (or their transitive dependencies) could potentially affect the application or its build process.
 **Prevention:** Regularly audit the project's dependencies and remove any packages that are no longer actively used to minimize the attack surface and potential for supply chain attacks.
+
+## 2026-05-20 - Harden Permissions-Policy against Network/Device Fingerprinting
+**Vulnerability:** Permissive access to pointer-lock and Network Information / Device Memory client hints (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict the pointer-lock API and various Network/Device client hints (`ch-device-memory`, `ch-downlink`, `ch-ect`, `ch-rtt`, `ch-save-data`, `ch-viewport-width`, `ch-width`) in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially perform device fingerprinting based on network conditions and device memory.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific high-entropy client hints or pointer-lock capabilities, explicitly disable them to prevent unauthorized use and mitigate fingerprinting risks.
