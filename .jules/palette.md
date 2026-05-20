@@ -52,3 +52,7 @@
 ## 2025-02-18 - Keyboard Navigation Gaps in Scroll-Driven Experiences
 **Learning:** In scroll-driven experiences (like R3F with ScrollControls), visual users can easily scroll between sections, but keyboard/screen reader users can get trapped if sections don't have interactive elements to tab to. The native browser scroll behavior doesn't trigger when tabbing between non-interactive headings.
 **Action:** Always provide clear, sequential "Continue to [Next Section]" buttons at the end of each informational panel to bridge the tab order and programmatically scroll the user, ensuring a continuous keyboard navigation flow.
+
+## 2024-05-20 - Mirroring Structural Focus and Hover States
+**Learning:** Having a disparity in visual feedback between mouse (hover) and keyboard (focus) users creates an inconsistent experience. Structural hover states that reveal a larger padded hit area (like changing a background color) must be mirrored for keyboard users.
+**Action:** Always mirror parent container structural hover states (like background color or text color changes) with the corresponding `focus-visible:` utility classes, and vice versa.
