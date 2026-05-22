@@ -115,3 +115,8 @@
 **Vulnerability:** Permissive access to pointer-lock and Network Information / Device Memory client hints (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict the pointer-lock API and various Network/Device client hints (`ch-device-memory`, `ch-downlink`, `ch-ect`, `ch-rtt`, `ch-save-data`, `ch-viewport-width`, `ch-width`) in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially perform device fingerprinting based on network conditions and device memory.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific high-entropy client hints or pointer-lock capabilities, explicitly disable them to prevent unauthorized use and mitigate fingerprinting risks.
+
+## 2026-05-21 - Harden Permissions-Policy against NFC and Privacy Sandbox
+**Vulnerability:** Permissive access to Web NFC and new Privacy Sandbox APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict the Web NFC API (`nfc`) and additional Google Privacy Sandbox APIs (`shared-storage`, `shared-storage-select-url`, `private-aggregation`) in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially interact with NFC devices or participate in covert cross-site tracking.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific hardware APIs like NFC or new Privacy Sandbox features, explicitly disable them to prevent unauthorized use and mitigate tracking risks.
