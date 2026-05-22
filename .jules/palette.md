@@ -56,3 +56,7 @@
 ## 2024-05-20 - Mirroring Structural Focus and Hover States
 **Learning:** Having a disparity in visual feedback between mouse (hover) and keyboard (focus) users creates an inconsistent experience. Structural hover states that reveal a larger padded hit area (like changing a background color) must be mirrored for keyboard users.
 **Action:** Always mirror parent container structural hover states (like background color or text color changes) with the corresponding `focus-visible:` utility classes, and vice versa.
+
+## 2024-05-22 - Explicit Loading Text for Clarity
+**Learning:** Relying purely on an icon (like a spinner) for loading states, with the explanatory text hidden via `sr-only`, can leave users uncertain about what exactly is happening or if the application has hung, especially during long 3D asset downloads. While screen reader users receive context, sighted users might just see an ambiguous spinning circle.
+**Action:** Always pair loading animation icons with explicitly visible text (e.g., "Loading 3D experience...") so the system state is clear to all users, adhering to Nielsen's first heuristic: visibility of system status.

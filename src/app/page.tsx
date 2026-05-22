@@ -25,7 +25,7 @@ const Scene = dynamic(() => import("@/components/Scene"), {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only motion-reduce:not-sr-only motion-reduce:text-white/80 motion-reduce:font-medium motion-reduce:tracking-wide">Loading 3D experience...</span>
+        <span className="text-white/80 font-medium tracking-wide">Loading 3D experience...</span>
       </div>
     </div>
   )
