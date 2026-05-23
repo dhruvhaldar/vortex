@@ -120,3 +120,8 @@
 **Vulnerability:** Permissive access to Web NFC and new Privacy Sandbox APIs (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict the Web NFC API (`nfc`) and additional Google Privacy Sandbox APIs (`shared-storage`, `shared-storage-select-url`, `private-aggregation`) in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially interact with NFC devices or participate in covert cross-site tracking.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific hardware APIs like NFC or new Privacy Sandbox features, explicitly disable them to prevent unauthorized use and mitigate tracking risks.
+
+## 2025-05-23 - Harden Content-Security-Policy against unused fetch types
+**Vulnerability:** Permissive manifest and prefetch fetching (Defense in Depth)
+**Learning:** The Content-Security-Policy did not explicitly restrict `manifest-src` or `prefetch-src`. Leaving these unrestricted could allow an attacker to exfiltrate data or perform request forgery via web app manifests or prefetching if other injection vulnerabilities exist.
+**Prevention:** Always restrict unused CSP directives like `manifest-src` to `'none'` and limit `prefetch-src` to `'self'` for enhanced defense-in-depth.
