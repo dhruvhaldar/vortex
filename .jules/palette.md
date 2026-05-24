@@ -60,3 +60,7 @@
 ## 2024-05-22 - Explicit Loading Text for Clarity
 **Learning:** Relying purely on an icon (like a spinner) for loading states, with the explanatory text hidden via `sr-only`, can leave users uncertain about what exactly is happening or if the application has hung, especially during long 3D asset downloads. While screen reader users receive context, sighted users might just see an ambiguous spinning circle.
 **Action:** Always pair loading animation icons with explicitly visible text (e.g., "Loading 3D experience...") so the system state is clear to all users, adhering to Nielsen's first heuristic: visibility of system status.
+
+## 2026-05-24 - Adding Skip Links to Scroll-Driven WebGL Experiences
+**Learning:** Scroll-driven 3D experiences can be tedious and disorienting for keyboard-only and screen reader users to tab through linearly, essentially trapping them in an enforced presentation pace.
+**Action:** Always include a 'Skip to Content' or 'Skip to Data' bypass link at the very beginning of the tab order (using focus-visible utility classes to keep it visually hidden otherwise) so keyboard users can immediately bypass the presentation layer if desired.
