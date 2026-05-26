@@ -125,3 +125,8 @@
 **Vulnerability:** Permissive manifest and prefetch fetching (Defense in Depth)
 **Learning:** The Content-Security-Policy did not explicitly restrict `manifest-src` or `prefetch-src`. Leaving these unrestricted could allow an attacker to exfiltrate data or perform request forgery via web app manifests or prefetching if other injection vulnerabilities exist.
 **Prevention:** Always restrict unused CSP directives like `manifest-src` to `'none'` and limit `prefetch-src` to `'self'` for enhanced defense-in-depth.
+
+## 2026-05-26 - Enforce Package Manager via preinstall script
+**Vulnerability:** Bypass of package manager overrides leading to vulnerable dependencies (Supply Chain Risk)
+**Learning:** While the packageManager field is defined in package.json, developers without Corepack enabled could still run npm install. This would ignore pnpm.overrides, silently installing vulnerable transitive dependencies and creating a conflicting package-lock.json. Additionally, misleading npm instructions in the README exacerbated this risk.
+**Prevention:** Always enforce the intended package manager at the npm lifecycle level by adding a preinstall script (e.g., npx only-allow pnpm) and ensure documentation consistently reflects the secure installation method.
