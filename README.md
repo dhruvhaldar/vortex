@@ -22,7 +22,7 @@ This project visualizes fluid dynamics data (flow around a cylinder) using a mod
 ### 1. Install Dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 2. Generate Data (Optional)
@@ -42,7 +42,7 @@ The project comes with pre-generated assets in `public/assets/`. If you want to 
 ### 3. Run Development Server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
