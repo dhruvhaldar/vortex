@@ -130,3 +130,8 @@
 **Vulnerability:** Bypass of package manager overrides leading to vulnerable dependencies (Supply Chain Risk)
 **Learning:** While the packageManager field is defined in package.json, developers without Corepack enabled could still run npm install. This would ignore pnpm.overrides, silently installing vulnerable transitive dependencies and creating a conflicting package-lock.json. Additionally, misleading npm instructions in the README exacerbated this risk.
 **Prevention:** Always enforce the intended package manager at the npm lifecycle level by adding a preinstall script (e.g., npx only-allow pnpm) and ensure documentation consistently reflects the secure installation method.
+
+## 2026-05-28 - Harden Permissions-Policy against UI Preference Fingerprinting and Vibration API
+**Vulnerability:** Permissive access to Vibration API and UI Preference Client Hints (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict the Vibration API (`vibration`) and UI/Display Preference client hints (`ch-dpr`, `ch-viewport-height`, `ch-prefers-color-scheme`, `ch-prefers-reduced-motion`, `ch-prefers-reduced-transparency`) in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially trigger unauthorized device vibrations and perform high-fidelity device fingerprinting based on detailed user preferences and display characteristics.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. If an application does not require specific hardware APIs like Vibration or detailed UI preference client hints, explicitly disable them to prevent unauthorized use and mitigate fingerprinting risks.
