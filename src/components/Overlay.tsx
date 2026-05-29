@@ -149,10 +149,14 @@ export default function Overlay() {
 
           <button
             onClick={handleScrollToTop}
+            aria-keyshortcuts="Home"
             className="group text-white/70 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:bg-white/10 flex items-center gap-2 px-4 py-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto"
           >
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-y-1 group-focus-visible:-translate-y-1 transition-transform"><path d="m18 15-6-6-6 6" /></svg>
-            <span className="font-medium">Back to Start</span>
+            <span className="font-medium flex items-center gap-2">
+              Back to Start
+              <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">Home</kbd>
+            </span>
           </button>
         </div>
       </section>

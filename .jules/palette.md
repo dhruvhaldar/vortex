@@ -64,3 +64,7 @@
 ## 2026-05-24 - Adding Skip Links to Scroll-Driven WebGL Experiences
 **Learning:** Scroll-driven 3D experiences can be tedious and disorienting for keyboard-only and screen reader users to tab through linearly, essentially trapping them in an enforced presentation pace.
 **Action:** Always include a 'Skip to Content' or 'Skip to Data' bypass link at the very beginning of the tab order (using focus-visible utility classes to keep it visually hidden otherwise) so keyboard users can immediately bypass the presentation layer if desired.
+
+## 2026-05-29 - Revealing Native Keyboard Shortcuts with kbd Hints
+**Learning:** Keyboard power users often rely on native browser shortcuts (like 'Home' to jump to the top), but single-page application custom scrolling can obscure these native behaviors or users may simply not realize they can use them instead of clicking 'Back to Top' buttons.
+**Action:** Add `aria-keyshortcuts` to 'Back to Top/Start' buttons and pair them with a visually appealing, hidden-from-screen-readers (to avoid redundant announcements) `<kbd>Home</kbd>` hint to teach users about native shortcuts and improve perceived performance.
