@@ -68,3 +68,7 @@
 ## 2026-05-29 - Revealing Native Keyboard Shortcuts with kbd Hints
 **Learning:** Keyboard power users often rely on native browser shortcuts (like 'Home' to jump to the top), but single-page application custom scrolling can obscure these native behaviors or users may simply not realize they can use them instead of clicking 'Back to Top' buttons.
 **Action:** Add `aria-keyshortcuts` to 'Back to Top/Start' buttons and pair them with a visually appealing, hidden-from-screen-readers (to avoid redundant announcements) `<kbd>Home</kbd>` hint to teach users about native shortcuts and improve perceived performance.
+
+## 2026-05-31 - Link Screen Reader Accessibility
+**Learning:** When using the expanded click area pattern (with `after:absolute`) alongside sibling interactive elements like `<abbr>`, the primary link's text can become disjointed for screen readers (e.g., 'Powered by PyVista &').
+**Action:** Hide decorative characters (like '&') with `aria-hidden='true'` and add a `sr-only` span containing the missing sibling text (e.g., 'and R3F') inside the link so it makes sense in isolation.
