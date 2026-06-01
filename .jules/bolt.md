@@ -89,3 +89,7 @@
 ## 2024-05-14 - Disable frustum culling for always-visible objects
 **Learning:** Three.js performs frustum culling on all objects by default, computing bounding box or bounding sphere intersections against the camera's view frustum on every single frame. For main scene elements that never leave the view, this computation is pure overhead.
 **Action:** Always set `frustumCulled={false}` on React Three Fiber `<mesh>` or `<group>` components that represent central, always-visible objects (like the main environment or focus subject) to save CPU cycles during the render loop.
+
+## 2024-06-25 - Replace PointLights with DirectionalLights for global illumination
+**Learning:** Point lights require the GPU's fragment shader to calculate the distance and direction vector from every pixel to the light source, as well as complex attenuation curves. When a light is positioned far away simply to provide broad illumination, this per-pixel math is computationally wasteful compared to a Directional Light.
+**Action:** Always prefer `<directionalLight>` over `<pointLight>` for broad, global scene illumination to skip expensive per-fragment distance and attenuation calculations, significantly reducing GPU overhead.
