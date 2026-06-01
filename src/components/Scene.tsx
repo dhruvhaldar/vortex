@@ -27,7 +27,10 @@ export default function Scene() {
         style={{ pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1.0} />
+        {/* ⚡ Bolt: Replaced pointLight with directionalLight. Point lights calculate distance and attenuation per-pixel,
+            which is computationally expensive. For broad illumination, directional lights are significantly faster
+            because the light vector is constant. */}
+        <directionalLight position={[10, 10, 10]} intensity={1.0} />
 
         <Suspense fallback={null}>
             <ScrollControls pages={4} damping={0.2}>
