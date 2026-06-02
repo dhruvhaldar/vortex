@@ -140,3 +140,7 @@
 **Vulnerability:** Permissive access to remaining High-Entropy User-Agent Client Hints and UI Preference Client Hints (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict `ch-ua-platform`, `ch-ua-platform-version`, `ch-prefers-contrast`, and `ch-forced-colors` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially perform high-fidelity device fingerprinting based on platform details and accessibility preferences.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused high-entropy client hints and UI preference client hints to prevent unauthorized use and mitigate fingerprinting risks.
+## 2026-06-02 - Harden Permissions-Policy against remaining User-Agent Client Hints and Focus Stealing
+**Vulnerability:** Permissive access to low-entropy User-Agent Client Hints and focus stealing API (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict `ch-ua`, `ch-ua-mobile`, and `focus-without-user-activation` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially perform fingerprinting or disruptive actions.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused client hints and potentially disruptive APIs to prevent unauthorized use and mitigate security risks.
