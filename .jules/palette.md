@@ -72,3 +72,7 @@
 ## 2026-05-31 - Link Screen Reader Accessibility
 **Learning:** When using the expanded click area pattern (with `after:absolute`) alongside sibling interactive elements like `<abbr>`, the primary link's text can become disjointed for screen readers (e.g., 'Powered by PyVista &').
 **Action:** Hide decorative characters (like '&') with `aria-hidden='true'` and add a `sr-only` span containing the missing sibling text (e.g., 'and R3F') inside the link so it makes sense in isolation.
+
+## 2026-06-03 - Seamless Immersive Loading States
+**Learning:** The default @react-three/drei Loader component flashes a bright white background, creating a jarring UX regression in dark-themed immersive applications. Furthermore, its default text lacks clear context (just showing a percentage), violating heuristic guidelines on visibility of system status during heavy asset loads.
+**Action:** Always customize the <Loader /> component props (containerStyles, innerStyles, barStyles, dataStyles, and dataInterpolation) to match the surrounding application theme (e.g. black background) and provide explicit context (e.g. 'Loading 3D experience...').
