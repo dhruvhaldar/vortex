@@ -72,3 +72,7 @@
 ## 2026-05-31 - Link Screen Reader Accessibility
 **Learning:** When using the expanded click area pattern (with `after:absolute`) alongside sibling interactive elements like `<abbr>`, the primary link's text can become disjointed for screen readers (e.g., 'Powered by PyVista &').
 **Action:** Hide decorative characters (like '&') with `aria-hidden='true'` and add a `sr-only` span containing the missing sibling text (e.g., 'and R3F') inside the link so it makes sense in isolation.
+
+## 2026-06-04 - Dark Theme Loader Customization
+**Learning:** In dark-themed 3D applications using @react-three/drei, the default <Loader /> component creates a jarring white flash. Additionally, the default percentage display lacks context.
+**Action:** Always customize the <Loader /> component's styles (e.g., containerStyles, innerStyles) and loading text (dataInterpolation) to match the application theme and provide explicit context.

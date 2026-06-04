@@ -68,7 +68,12 @@ export default function Scene() {
             </EffectComposer>
         </Suspense>
       </Canvas>
-      <Loader />
+      <Loader
+        containerStyles={{ backgroundColor: 'black' }}
+        innerStyles={{ backgroundColor: '#222' }}
+        barStyles={{ backgroundColor: 'white' }}
+        dataInterpolation={(p) => `Loading 3D experience... ${p.toFixed(0)}%`}
+      />
     </div>
   );
 }
