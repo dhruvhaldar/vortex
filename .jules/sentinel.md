@@ -144,3 +144,8 @@
 **Vulnerability:** Permissive access to low-entropy User-Agent Client Hints and focus stealing API (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict `ch-ua`, `ch-ua-mobile`, and `focus-without-user-activation` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially perform fingerprinting or disruptive actions.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused client hints and potentially disruptive APIs to prevent unauthorized use and mitigate security risks.
+
+## 2026-06-03 - Harden Permissions-Policy against unauthorized public key credentials creation
+**Vulnerability:** Permissive access to create public key credentials (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict `publickey-credentials-create` in the `Permissions-Policy` header. Leaving this enabled when not required allows third-party scripts to potentially prompt the user to create unauthorized public key credentials.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable the `publickey-credentials-create` API to prevent unauthorized use and mitigate security risks.
