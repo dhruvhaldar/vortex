@@ -76,3 +76,11 @@
 ## 2026-06-03 - Seamless Immersive Loading States
 **Learning:** The default @react-three/drei Loader component flashes a bright white background, creating a jarring UX regression in dark-themed immersive applications. Furthermore, its default text lacks clear context (just showing a percentage), violating heuristic guidelines on visibility of system status during heavy asset loads.
 **Action:** Always customize the <Loader /> component props (containerStyles, innerStyles, barStyles, dataStyles, and dataInterpolation) to match the surrounding application theme (e.g. black background) and provide explicit context (e.g. 'Loading 3D experience...').
+
+## 2026-06-06 - Tactile Affordance for Interactive Keyboard Hints
+**Learning:** Decorative physical keyboard hints (like `<kbd>↓</kbd>` inside a button) lack affordance if they remain static while the parent button is hovered, focused, or clicked. This disconnect makes the interface feel less responsive and the hints less like actual "keys".
+**Action:** When nesting `<kbd>` elements inside interactive controls, always bind their interactive states (e.g., `group-hover`, `group-focus-visible`, `group-active`) to the parent control to simulate a physical key press, providing a more tactile and cohesive user experience.
+
+## 2026-06-06 - ARIA Keyboard Shortcuts for Scroll Actions
+**Learning:** While visual keyboard hints inform sighted users, screen reader users may not benefit if these visual hints are hidden via `aria-hidden` (to avoid clutter) without providing an alternative semantic mapping to the action.
+**Action:** Whenever providing visual keyboard hints for an interactive element, always supplement the parent element with an explicit `aria-keyshortcuts` attribute (e.g., `aria-keyshortcuts="ArrowDown ArrowUp"`) to natively announce the available shortcuts to assistive technologies.
