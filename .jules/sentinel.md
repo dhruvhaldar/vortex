@@ -149,3 +149,8 @@
 **Vulnerability:** Permissive access to create public key credentials (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict `publickey-credentials-create` in the `Permissions-Policy` header. Leaving this enabled when not required allows third-party scripts to potentially prompt the user to create unauthorized public key credentials.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable the `publickey-credentials-create` API to prevent unauthorized use and mitigate security risks.
+
+## 2026-06-06 - Harden Content-Security-Policy against unauthorized fonts and Permissions-Policy against digital credentials
+**Vulnerability:** Permissive access to fonts and new Digital Credentials API (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict `font-src` in CSP or `digital-credentials-get` in Permissions-Policy. Leaving these unrestricted increases the attack surface for font-based attacks and unauthorized digital credential requests.
+**Prevention:** Always explicitly define `font-src` in CSP and restrict experimental APIs like `digital-credentials-get` in Permissions-Policy for enhanced defense-in-depth.
