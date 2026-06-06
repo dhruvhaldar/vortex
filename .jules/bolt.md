@@ -93,3 +93,7 @@
 ## 2024-06-25 - Replace PointLights with DirectionalLights for global illumination
 **Learning:** Point lights require the GPU's fragment shader to calculate the distance and direction vector from every pixel to the light source, as well as complex attenuation curves. When a light is positioned far away simply to provide broad illumination, this per-pixel math is computationally wasteful compared to a Directional Light.
 **Action:** Always prefer `<directionalLight>` over `<pointLight>` for broad, global scene illumination to skip expensive per-fragment distance and attenuation calculations, significantly reducing GPU overhead.
+
+## 2026-06-06 - Flatten R3F scene graphs
+**Learning:** Wrapping meshes in an unnecessary `<group>` tag injects an empty `THREE.Group` into the scene graph, which forces Three.js to needlessly traverse an extra level and compute its transforms every frame.
+**Action:** Use React Fragments (`<></>`) instead of `<group>` when you only need to return multiple siblings without applying a shared 3D transformation.

@@ -107,7 +107,11 @@ export default function CFDModel() {
   });
 
   return (
-    <group>
+    // ⚡ Bolt: Use a React Fragment instead of an empty <group>.
+    // Using <group> without applying any transformations injects a useless THREE.Group node
+    // into the scene graph, forcing the renderer to traverse an extra level and compute identity
+    // matrices every frame.
+    <>
       {streamMesh && (
         <mesh
           geometry={streamMesh.geometry}
@@ -143,7 +147,7 @@ export default function CFDModel() {
            <meshStandardMaterial color="#888888" roughness={0.4} metalness={0.8} />
         </mesh>
       )}
-    </group>
+    </>
   );
 }
 
