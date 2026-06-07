@@ -154,3 +154,8 @@
 **Vulnerability:** Permissive access to fonts and new Digital Credentials API (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict `font-src` in CSP or `digital-credentials-get` in Permissions-Policy. Leaving these unrestricted increases the attack surface for font-based attacks and unauthorized digital credential requests.
 **Prevention:** Always explicitly define `font-src` in CSP and restrict experimental APIs like `digital-credentials-get` in Permissions-Policy for enhanced defense-in-depth.
+
+## 2026-06-08 - Harden Permissions-Policy against remaining experimental APIs
+**Vulnerability:** Permissive access to experimental browser APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict `deferred-fetch`, `sync-script`, `system-keyboard-lock`, and `fenced-unpartitioned-storage` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially utilize experimental features that could introduce side-channels or disruptive behavior.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused experimental APIs to prevent unauthorized use and mitigate security risks.
