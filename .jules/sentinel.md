@@ -164,3 +164,8 @@
 **Vulnerability:** Execution on potentially vulnerable legacy Node.js environments (Defense in Depth)
 **Learning:** This application lacked an engines restriction in package.json. While deployment platforms typically default to newer versions, failing to enforce a minimum version programmatically leaves open the risk that developers or CI pipelines might run the application on outdated, unsupported Node.js versions with known CVEs.
 **Prevention:** Always define an engines.node field in package.json specifying the minimum LTS version required (e.g., >=20.0.0) to ensure a secure baseline runtime.
+
+## 2026-06-09 - Harden Permissions-Policy against remaining execution control APIs
+**Vulnerability:** Permissive access to execution control and cross-origin isolation APIs (Defense in Depth)
+**Learning:** This Next.js web application did not explicitly restrict `cross-origin-isolated`, `execution-while-not-rendered`, `execution-while-out-of-viewport`, and `navigation-override` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially utilize features that could introduce performance degradation or unauthorized navigation overriding.
+**Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused execution control and experimental APIs to prevent unauthorized use and mitigate security risks.
