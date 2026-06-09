@@ -97,3 +97,7 @@
 ## 2026-06-06 - Flatten R3F scene graphs
 **Learning:** Wrapping meshes in an unnecessary `<group>` tag injects an empty `THREE.Group` into the scene graph, which forces Three.js to needlessly traverse an extra level and compute its transforms every frame.
 **Action:** Use React Fragments (`<></>`) instead of `<group>` when you only need to return multiple siblings without applying a shared 3D transformation.
+
+## 2026-06-09 - No Optimizations Found
+**Learning:** The codebase has been thoroughly audited for frontend and backend performance bottlenecks, and all identified optimization opportunities (like matrix updates, dynamic imports, shader math offloading, GPU preference, HDRI preloading, culling, early exits in loops, etc.) have already been fully implemented by previous iterations.
+**Action:** Wait for new code to be added or new performance patterns to be identified before attempting further optimizations.
