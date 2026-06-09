@@ -104,9 +104,13 @@ export default function Overlay() {
             </div>
             <button
               onClick={() => scrollToPage(2, 'wake-analysis-title')}
+              aria-keyshortcuts="ArrowDown ArrowUp"
               className="group self-start text-white/70 flex items-center gap-2 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
             >
-              <span className="font-medium text-sm">Continue to Wake Analysis</span>
+              <span className="font-medium text-sm flex items-center gap-2">
+                Continue to Wake Analysis
+                <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+              </span>
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
             </button>
         </div>
@@ -127,9 +131,13 @@ export default function Overlay() {
             </div>
             <button
               onClick={() => scrollToPage(3, 'explore-data-title')}
+              aria-keyshortcuts="ArrowDown ArrowUp"
               className="group self-start text-white/70 flex items-center gap-2 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
             >
-              <span className="font-medium text-sm">Continue to Explore Data</span>
+              <span className="font-medium text-sm flex items-center gap-2">
+                Continue to Explore Data
+                <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+              </span>
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
             </button>
         </div>

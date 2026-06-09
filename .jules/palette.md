@@ -84,3 +84,7 @@
 ## 2026-06-06 - ARIA Keyboard Shortcuts for Scroll Actions
 **Learning:** While visual keyboard hints inform sighted users, screen reader users may not benefit if these visual hints are hidden via `aria-hidden` (to avoid clutter) without providing an alternative semantic mapping to the action.
 **Action:** Whenever providing visual keyboard hints for an interactive element, always supplement the parent element with an explicit `aria-keyshortcuts` attribute (e.g., `aria-keyshortcuts="ArrowDown ArrowUp"`) to natively announce the available shortcuts to assistive technologies.
+
+## 2026-06-09 - Consistent Keyboard Hints Across Scroll Steps
+**Learning:** When guiding users through a scroll-driven experience, providing keyboard shortcuts and visual hints (like <kbd> tags) only on the first and last interactions creates an inconsistent experience. Middle steps must also clearly indicate continued keyboard navigability.
+**Action:** Ensure consistent `aria-keyshortcuts` attributes and nested tactile `<kbd>` elements are present on all sequential navigation buttons in a multi-step flow.
