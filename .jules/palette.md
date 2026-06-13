@@ -88,3 +88,7 @@
 ## 2026-06-09 - Consistent Keyboard Hints Across Scroll Steps
 **Learning:** When guiding users through a scroll-driven experience, providing keyboard shortcuts and visual hints (like <kbd> tags) only on the first and last interactions creates an inconsistent experience. Middle steps must also clearly indicate continued keyboard navigability.
 **Action:** Ensure consistent `aria-keyshortcuts` attributes and nested tactile `<kbd>` elements are present on all sequential navigation buttons in a multi-step flow.
+
+## 2024-06-10 - Consistent Visual Keyboard Hints
+**Learning:** Providing `aria-keyshortcuts="ArrowDown ArrowUp"` on buttons but only showing the visual `<kbd>↓</kbd>` hint causes confusion for users expecting to see both directions visually represented, especially in a scrollable flow where users can go backward.
+**Action:** Always provide visual keyboard hints for all defined `aria-keyshortcuts` to ensure sighted users are aware of all available native navigation shortcuts.

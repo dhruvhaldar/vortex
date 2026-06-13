@@ -109,7 +109,10 @@ export default function Overlay() {
             >
               <span className="font-medium text-sm flex items-center gap-2">
                 Continue to Wake Analysis
-                <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+                <span aria-hidden="true" className="hidden md:inline-flex gap-1">
+                  <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+                  <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↑</kbd>
+                </span>
               </span>
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
             </button>
@@ -136,7 +139,10 @@ export default function Overlay() {
             >
               <span className="font-medium text-sm flex items-center gap-2">
                 Continue to Explore Data
-                <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+                <span aria-hidden="true" className="hidden md:inline-flex gap-1">
+                  <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
+                  <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↑</kbd>
+                </span>
               </span>
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-y-1 group-focus-visible:translate-y-1 transition-transform"><path d="m6 9 6 6 6-6" /></svg>
             </button>
