@@ -169,3 +169,8 @@
 **Vulnerability:** Permissive access to execution control and cross-origin isolation APIs (Defense in Depth)
 **Learning:** This Next.js web application did not explicitly restrict `cross-origin-isolated`, `execution-while-not-rendered`, `execution-while-out-of-viewport`, and `navigation-override` in the `Permissions-Policy` header. Leaving these enabled when not required allows third-party scripts to potentially utilize features that could introduce performance degradation or unauthorized navigation overriding.
 **Prevention:** Always maintain a strict and comprehensive `Permissions-Policy` in HTTP headers. Explicitly disable all unused execution control and experimental APIs to prevent unauthorized use and mitigate security risks.
+
+## 2026-06-15 - Add eslint-plugin-security
+**Vulnerability:** Lack of automated security checks in CI/CD pipeline
+**Learning:** The project did not enforce security linting rules, increasing the risk of developers accidentally introducing common vulnerabilities (e.g., regex DOS, unsafe eval) that could have been caught automatically.
+**Prevention:** Integrated `eslint-plugin-security` into the ESLint configuration to proactively detect and prevent insecure coding patterns.
