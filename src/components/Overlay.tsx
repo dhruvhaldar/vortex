@@ -58,9 +58,13 @@ export default function Overlay() {
       {/* Skip to Content Link for Keyboard Users */}
       <button
         onClick={() => scrollToPage(3, 'explore-data-title')}
-        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-6 focus-visible:left-6 focus-visible:z-[100] focus-visible:px-6 focus-visible:py-3 focus-visible:bg-white focus-visible:text-black focus-visible:rounded-full focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black pointer-events-auto"
+        aria-keyshortcuts="End"
+        className="group sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-6 focus-visible:left-6 focus-visible:z-[100] focus-visible:px-6 focus-visible:py-3 focus-visible:bg-white focus-visible:text-black focus-visible:rounded-full focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black pointer-events-auto flex items-center gap-2"
       >
-        Skip to Explore Data
+        <span className="font-medium flex items-center gap-2">
+          Skip to Explore Data
+          <kbd aria-hidden="true" className="font-sans px-2 py-0.5 rounded-md bg-black/10 border border-black/30 border-b-[3px] shadow-sm text-xs text-black font-bold transition-colors group-hover:bg-black/20 group-focus-visible:bg-black/20 group-active:border-b group-active:translate-y-[2px]">End</kbd>
+        </span>
       </button>
 
       {/* Scroll Progress Bar */}
