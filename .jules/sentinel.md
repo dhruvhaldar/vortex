@@ -174,3 +174,8 @@
 **Vulnerability:** Lack of automated security checks in CI/CD pipeline
 **Learning:** The project did not enforce security linting rules, increasing the risk of developers accidentally introducing common vulnerabilities (e.g., regex DOS, unsafe eval) that could have been caught automatically.
 **Prevention:** Integrated `eslint-plugin-security` into the ESLint configuration to proactively detect and prevent insecure coding patterns.
+
+## 2026-06-16 - Harden dependencies against known CVEs
+**Vulnerability:** Vulnerable transitive dependencies (`js-yaml`, `@babel/core`) with known CVEs (ReDoS and Arbitrary File Read)
+**Learning:** The project had vulnerable transitive dependencies exposing the application to potential Denial of Service and Arbitrary File Read risks. Relying on default dependency resolutions without active auditing leaves the project open to newly discovered vulnerabilities in upstream packages.
+**Prevention:** Regularly run `pnpm audit` and proactively update vulnerable packages to their secure versions, maintaining a clean dependency graph.
