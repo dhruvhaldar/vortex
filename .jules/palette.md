@@ -92,3 +92,7 @@
 ## 2024-06-10 - Consistent Visual Keyboard Hints
 **Learning:** Providing `aria-keyshortcuts="ArrowDown ArrowUp"` on buttons but only showing the visual `<kbd>↓</kbd>` hint causes confusion for users expecting to see both directions visually represented, especially in a scrollable flow where users can go backward.
 **Action:** Always provide visual keyboard hints for all defined `aria-keyshortcuts` to ensure sighted users are aware of all available native navigation shortcuts.
+
+## 2026-08-01 - Exposing Custom Scroll Progress Bars
+**Learning:** Overly frequent aria updates (like `aria-valuenow` updated 60 times a second via `requestAnimationFrame` or `useFrame`) cause notification spam for screen readers, completely degrading the experience. Hiding them with `aria-hidden="true"` deprives screen reader users of an explicit context cue regarding overall progress in multi-step visual experiences.
+**Action:** Always provide custom scroll progress bars with `role="progressbar"`, `aria-label`, `aria-valuemin`, and `aria-valuemax`. Update `aria-valuenow` via a ref, and throttle updates so it only changes when the integer percentage changes.
