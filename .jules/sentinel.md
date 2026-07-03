@@ -179,3 +179,8 @@
 **Vulnerability:** Vulnerable transitive dependencies (`js-yaml`, `@babel/core`) with known CVEs (ReDoS and Arbitrary File Read)
 **Learning:** The project had vulnerable transitive dependencies exposing the application to potential Denial of Service and Arbitrary File Read risks. Relying on default dependency resolutions without active auditing leaves the project open to newly discovered vulnerabilities in upstream packages.
 **Prevention:** Regularly run `pnpm audit` and proactively update vulnerable packages to their secure versions, maintaining a clean dependency graph.
+
+## 2026-06-17 - Correctly Enforce Safe Versions for Transitive Dependencies
+**Vulnerability:** Vulnerable transitive dependencies (`js-yaml`, `@babel/core`) with known CVEs (ReDoS and Arbitrary File Read)
+**Learning:** The project had vulnerable transitive dependencies exposing the application to potential Denial of Service and Arbitrary File Read risks. Relying on default dependency resolutions or adding them directly to `devDependencies` without active auditing leaves the project open to newly discovered vulnerabilities in upstream packages. Placing them in `devDependencies` does not reliably fix the vulnerabilities across the entire dependency tree.
+**Prevention:** Use the `pnpm.overrides` field in `package.json` to explicitly enforce minimum safe versions for transitive dependencies, resolving deep tree vulnerabilities reliably without waiting for direct dependency updates. Removing them from `devDependencies` helps keep the project's direct dependencies clean.

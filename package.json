@@ -19,7 +19,6 @@
     "three": "^0.183.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,7 +27,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "eslint-plugin-security": "^4.0.1",
-    "js-yaml": "^4.2.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
@@ -39,7 +37,9 @@
       "brace-expansion": ">=1.1.13",
       "flatted": ">=3.4.2",
       "minimatch": ">=3.1.4",
-      "picomatch": ">=2.3.2"
+      "picomatch": ">=2.3.2",
+      "@babel/core": "^7.29.7",
+      "js-yaml": "^4.2.0"
     }
   },
   "engines": {
