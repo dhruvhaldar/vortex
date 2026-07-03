@@ -10,6 +10,8 @@ overrides:
   flatted: '>=3.4.2'
   minimatch: '>=3.1.4'
   picomatch: '>=2.3.2'
+  '@babel/core': ^7.29.7
+  js-yaml: ^4.2.0
 
 importers:
 
@@ -37,9 +39,6 @@ importers:
         specifier: ^0.183.1
         version: 0.183.2
     devDependencies:
-      '@babel/core':
-        specifier: ^7.29.7
-        version: 7.29.7
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.3.0
@@ -64,9 +63,6 @@ importers:
       eslint-plugin-security:
         specifier: ^4.0.1
         version: 4.0.1
-      js-yaml:
-        specifier: ^4.2.0
-        version: 4.2.0
       tailwindcss:
         specifier: ^4
         version: 4.3.0
@@ -112,7 +108,7 @@ packages:
     resolution: {integrity: sha512-UPUVSyXbOh627KiCIGQSgwWzGeBKLkaJ9PJEdrngIwMSzxLR4jS4+f1f1jb7VzBbg8nFLaYotvVPFCTqdrmTAg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
-      '@babel/core': ^7.0.0
+      '@babel/core': ^7.29.7
 
   '@babel/helper-string-parser@7.27.1':
     resolution: {integrity: sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==}
