@@ -96,3 +96,7 @@
 ## 2026-08-01 - Exposing Custom Scroll Progress Bars
 **Learning:** Overly frequent aria updates (like `aria-valuenow` updated 60 times a second via `requestAnimationFrame` or `useFrame`) cause notification spam for screen readers, completely degrading the experience. Hiding them with `aria-hidden="true"` deprives screen reader users of an explicit context cue regarding overall progress in multi-step visual experiences.
 **Action:** Always provide custom scroll progress bars with `role="progressbar"`, `aria-label`, `aria-valuemin`, and `aria-valuemax`. Update `aria-valuenow` via a ref, and throttle updates so it only changes when the integer percentage changes.
+
+## 2024-07-08 - Immersive Browser Chrome for WebGL Apps
+**Learning:** Full-screen dark-themed WebGL applications can have their aesthetic broken if the native browser UI (like the mobile address bar or macOS status bar) defaults to light mode or a contrasting color. Setting the document body background is often not enough to affect the browser's native chrome.
+**Action:** Always export a `viewport` configuration (or use `<meta name="theme-color">`) setting `themeColor` to match the application's background (e.g., `#000000`) and `colorScheme` to "dark" in the root layout of immersive experiences to ensure a seamless edge-to-edge aesthetic.
