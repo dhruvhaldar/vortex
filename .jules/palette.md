@@ -100,3 +100,7 @@
 ## 2024-07-08 - Immersive Browser Chrome for WebGL Apps
 **Learning:** Full-screen dark-themed WebGL applications can have their aesthetic broken if the native browser UI (like the mobile address bar or macOS status bar) defaults to light mode or a contrasting color. Setting the document body background is often not enough to affect the browser's native chrome.
 **Action:** Always export a `viewport` configuration (or use `<meta name="theme-color">`) setting `themeColor` to match the application's background (e.g., `#000000`) and `colorScheme` to "dark" in the root layout of immersive experiences to ensure a seamless edge-to-edge aesthetic.
+
+## 2026-06-10 - Isolating Sibling Focus Rings
+**Learning:** When using the expanded click area pattern (with `after:absolute` on a primary link) alongside other focusable sibling elements (like `<abbr tabIndex={0}>`), applying `focus-within:ring-*` utilities to the parent container causes a confusing "double focus ring" effect when the sibling is focused. Both the parent and the sibling display focus rings simultaneously, confusing the user about which element actually holds focus.
+**Action:** Instead of applying focus rings to the parent using `focus-within`, use the `peer` class on the primary link and an absolutely positioned sibling `<span aria-hidden="true">` with `peer-focus-visible:ring-*` classes. This ensures the global parent-sized focus ring is only visible when the primary link itself is focused, allowing sibling interactive elements to display their own isolated focus states cleanly.
