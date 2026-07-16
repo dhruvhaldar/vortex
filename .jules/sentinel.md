@@ -184,3 +184,8 @@
 **Vulnerability:** Vulnerable transitive dependencies (`js-yaml`, `@babel/core`) with known CVEs (ReDoS and Arbitrary File Read)
 **Learning:** The project had vulnerable transitive dependencies exposing the application to potential Denial of Service and Arbitrary File Read risks. Relying on default dependency resolutions or adding them directly to `devDependencies` without active auditing leaves the project open to newly discovered vulnerabilities in upstream packages. Placing them in `devDependencies` does not reliably fix the vulnerabilities across the entire dependency tree.
 **Prevention:** Use the `pnpm.overrides` field in `package.json` to explicitly enforce minimum safe versions for transitive dependencies, resolving deep tree vulnerabilities reliably without waiting for direct dependency updates. Removing them from `devDependencies` helps keep the project's direct dependencies clean.
+
+## 2026-07-16 - Migrate pnpm.overrides to pnpm-workspace.yaml
+**Vulnerability:** Ignored dependency overrides leading to unpatched transitive vulnerabilities (Supply Chain Risk)
+**Learning:** In newer versions of pnpm (>= v11), the `pnpm.overrides` field in `package.json` is completely ignored, and pnpm warns about this during installation. If relied upon to patch vulnerable transitive dependencies, these overrides will fail silently (beyond the initial warning), exposing the application to known vulnerabilities.
+**Prevention:** Always define `overrides` in `pnpm-workspace.yaml` instead of `package.json` in projects using pnpm >= v10/11 to ensure they are properly respected by the package manager.
