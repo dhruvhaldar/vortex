@@ -52,3 +52,7 @@
 ## 2025-06-15 - Unnecessary Focus Attributes on Static Headings
 **Learning:** Adding `tabIndex={-1}` and `focus:outline-none` to static headings is a standard practice only if there is active JavaScript managing programmatic focus (e.g., skip links or routing). Adding these attributes on their own provides no tangible UX or accessibility benefit and clutters the DOM.
 **Action:** Only apply programmatic focus attributes to elements that are actually targeted by focus management logic.
+
+## 2026-10-24 - Motion Sickness in 3D WebGL Camera Movements
+**Learning:** Continuous smoothing or interpolation (like `lerp` or `slerp`) of 3D camera movements tied to scrolling causes significant motion sickness for users who have enabled OS-level reduced motion preferences.
+**Action:** Always respect the user's `prefers-reduced-motion` setting in 3D scene camera handlers by bypassing smooth interpolation and instantly snapping the camera position and rotation to the target coordinates.
