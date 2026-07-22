@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -27,6 +27,15 @@ const lookAtMatrix = new THREE.Matrix4();
 export default function CameraHandler() {
   const scroll = useScroll();
   const lastOffset = useRef(-1);
+  const prefersReducedMotion = useRef(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion.current = mediaQuery.matches;
+    const listener = (e: MediaQueryListEvent) => { prefersReducedMotion.current = e.matches; };
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, []);
 
   useFrame((state, delta) => {
     const offset = scroll.offset; // 0..1
@@ -62,7 +71,11 @@ export default function CameraHandler() {
 
     // Smooth camera movement
     // Lerp towards the target position for cinematic feel
-    state.camera.position.lerp(currentPos, 3.0 * delta);
+    if (prefersReducedMotion.current) {
+        state.camera.position.copy(currentPos);
+    } else {
+        state.camera.position.lerp(currentPos, 3.0 * delta);
+    }
 
     // Smooth lookAt
     // ⚡ Bolt: Use Matrix4.lookAt to compute target rotation instead of camera.lookAt()
@@ -71,7 +84,11 @@ export default function CameraHandler() {
     lookAtMatrix.lookAt(state.camera.position, currentTarget, state.camera.up);
     targetQuaternion.setFromRotationMatrix(lookAtMatrix);
 
-    state.camera.quaternion.slerp(targetQuaternion, 3.0 * delta);
+    if (prefersReducedMotion.current) {
+        state.camera.quaternion.copy(targetQuaternion);
+    } else {
+        state.camera.quaternion.slerp(targetQuaternion, 3.0 * delta);
+    }
   });
 
   return null;
