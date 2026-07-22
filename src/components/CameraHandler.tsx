@@ -27,6 +27,11 @@ const lookAtMatrix = new THREE.Matrix4();
 export default function CameraHandler() {
   const scroll = useScroll();
   const lastOffset = useRef(-1);
+  const prefersReducedMotion = useRef(
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+  );
 
   useFrame((state, delta) => {
     const offset = scroll.offset; // 0..1
@@ -60,18 +65,30 @@ export default function CameraHandler() {
         return;
     }
 
-    // Smooth camera movement
-    // Lerp towards the target position for cinematic feel
-    state.camera.position.lerp(currentPos, 3.0 * delta);
+    // 🎨 Palette: Respect reduced motion preference for continuous animations
 
-    // Smooth lookAt
-    // ⚡ Bolt: Use Matrix4.lookAt to compute target rotation instead of camera.lookAt()
-    // This avoids triggering expensive updateWorldMatrix() calls on the camera every frame
-    // and removes the need for multiple quaternion copy operations.
-    lookAtMatrix.lookAt(state.camera.position, currentTarget, state.camera.up);
-    targetQuaternion.setFromRotationMatrix(lookAtMatrix);
+    if (prefersReducedMotion.current) {
+      // Instantly snap to target position and rotation to avoid motion sickness
+      state.camera.position.copy(currentPos);
 
-    state.camera.quaternion.slerp(targetQuaternion, 3.0 * delta);
+      lookAtMatrix.lookAt(state.camera.position, currentTarget, state.camera.up);
+      targetQuaternion.setFromRotationMatrix(lookAtMatrix);
+
+      state.camera.quaternion.copy(targetQuaternion);
+    } else {
+      // Smooth camera movement
+      // Lerp towards the target position for cinematic feel
+      state.camera.position.lerp(currentPos, 3.0 * delta);
+
+      // Smooth lookAt
+      // ⚡ Bolt: Use Matrix4.lookAt to compute target rotation instead of camera.lookAt()
+      // This avoids triggering expensive updateWorldMatrix() calls on the camera every frame
+      // and removes the need for multiple quaternion copy operations.
+      lookAtMatrix.lookAt(state.camera.position, currentTarget, state.camera.up);
+      targetQuaternion.setFromRotationMatrix(lookAtMatrix);
+
+      state.camera.quaternion.slerp(targetQuaternion, 3.0 * delta);
+    }
   });
 
   return null;

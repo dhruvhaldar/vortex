@@ -104,3 +104,7 @@
 ## 2026-06-10 - Isolating Sibling Focus Rings
 **Learning:** When using the expanded click area pattern (with `after:absolute` on a primary link) alongside other focusable sibling elements (like `<abbr tabIndex={0}>`), applying `focus-within:ring-*` utilities to the parent container causes a confusing "double focus ring" effect when the sibling is focused. Both the parent and the sibling display focus rings simultaneously, confusing the user about which element actually holds focus.
 **Action:** Instead of applying focus rings to the parent using `focus-within`, use the `peer` class on the primary link and an absolutely positioned sibling `<span aria-hidden="true">` with `peer-focus-visible:ring-*` classes. This ensures the global parent-sized focus ring is only visible when the primary link itself is focused, allowing sibling interactive elements to display their own isolated focus states cleanly.
+
+## 2024-05-18 - Respecting Reduced Motion Preferences in Camera Smoothing
+**Learning:** In 3D WebGL scenes using scrolling-tied camera movements, continuous smoothing/interpolation (`lerp` or `slerp`) causes motion sickness for users with reduced motion preferences.
+**Action:** Respect `prefers-reduced-motion: reduce` by bypassing smooth interpolation and instantly snapping camera coordinates and rotations (`copy` instead of `lerp`/`slerp`).
