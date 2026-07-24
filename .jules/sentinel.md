@@ -189,3 +189,8 @@
 **Vulnerability:** Ignored dependency overrides leading to unpatched transitive vulnerabilities (Supply Chain Risk)
 **Learning:** In newer versions of pnpm (>= v11), the `pnpm.overrides` field in `package.json` is completely ignored, and pnpm warns about this during installation. If relied upon to patch vulnerable transitive dependencies, these overrides will fail silently (beyond the initial warning), exposing the application to known vulnerabilities.
 **Prevention:** Always define `overrides` in `pnpm-workspace.yaml` instead of `package.json` in projects using pnpm >= v10/11 to ensure they are properly respected by the package manager.
+
+## 2026-07-24 - Enforce Strict Engine Requirements
+**Vulnerability:** Weak engine enforcement allowing execution on potentially vulnerable legacy Node.js environments
+**Learning:** Even with an `engines.node` field defined in `package.json`, package managers may still allow installation and execution on unsupported Node.js versions, potentially exposing the application to known vulnerabilities in older Node.js runtimes.
+**Prevention:** Always include an `.npmrc` file with `engine-strict=true` to enforce strict engine requirements defined in `package.json`, ensuring the application only runs on secure, supported Node.js environments.
