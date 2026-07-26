@@ -108,3 +108,6 @@
 ## 2024-05-18 - Respecting Reduced Motion Preferences in Camera Smoothing
 **Learning:** In 3D WebGL scenes using scrolling-tied camera movements, continuous smoothing/interpolation (`lerp` or `slerp`) causes motion sickness for users with reduced motion preferences.
 **Action:** Respect `prefers-reduced-motion: reduce` by bypassing smooth interpolation and instantly snapping camera coordinates and rotations (`copy` instead of `lerp`/`slerp`).
+## 2024-07-26 - Add screen-reader text for aria-keyshortcuts
+**Learning:** Elements using `aria-keyshortcuts` with purely visual hints (like `<kbd>`) are not reliably read by screen readers. A visually hidden text description is necessary.
+**Action:** Always provide explicit screen-reader text (e.g., `<span className="sr-only">`) alongside any `aria-keyshortcuts` implementation to ensure equivalent experience.
