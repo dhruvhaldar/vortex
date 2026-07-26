@@ -75,7 +75,7 @@ export default function Overlay() {
         className="group sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-6 focus-visible:left-6 focus-visible:z-[100] focus-visible:px-6 focus-visible:py-3 focus-visible:bg-white focus-visible:text-black focus-visible:rounded-full focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black pointer-events-auto flex items-center gap-2"
       >
         <span className="font-medium flex items-center gap-2">
-          Skip to Explore Data
+          Skip to Explore Data<span className="sr-only"> (Keyboard shortcut: End)</span>
           <kbd aria-hidden="true" className="font-sans px-2 py-0.5 rounded-md bg-black/10 border border-black/30 border-b-[3px] shadow-sm text-xs text-black font-bold transition-colors group-hover:bg-black/20 group-focus-visible:bg-black/20 group-active:border-b group-active:translate-y-[2px]">End</kbd>
         </span>
       </button>
@@ -130,7 +130,7 @@ export default function Overlay() {
               className="group self-start text-white/70 flex items-center gap-2 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
             >
               <span className="font-medium text-sm flex items-center gap-2">
-                Continue to Wake Analysis
+                Continue to Wake Analysis<span className="sr-only"> (Keyboard shortcuts: Down and Up arrows)</span>
                 <span aria-hidden="true" className="hidden md:inline-flex gap-1">
                   <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
                   <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↑</kbd>
@@ -160,7 +160,7 @@ export default function Overlay() {
               className="group self-start text-white/70 flex items-center gap-2 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-lg p-2 -ml-2 transition-all active:scale-95"
             >
               <span className="font-medium text-sm flex items-center gap-2">
-                Continue to Explore Data
+                Continue to Explore Data<span className="sr-only"> (Keyboard shortcuts: Down and Up arrows)</span>
                 <span aria-hidden="true" className="hidden md:inline-flex gap-1">
                   <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↓</kbd>
                   <kbd className="font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">↑</kbd>
@@ -192,7 +192,7 @@ export default function Overlay() {
           >
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-y-1 group-focus-visible:-translate-y-1 transition-transform"><path d="m18 15-6-6-6 6" /></svg>
             <span className="font-medium flex items-center gap-2">
-              Back to Start
+              Back to Start<span className="sr-only"> (Keyboard shortcut: Home)</span>
               <kbd aria-hidden="true" className="hidden md:inline-block font-sans px-2 py-0.5 rounded-md bg-white/10 border border-white/30 border-b-[3px] shadow-sm text-xs text-white font-bold transition-colors group-hover:bg-white/20 group-focus-visible:bg-white/20 group-active:border-b group-active:translate-y-[2px]">Home</kbd>
             </span>
           </button>
