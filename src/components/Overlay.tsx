@@ -15,7 +15,7 @@ export default function Overlay() {
       // This prevents useless string allocations and DOM property assignments 60-120 times per second when idle.
       if (scroll.offset !== lastOffset.current) {
         if (progressRef.current) {
-            progressRef.current.style.transform = `scaleX(${scroll.offset})`;
+            progressRef.current.style.transform = `translateX(${(scroll.offset - 1) * 100}%)`;
         }
 
         // 🎨 Palette: Throttle aria-valuenow updates to integer percentage changes
@@ -88,12 +88,12 @@ export default function Overlay() {
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={0}
-        className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none"
+        className="fixed top-0 left-0 w-full h-1.5 bg-white/10 z-50 pointer-events-none overflow-hidden"
       >
         <div
           ref={progressRef}
-          className="h-full bg-white origin-left rounded-r-full"
-          style={{ transform: 'scaleX(0)', willChange: 'transform' }} />
+          className="w-full h-full bg-white rounded-r-full"
+          style={{ transform: 'translateX(-100%)', willChange: 'transform' }} />
       </div>
 
       {/* Page 1 */}

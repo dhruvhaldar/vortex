@@ -111,3 +111,7 @@
 ## 2024-07-26 - Add screen-reader text for aria-keyshortcuts
 **Learning:** Elements using `aria-keyshortcuts` with purely visual hints (like `<kbd>`) are not reliably read by screen readers. A visually hidden text description is necessary.
 **Action:** Always provide explicit screen-reader text (e.g., `<span className="sr-only">`) alongside any `aria-keyshortcuts` implementation to ensure equivalent experience.
+
+## 2026-10-25 - Preventing Border Radius Distortion on Scaled Progress Bars
+**Learning:** Using `transform: scaleX()` on a progress bar element with rounded corners (like `rounded-r-full`) causes the border radius to visually stretch and distort on the X-axis during the animation.
+**Action:** Instead of scaling, use `transform: translateX()` from `-100%` to `0%` on a full-width (`w-full`) element within an `overflow-hidden` container. This moves the element into view without altering its dimensions, preserving perfectly round corners throughout the entire progress animation.
