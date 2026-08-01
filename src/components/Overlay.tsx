@@ -1,6 +1,6 @@
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function Overlay() {
   const scroll = useScroll();
@@ -8,6 +8,20 @@ export default function Overlay() {
   const progressContainerRef = useRef<HTMLDivElement>(null);
   const lastOffset = useRef(-1);
   const lastPercent = useRef(-1);
+  const prefersReducedMotion = useRef(
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   useFrame(() => {
     if (scroll) {
@@ -34,10 +48,10 @@ export default function Overlay() {
   const scrollToPage = (pageIndex: number, targetId: string) => {
     if (scroll && scroll.el) {
       // Respect user's reduced motion preference for JS-driven animations
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // ⚡ Bolt: Use cached ref instead of querying window.matchMedia synchronously
       scroll.el.scrollTo({
         top: window.innerHeight * pageIndex,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        behavior: prefersReducedMotion.current ? 'auto' : 'smooth'
       });
 
       // Programmatically move focus to the next section's heading for keyboard/screen reader users
@@ -51,10 +65,10 @@ export default function Overlay() {
 
   const handleScrollToTop = () => {
     if (scroll && scroll.el) {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // ⚡ Bolt: Use cached ref instead of querying window.matchMedia synchronously
       scroll.el.scrollTo({
         top: 0,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        behavior: prefersReducedMotion.current ? 'auto' : 'smooth'
       });
       // Programmatically move focus back to the top element for keyboard/screen reader users
       // preventScroll: true is crucial here, otherwise the browser instantly snaps back to the top,

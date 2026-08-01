@@ -101,3 +101,6 @@
 ## 2026-06-09 - No Optimizations Found
 **Learning:** The codebase has been thoroughly audited for frontend and backend performance bottlenecks, and all identified optimization opportunities (like matrix updates, dynamic imports, shader math offloading, GPU preference, HDRI preloading, culling, early exits in loops, etc.) have already been fully implemented by previous iterations.
 **Action:** Wait for new code to be added or new performance patterns to be identified before attempting further optimizations.
+## 2024-08-01 - Cache window.matchMedia for interactive handlers
+**Learning:** Calling `window.matchMedia` dynamically inside frequently invoked interactive functions (like scroll handlers or dynamic view transition triggers) causes synchronous DOM blocking. While not as catastrophic as calling it inside a high-frequency `useFrame` render loop, it still produces unnecessary layout and JS overhead on every interaction, which can lead to micro-stutters during animations.
+**Action:** Always cache `window.matchMedia` values using a `useRef` (with a `typeof window !== 'undefined'` check for SSR safety) and keep them synchronized via a `change` event listener in a `useEffect`. Read the ref value inside event handlers instead of querying the DOM directly.
