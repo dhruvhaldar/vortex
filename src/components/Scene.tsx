@@ -49,7 +49,10 @@ export default function Scene() {
                 Since we are not using any stencil-based effects (like masks or outlines),
                 disabling it prevents the GPU from allocating and managing an unused stencil buffer,
                 saving VRAM and memory bandwidth. */}
-            <EffectComposer multisampling={4} stencilBuffer={false}>
+            {/* ⚡ Bolt: Explicitly disable the normal pass (enableNormalPass={false}).
+                In newer versions of @react-three/postprocessing, omitting this defaults to true
+                and can cause expensive on-the-fly depth-to-normal reconstruction when MSAA is used. */}
+            <EffectComposer multisampling={4} stencilBuffer={false} enableNormalPass={false}>
                 {/* ⚡ Bolt: Replaced legacy SSAO with N8AO (N8 Ambient Occlusion).
                     N8AO is highly optimized, significantly faster, and doesn't require a separate NormalPass
                     which was missing and causing expensive on-the-fly depth-to-normal reconstruction. */}
