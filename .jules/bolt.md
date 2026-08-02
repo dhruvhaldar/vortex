@@ -104,3 +104,6 @@
 ## 2024-08-01 - Cache window.matchMedia for interactive handlers
 **Learning:** Calling `window.matchMedia` dynamically inside frequently invoked interactive functions (like scroll handlers or dynamic view transition triggers) causes synchronous DOM blocking. While not as catastrophic as calling it inside a high-frequency `useFrame` render loop, it still produces unnecessary layout and JS overhead on every interaction, which can lead to micro-stutters during animations.
 **Action:** Always cache `window.matchMedia` values using a `useRef` (with a `typeof window !== 'undefined'` check for SSR safety) and keep them synchronized via a `change` event listener in a `useEffect`. Read the ref value inside event handlers instead of querying the DOM directly.
+## 2026-08-02 - Disable NormalPass in EffectComposer to avoid expensive reconstruction
+**Learning:** In newer versions of `@react-three/postprocessing` (e.g. >= 3.0.4), the `enableNormalPass` prop on `<EffectComposer>` defaults to true. When combined with MSAA, this can cause an expensive on-the-fly depth-to-normal reconstruction pass which degrades performance, especially if effects like N8AO are used that don't even require it.
+**Action:** Always explicitly set `enableNormalPass={false}` on `<EffectComposer>` when a normal pass is not required by the active effects to prevent unnecessary GPU overhead.
