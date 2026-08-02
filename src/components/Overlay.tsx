@@ -190,7 +190,7 @@ export default function Overlay() {
         <h2 id="explore-data-title" tabIndex={-1} className="text-4xl md:text-6xl font-bold text-white mb-8 drop-shadow-lg focus:outline-none">Explore the Data</h2>
         <div className="flex flex-col items-center gap-6">
           <div className="group relative px-6 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 focus-within:bg-gray-200 transition-all active:scale-95 pointer-events-auto inline-flex items-center gap-2 justify-center">
-              <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" className="peer after:absolute after:inset-0 focus:outline-none inline-flex items-center gap-2">
+              <a href="https://github.com/pyvista/pyvista" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="peer after:absolute after:inset-0 focus:outline-none inline-flex items-center gap-2">
                 Powered by PyVista <span aria-hidden="true">&</span>
                 <span className="sr-only"> and R3F (opens in a new tab)</span>
               </a>
