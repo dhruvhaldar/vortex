@@ -25,9 +25,10 @@ export default function Overlay() {
 
   useFrame(() => {
     if (scroll) {
-      // ⚡ Bolt: Only update DOM style if the scroll offset has actually changed.
-      // This prevents useless string allocations and DOM property assignments 60-120 times per second when idle.
-      if (scroll.offset !== lastOffset.current) {
+      // ⚡ Bolt: Only update DOM style if the scroll offset has changed significantly.
+      // Use an epsilon threshold instead of strict inequality because ScrollControls
+      // dampening has a very long tail of micro-updates.
+      if (Math.abs(scroll.offset - lastOffset.current) > 0.0001) {
         if (progressRef.current) {
             progressRef.current.style.transform = `translateX(${(scroll.offset - 1) * 100}%)`;
         }

@@ -46,8 +46,10 @@ export default function CameraHandler() {
     const offset = scroll.offset; // 0..1
 
     let changed = false;
-    // ⚡ Bolt: Only recalculate waypoints if offset has changed
-    if (offset !== lastOffset.current) {
+    // ⚡ Bolt: Only recalculate waypoints if offset has changed significantly.
+    // Use an epsilon threshold instead of strict inequality because ScrollControls
+    // dampening has a very long tail of micro-updates that defeat the early return.
+    if (Math.abs(offset - lastOffset.current) > 0.0001) {
         lastOffset.current = offset;
         changed = true;
         // Piecewise linear interpolation between waypoints

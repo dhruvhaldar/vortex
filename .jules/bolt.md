@@ -107,3 +107,7 @@
 ## 2026-08-02 - Disable NormalPass in EffectComposer to avoid expensive reconstruction
 **Learning:** In newer versions of `@react-three/postprocessing` (e.g. >= 3.0.4), the `enableNormalPass` prop on `<EffectComposer>` defaults to true. When combined with MSAA, this can cause an expensive on-the-fly depth-to-normal reconstruction pass which degrades performance, especially if effects like N8AO are used that don't even require it.
 **Action:** Always explicitly set `enableNormalPass={false}` on `<EffectComposer>` when a normal pass is not required by the active effects to prevent unnecessary GPU overhead.
+
+## 2024-10-24 - ScrollControls Dampening Tail Defeats Strict Equality
+**Learning:** Drei's `ScrollControls` applies a dampening effect that results in a very long tail of microscopic `scroll.offset` updates (e.g., changes of `0.0000000001`). Using strict equality checks (`if (offset !== lastOffset.current)`) for early returns in high-frequency `useFrame` loops is ineffective because these micro-updates continuously trigger recalculations and DOM style updates long after the scroll appears visually complete.
+**Action:** When tracking scroll or animated values in `useFrame`, use an epsilon threshold check (e.g., `Math.abs(offset - lastOffset.current) > 0.0001`) instead of strict inequality to aggressively prune the imperceptible dampening tail and successfully trigger early returns to save CPU/GPU cycles.
