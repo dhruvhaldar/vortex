@@ -87,7 +87,7 @@ export default function Overlay() {
       <button
         onClick={() => scrollToPage(3, 'explore-data-title')}
         aria-keyshortcuts="End"
-        className="group sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-6 focus-visible:left-6 focus-visible:z-[100] focus-visible:px-6 focus-visible:py-3 focus-visible:bg-white focus-visible:text-black focus-visible:rounded-full focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black pointer-events-auto flex items-center gap-2"
+        className="group sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-6 focus-visible:left-6 focus-visible:z-[100] focus-visible:px-6 focus-visible:py-3 focus-visible:bg-white focus-visible:text-black focus-visible:rounded-full focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all active:scale-95 pointer-events-auto flex items-center gap-2"
       >
         <span className="font-medium flex items-center gap-2">
           Skip to Explore Data<span className="sr-only"> (Keyboard shortcut: End)</span>
