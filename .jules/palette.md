@@ -115,3 +115,7 @@
 ## 2024-08-05 - Preserving Border Radius During Animation
 **Learning:** Using `transform: scaleX()` on elements with rounded corners (like a progress bar with `rounded-r-full`) causes the border radius to visually distort on the X-axis during animation.
 **Action:** To preserve perfectly round corners, use `transform: translateX()` on a full-width element within an `overflow-hidden` container instead of scaling.
+
+## 2024-08-05 - Consistent Interactive Affordances on Skip Links
+**Learning:** Visually hidden interactive elements (like `sr-only` Skip to Content links) that become visible on focus still need the same interactive affordances as regular buttons in the application. Missing classes like `active:scale-95` on a skip link makes it feel broken or inconsistent when a keyboard user interacts with it, compared to the rest of the application's buttons.
+**Action:** Always ensure that structural hidden links (e.g. Skip to Content) inherit the same interactive state utility classes (`transition-all`, `active:scale-95`, etc.) as the primary buttons in the design system.
