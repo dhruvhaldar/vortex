@@ -194,3 +194,8 @@
 **Vulnerability:** Weak engine enforcement allowing execution on potentially vulnerable legacy Node.js environments
 **Learning:** Even with an `engines.node` field defined in `package.json`, package managers may still allow installation and execution on unsupported Node.js versions, potentially exposing the application to known vulnerabilities in older Node.js runtimes.
 **Prevention:** Always include an `.npmrc` file with `engine-strict=true` to enforce strict engine requirements defined in `package.json`, ensuring the application only runs on secure, supported Node.js environments.
+
+## 2026-08-09 - Avoid Loose Version Operators for Transitive Overrides
+**Vulnerability:** Supply Chain and Availability Risk via Unexpected Major Version Bumps
+**Learning:** Using loose version operators like `>=` in `pnpm-workspace.yaml` `overrides` can unexpectedly pull in breaking major version updates. This can lead to runtime crashes in legacy environments (e.g., pulling an ESM-only major version into a CommonJS environment) or inadvertently introducing new, unvetted vulnerabilities from significant dependency changes.
+**Prevention:** Always use strictly bound constraints (e.g., `^` or `~`) for dependency overrides to ensure backwards compatibility and prevent unintended major version upgrades, while still allowing for necessary security patches.
