@@ -54,7 +54,7 @@ const securityHeaders = [
     // Sentinel: Explicitly restrict worker-src, media-src, child-src, and frame-src to 'none' for enhanced defense-in-depth.
     // Sentinel: Further restrict script-src by setting script-src-attr to 'none' to disallow inline event handlers (e.g. onclick="...").
     // Sentinel: Explicitly restrict font-src to 'self' for defense-in-depth against font-based attacks.
-    value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; script-src-attr 'none'; connect-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; worker-src 'none'; media-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'none'; prefetch-src 'self'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
+    value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : ""}; script-src-attr 'none'; connect-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; worker-src 'none'; media-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'none'; prefetch-src 'self'; upgrade-insecure-requests;`.replace(/\s+/g, ' ').trim(),
   },
   {
     key: "Strict-Transport-Security",
