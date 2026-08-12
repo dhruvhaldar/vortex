@@ -199,3 +199,8 @@
 **Vulnerability:** Supply Chain and Availability Risk via Unexpected Major Version Bumps
 **Learning:** Using loose version operators like `>=` in `pnpm-workspace.yaml` `overrides` can unexpectedly pull in breaking major version updates. This can lead to runtime crashes in legacy environments (e.g., pulling an ESM-only major version into a CommonJS environment) or inadvertently introducing new, unvetted vulnerabilities from significant dependency changes.
 **Prevention:** Always use strictly bound constraints (e.g., `^` or `~`) for dependency overrides to ensure backwards compatibility and prevent unintended major version upgrades, while still allowing for necessary security patches.
+
+## 2026-08-12 - Avoid Major Version Overrides on Shared Transitive Dependencies
+**Vulnerability:** Execution environment failure (Denial of Service via dependency resolution).
+**Learning:** Forcing a major version override (like `brace-expansion: ^5.0.9`) for a shared transitive dependency in `pnpm-workspace.yaml` can break legacy packages in the tree (like `minimatch@3.1.5` which expects `^1.1.7`). The legacy package may rely on an older, incompatible API of the overridden package, resulting in runtime crashes (e.g., `TypeError: expand is not a function`).
+**Prevention:** When adding dependency overrides in `pnpm-workspace.yaml`, verify the dependency tree to ensure the forced version doesn't introduce breaking changes for legacy packages that rely on older, incompatible APIs of the overridden package. Use specific overrides targeting the vulnerable package tree rather than broad workspace overrides if major versions conflict.
