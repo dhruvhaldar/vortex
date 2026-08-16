@@ -111,3 +111,7 @@
 ## 2024-10-24 - ScrollControls Dampening Tail Defeats Strict Equality
 **Learning:** Drei's `ScrollControls` applies a dampening effect that results in a very long tail of microscopic `scroll.offset` updates (e.g., changes of `0.0000000001`). Using strict equality checks (`if (offset !== lastOffset.current)`) for early returns in high-frequency `useFrame` loops is ineffective because these micro-updates continuously trigger recalculations and DOM style updates long after the scroll appears visually complete.
 **Action:** When tracking scroll or animated values in `useFrame`, use an epsilon threshold check (e.g., `Math.abs(offset - lastOffset.current) > 0.0001`) instead of strict inequality to aggressively prune the imperceptible dampening tail and successfully trigger early returns to save CPU/GPU cycles.
+
+## 2024-05-18 - No Further Optimizations Identified
+**Learning:** After a thorough codebase audit, all known frontend and backend performance bottlenecks (including object pre-allocation, useFrame loop throttling, shader math offloading, hardware MSAA, HDRI preloading, N8AO usage, capping device pixel ratio, caching window.matchMedia, and avoiding expensive CSS compositing over WebGL) have already been extensively implemented.
+**Action:** Stop execution without making codebase changes or creating a PR when no new bottlenecks or unoptimized new code can be identified.
