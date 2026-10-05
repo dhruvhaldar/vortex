@@ -119,3 +119,7 @@
 ## 2024-08-05 - Consistent Interactive Affordances on Skip Links
 **Learning:** Visually hidden interactive elements (like `sr-only` Skip to Content links) that become visible on focus still need the same interactive affordances as regular buttons in the application. Missing classes like `active:scale-95` on a skip link makes it feel broken or inconsistent when a keyboard user interacts with it, compared to the rest of the application's buttons.
 **Action:** Always ensure that structural hidden links (e.g. Skip to Content) inherit the same interactive state utility classes (`transition-all`, `active:scale-95`, etc.) as the primary buttons in the design system.
+
+## 2024-08-08 - Binding Decorative Icon Animations to Specific Elements
+**Learning:** When using an expanded click area pattern with multiple focusable sibling elements inside a parent container, binding decorative icon animations to the parent's `group-hover` or `group-focus-within` states can cause misleading visual feedback. For example, if a sibling element (like an `<abbr>`) receives focus, the primary link's decorative icon might animate, confusing the user about which element is currently active.
+**Action:** Avoid binding decorative icon animations to the parent container using `group-hover` or `group-focus-within` when siblings can be focused. Instead, bind the icon directly to the primary interactive element's state using `peer-hover` and `peer-focus-visible` to ensure animations only trigger when the specific related element is interacted with.
