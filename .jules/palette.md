@@ -123,3 +123,7 @@
 ## 2024-08-08 - Binding Decorative Icon Animations to Specific Elements
 **Learning:** When using an expanded click area pattern with multiple focusable sibling elements inside a parent container, binding decorative icon animations to the parent's `group-hover` or `group-focus-within` states can cause misleading visual feedback. For example, if a sibling element (like an `<abbr>`) receives focus, the primary link's decorative icon might animate, confusing the user about which element is currently active.
 **Action:** Avoid binding decorative icon animations to the parent container using `group-hover` or `group-focus-within` when siblings can be focused. Instead, bind the icon directly to the primary interactive element's state using `peer-hover` and `peer-focus-visible` to ensure animations only trigger when the specific related element is interacted with.
+
+## 2026-08-11 - Preventing Sticky Focus Styles on Click
+**Learning:** Using `focus-within:bg-*` on a parent container causes a sticky pseudo-hover effect when a user clicks the primary internal element with a mouse. The mouse click focuses the internal element, triggering the parent's `focus-within`, and the parent remains highlighted even after the mouse moves away, which feels like a stuck hover state.
+**Action:** Replace `focus-within:` with `has-[:focus-visible]:` for parent structural states. This ensures the parent only reflects focus styling when a keyboard user navigates to the child element, avoiding sticky styling artifacts for mouse users.
